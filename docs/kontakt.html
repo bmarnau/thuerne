@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kontakt – Dörfergemeinschaft Thürne e.V.</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/cookie.css" />
+  <script defer src="../js/script.js"></script>
+	
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <h1>Kontakt</h1>
+     <nav id="main-nav">
+      <button id="menu-toggle">☰ Menü</button>
+       <ul id="menu" class="hidden">
+        <li><a href="../index.html">Start</a></li>
+        <li><a href="../docs/kalender.html">Kalender</a></li>
+        <li><a href="../docs/kontakt.html">Kontakt</a></li>
+        <li><a href="../docs/service.html">Service</a></li>
+		<li><a href="../docs/gesundheit.html">Gesundheit</a></li>
+		<li><a href="../docs/galerie.html">Galerie</a></li>
+		<li><a href="../docs/impressum.html">Impressum</a></li>
+        <li><a href="../docs/datenschutz.html">Datenschutz</a></li>
+      </ul>
+	  </nav>
+ </header>
+
+  <main>
+    <section>
+      <h2>Schreib uns!</h2>
+      <p>
+        Du hast Fragen zum Verein, willst mitmachen oder brauchst Informationen? Nutze einfach dieses Formular.
+      </p>
+      <form class="kontakt-form" action="mailto:info@thuerne.de" method="post" enctype="text/plain">
+        <label for="name">Name *</label><br />
+        <input type="text" id="name" name="name" required /><br /><br />
+
+        <label for="email">E-Mail *</label><br />
+        <input type="email" id="email" name="email" required /><br /><br />
+
+        <label for="nachricht">Nachricht *</label><br />
+        <textarea id="nachricht" name="nachricht" rows="6" required></textarea><br /><br />
+
+        <button type="submit">Absenden</button>
+      </form>
+
+      <p style="font-size: 0.9rem; margin-top: 2rem;">
+        Mit dem Absenden erklärst du dich einverstanden, dass deine Daten zum Zweck der Kontaktaufnahme gespeichert werden. Mehr dazu in unserer
+        <a href="datenschutz.html">Datenschutzerklärung</a>.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 Dorfverein Musterhausen |
+    <a href="../docs/impressum.html">Impressum</a> |
+    <a href="../docs/datenschutz.html">Datenschutz</a>
+  </footer>
+</body>
+</html>
