@@ -14,6 +14,7 @@ thuerne/
 │   ├── style.css          # Hauptstile
 │   └── cookie.css         # Cookie-Banner Styles
 ├── docs/                  # Dokumentenseiten
+│   ├── entwicklung.html   # 👨‍💻 Entwickler-Leitfaden (START HIER!)
 │   ├── galerie.html       # Galerie
 │   ├── service.html       # Services
 │   ├── kontakt.html       # Kontakt
@@ -31,6 +32,8 @@ thuerne/
 ```
 
 ## 🚀 Erste Schritte
+
+**👨‍💻 [Entwickler-Leitfaden](docs/entwicklung.html)** - Alle wichtigen Hinweise zur Entwicklung der Website
 
 1. Repository klonen:
 ```bash

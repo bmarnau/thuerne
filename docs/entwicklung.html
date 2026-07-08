@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entwickler-Leitfaden | Thuerne</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        nav {
+            background: #f8f9fa;
+            padding: 15px 30px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        nav a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: #764ba2;
+        }
+        
+        main {
+            padding: 40px 30px;
+        }
+        
+        section {
+            margin-bottom: 40px;
+        }
+        
+        section h2 {
+            color: #667eea;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        section h3 {
+            color: #764ba2;
+            font-size: 1.3em;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .info-box {
+            background: #e7f3ff;
+            border-left: 4px solid #2196F3;
+            padding: 15px 20px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        
+        .warning-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px 20px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        
+        .success-box {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 15px 20px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            color: #d63384;
+        }
+        
+        pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+        }
+        
+        pre code {
+            background: none;
+            color: inherit;
+            padding: 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        
+        table th {
+            background: #667eea;
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        table tr:hover {
+            background: #f5f5f5;
+        }
+        
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        .checklist {
+            list-style: none;
+            margin-left: 0;
+        }
+        
+        .checklist li {
+            padding: 8px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+        
+        .checklist li:before {
+            content: "☐";
+            position: absolute;
+            left: 0;
+            font-size: 1.2em;
+            color: #667eea;
+        }
+        
+        footer {
+            background: #f8f9fa;
+            text-align: center;
+            padding: 20px 30px;
+            border-top: 1px solid #e9ecef;
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        .version-info {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            main {
+                padding: 20px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>👨‍💻 Entwickler-Leitfaden</h1>
+            <p>Thuerne Website - Best Practices & Richtlinien</p>
+            <div class="version-info">Gültig ab v1.0.0 | Stand: 08.07.2026</div>
+        </header>
+        
+        <nav>
+            <ul>
+                <li><a href="#dreamweaver">Dreamweaver</a></li>
+                <li><a href="#git">Git Workflow</a></li>
+                <li><a href="#commits">Commits</a></li>
+                <li><a href="#versionierung">Versionierung</a></li>
+                <li><a href="#checkliste">Checkliste</a></li>
+            </ul>
+        </nav>
+        
+        <main>
+            <!-- Dreamweaver Section -->
+            <section id="dreamweaver">
+                <h2>🎨 Arbeiten mit Dreamweaver</h2>
+                
+                <h3>Automatisch ignorierte Dateien</h3>
+                <p>Folgende Dateien werden von Git automatisch ignoriert (<code>.gitignore</code>):</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Dateityp</th>
+                            <th>Beschreibung</th>
+                            <th>Aktion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>_notes/</code></td>
+                            <td>Dreamweaver Notizen & Metadaten</td>
+                            <td>Ignorieren</td>
+                        </tr>
+                        <tr>
+                            <td><code>*.dwt</code></td>
+                            <td>Dreamweaver Templates</td>
+                            <td>Ignorieren</td>
+                        </tr>
+                        <tr>
+                            <td><code>*.bak</code></td>
+                            <td>Backup-Dateien</td>
+                            <td>Ignorieren</td>
+                        </tr>
+                        <tr>
+                            <td><code>dwsync.xml</code></td>
+                            <td>Synchronisierungs-Meta</td>
+                            <td>Ignorieren</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="info-box">
+                    <strong>💡 Hinweis:</strong> Diese Dateien werden automatisch von Git ignoriert. Du brauchst dir keine Sorgen zu machen, dass sie committed werden.
+                </div>
+                
+                <h3>Vor der Arbeit</h3>
+                <ul>
+                    <li>✅ <strong>Git Pull machen:</strong> Neue Änderungen vom Server abrufen</li>
+                    <li>✅ <strong>Lokale Änderungen committen:</strong> Sicherstellen, dass alles gespeichert ist</li>
+                    <li>✅ <strong>Synchronisierung deaktivieren:</strong> Falls Dreamweaver Auto-Sync hat</li>
+                </ul>
+                
+                <pre><code>git pull origin main</code></pre>
+                
+                <h3>Während der Arbeit</h3>
+                <ul>
+                    <li>🔍 Links lokal testen</li>
+                    <li>🎯 HTML/CSS validieren</li>
+                    <li>💾 Regelmäßig speichern</li>
+                    <li>🚫 Keine externen Links hard-coden</li>
+                </ul>
+            </section>
+            
+            <!-- Git Workflow Section -->
+            <section id="git">
+                <h2>🔄 Git Workflow</h2>
+                
+                <h3>Einfacher Workflow (für kleine Änderungen)</h3>
+                <pre><code>git add .
+git commit -m "docs: Updated service pages"
+git push origin main</code></pre>
+                
+                <h3>Feature-Branch Workflow (empfohlen)</h3>
+                <pre><code># Neuen Feature-Branch erstellen
+git checkout -b feature/update-galerie
+
+# ... Arbeit in Dreamweaver ...
+
+# Änderungen committen
+git add .
+git commit -m "feat: Add new gallery items"
+
+# Zurück zu main
+git checkout main
+
+# Feature mergen
+git merge feature/update-galerie
+
+# Zum Server pushen
+git push origin main</code></pre>
+                
+                <div class="success-box">
+                    <strong>✨ Best Practice:</strong> Verwende Feature-Branches für größere Änderungen. So bleibt der <code>main</code>-Branch immer stabil.
+                </div>
+                
+                <h3>Konflikt vermeiden</h3>
+                <ul>
+                    <li>Immer <code>git pull</code> machen vor der Arbeit</li>
+                    <li>Regelmäßig pushen (nicht zu lange lokal arbeiten)</li>
+                    <li>Mit anderen Entwicklern kommunizieren</li>
+                </ul>
+            </section>
+            
+            <!-- Commits Section -->
+            <section id="commits">
+                <h2>📝 Commit-Messages</h2>
+                
+                <h3>Commit-Typ Schema</h3>
+                <p>Verwende folgendes Format für aussagekräftige Commit-Messages:</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Typ</th>
+                            <th>Beschreibung</th>
+                            <th>Beispiel</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>feat:</code></td>
+                            <td>Neue Features/Funktionalität</td>
+                            <td>feat: Add contact form validation</td>
+                        </tr>
+                        <tr>
+                            <td><code>fix:</code></td>
+                            <td>Bugfixes</td>
+                            <td>fix: Correct typos in impressum</td>
+                        </tr>
+                        <tr>
+                            <td><code>docs:</code></td>
+                            <td>Dokumentation & README</td>
+                            <td>docs: Update development guide</td>
+                        </tr>
+                        <tr>
+                            <td><code>style:</code></td>
+                            <td>HTML/CSS Styling (keine Logik)</td>
+                            <td>style: Update CSS for responsive design</td>
+                        </tr>
+                        <tr>
+                            <td><code>refactor:</code></td>
+                            <td>Code-Umstrukturierung</td>
+                            <td>refactor: Reorganize CSS structure</td>
+                        </tr>
+                        <tr>
+                            <td><code>chore:</code></td>
+                            <td>Build-Tools, Versionierung</td>
+                            <td>chore: Release v1.1.0</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h3>Gute vs. Schlechte Messages</h3>
+                <div class="success-box">
+                    <strong>✅ Gut:</strong>
+                    <pre><code>git commit -m "feat: Add responsive navigation menu"
+git commit -m "fix: Correct gallery image padding"
+git commit -m "docs: Add developer guidelines"</code></pre>
+                </div>
+                
+                <div class="warning-box">
+                    <strong>❌ Schlecht:</strong>
+                    <pre><code>git commit -m "Update"
+git commit -m "Fixed stuff"
+git commit -m "Work in progress"</code></pre>
+                </div>
+            </section>
+            
+            <!-- Versionierung Section -->
+            <section id="versionierung">
+                <h2>📦 Versionierung & Releases</h2>
+                
+                <h3>Semantische Versionierung (SemVer)</h3>
+                <p>Format: <code>MAJOR.MINOR.PATCH</code> (z.B. 1.2.3)</p>
+                <ul>
+                    <li><strong>MAJOR (1.x.x):</strong> Inkompatible API-Änderungen</li>
+                    <li><strong>MINOR (x.1.x):</strong> Neue Funktionalität, abwärtskompatibel</li>
+                    <li><strong>PATCH (x.x.1):</strong> Bugfixes und kleine Verbesserungen</li>
+                </ul>
+                
+                <h3>Version & Changelog aktualisieren</h3>
+                <pre><code># 1. Version in package.json erhöhen (z.B. 1.0.0 → 1.1.0)
+# 2. Änderungen in CHANGELOG.md dokumentieren
+# 3. Committen
+git add package.json CHANGELOG.md
+git commit -m "chore: Release v1.1.0"
+
+# 4. Git Tag erstellen
+git tag -a v1.1.0 -m "Release version 1.1.0"
+
+# 5. Zum Server pushen (inklusive Tags)
+git push origin main --tags</code></pre>
+                
+                <div class="info-box">
+                    <strong>📖 Weitere Infos:</strong> Siehe <code>CHANGELOG.md</code> und <code>package.json</code> für aktuelle Version und Historie.
+                </div>
+            </section>
+            
+            <!-- Checkliste Section -->
+            <section id="checkliste">
+                <h2>✅ Entwickler Checkliste</h2>
+                
+                <h3>Vor dem Pushen</h3>
+                <ul class="checklist">
+                    <li>Alle Änderungen lokal getestet</li>
+                    <li>Alle Links funktionieren korrekt</li>
+                    <li>CSS & JavaScript laden ordnungsgemäß</li>
+                    <li>Keine sensiblen Daten in Code</li>
+                    <li>Commit-Message ist beschreibend</li>
+                    <li><code>git status</code> zeigt erwartete Dateien</li>
+                    <li>Keine großen Binärdateien committed</li>
+                </ul>
+                
+                <h3>Daily-Standup (optional)</h3>
+                <pre><code># Morgens: Neuste Änderungen abrufen
+git pull origin main
+
+# Abends: Änderungen committen & pushen
+git add .
+git commit -m "docs: End of day updates"
+git push origin main</code></pre>
+                
+                <h3>Nützliche Git-Befehle</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Befehl</th>
+                            <th>Beschreibung</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>git status</code></td>
+                            <td>Status aktueller Änderungen anzeigen</td>
+                        </tr>
+                        <tr>
+                            <td><code>git log --oneline -5</code></td>
+                            <td>Letzten 5 Commits anzeigen</td>
+                        </tr>
+                        <tr>
+                            <td><code>git diff</code></td>
+                            <td>Unterschiede seit letztem Commit</td>
+                        </tr>
+                        <tr>
+                            <td><code>git restore [datei]</code></td>
+                            <td>Datei auf letzten Commit zurücksetzen</td>
+                        </tr>
+                        <tr>
+                            <td><code>git tag -l</code></td>
+                            <td>Alle Versions-Tags anzeigen</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            
+            <!-- Häufige Probleme -->
+            <section>
+                <h2>⚠️ Häufige Probleme & Lösungen</h2>
+                
+                <h3>Merge Conflicts</h3>
+                <div class="warning-box">
+                    <strong>Problem:</strong> Git kann Änderungen nicht automatisch mergen.
+                    <p><strong>Lösung:</strong> Immer <code>git pull</code> machen vor Änderungen. Im Konfliktfall die Datei manuell bearbeiten und erneut committen.</p>
+                </div>
+                
+                <h3>Versehentliches Committen von Dreamweaver-Dateien</h3>
+                <div class="warning-box">
+                    <strong>Problem:</strong> <code>_notes/</code> oder <code>.bak</code> Dateien committed.
+                    <p><strong>Lösung:</strong> Die <code>.gitignore</code> ist bereits konfiguriert. Falls es passiert: <code>git rm --cached [datei]</code> nutzen.</p>
+                </div>
+                
+                <h3>Zu viele Dateien auf einmal committed</h3>
+                <div class="warning-box">
+                    <strong>Problem:</strong> Mit <code>git add .</code> werden alle Dateien hinzugefügt.
+                    <p><strong>Lösung:</strong> Selektiv committen: <code>git add [spezifische-datei]</code></p>
+                </div>
+            </section>
+            
+            <!-- Ressourcen -->
+            <section>
+                <h2>📚 Ressourcen & Links</h2>
+                <ul>
+                    <li><a href="README.md" target="_blank">README.md</a> - Projektübersicht</li>
+                    <li><a href="CHANGELOG.md" target="_blank">CHANGELOG.md</a> - Versionshistorie</li>
+                    <li><a href="https://git-scm.com/book/de/v2" target="_blank">Git Buch (Deutsch)</a></li>
+                    <li><a href="https://keepachangelog.com/de/1.0.0/" target="_blank">Keep a Changelog</a></li>
+                    <li><a href="https://semver.org/lang/de/" target="_blank">Semantische Versionierung</a></li>
+                </ul>
+            </section>
+        </main>
+        
+        <footer>
+            <p><strong>Thuerne Website Entwickler-Leitfaden</strong></p>
+            <p>Zuletzt aktualisiert: 08.07.2026 | Version: 1.0.0 | Lizenz: MIT</p>
+            <p>Für Fragen oder Updates bitte diese Datei bearbeiten und committen.</p>
+        </footer>
+    </div>
+</body>
+</html>
