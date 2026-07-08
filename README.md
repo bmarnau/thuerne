@@ -2,6 +2,8 @@
 
 Eine professionelle HTML-Website erstellt mit Dreamweaver.
 
+**Aktuelle Version:** [1.0.0](https://github.com/yourusername/thuerne/releases/tag/v1.0.0)
+
 ## 📁 Projektstruktur
 
 ```
@@ -80,7 +82,15 @@ git push -u origin main
 4. **Branch-Protection** in GitHub-Settings aktivieren (optional)
 5. **README & Dokumentation** regelmäßig aktualisieren
 
-## 📄 Lizenz
+## � Releases & Versionierung
+
+Siehe [CHANGELOG.md](CHANGELOG.md) für die vollständige Versionshistorie.
+
+Das Projekt folgt der [Semantischen Versionierung](https://semver.org/lang/de/) (SemVer).
+
+Neue Releases sind auf [GitHub Releases](https://github.com/yourusername/thuerne/releases) verfügbar.
+
+## �📄 Lizenz
 
 Dieses Projekt ist unter der [MIT-Lizenz](LICENSE) lizenziert. 
 Siehe [LICENSE](LICENSE) Datei für weitere Details.

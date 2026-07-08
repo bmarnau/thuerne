@@ -1,0 +1,21 @@
+{
+  "name": "thuerne",
+  "version": "1.0.0",
+  "description": "Eine professionelle HTML-Website erstellt mit Dreamweaver",
+  "main": "index.html",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/thuerne.git"
+  },
+  "keywords": [
+    "website",
+    "html",
+    "responsive"
+  ],
+  "author": "Thuerne",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yourusername/thuerne/issues"
+  },
+  "homepage": "https://github.com/yourusername/thuerne#readme"
+}
