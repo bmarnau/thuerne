@@ -37,9 +37,6 @@
     <div class="termine-liste">
       <h2 class="section-title">Unsere Backes Termine</h2>
       <ul class="news-list">
-		<li class="news-item"><strong>06.06.2026, Samstag:</strong> Backtag</li>
-		<li class="news-item"><strong>24.06.2026, Samstag:</strong> Pedelec Training</li> 
-		<li class="news-item"><strong>27.06.2026, Samstag:</strong> Besuch eines Vereins aus Celle</li>
 		<li class="news-item"><strong>11.07.2026, Samstag:</strong> Backtag</li>
 		<li class="news-item"><strong>01.08.2026, Samstag:</strong> Ital. Abend</li>
 		<li class="news-item"><strong>12.09.2026, Samstag:</strong> Backtag</li>
@@ -51,10 +48,12 @@
     <div class="termine-bild">
 
   <figure class="bild-box">
-    <img src="../bilder/italienischer-abend-flyer.jpg"
-         alt="Aktuelles"
-         class="bild-rechts">
-
+	  
+	<img id="flyer"
+     src="../bilder/italienischer-abend-flyer.jpg"
+     alt="Italienischer Abend"
+     class="bild-rechts">  
+   
     <figcaption class="bild-text">
       Quelle: Thuerne
     </figcaption>
@@ -65,16 +64,6 @@
   </div>
 </section>
 <section class="section padlet-board" id="padlet">
-  <h2 class="section-title">Pedelec-Training</h2>
-
-  <p class="section-text">
-    Pedelecs gehören inzwischen selbstverständlich zum Alltag vieler Radfahrerinnen und Radfahrer. Der elektrische Antrieb sorgt für mehr Komfort und unterstützt besonders beim Anfahren sowie an Steigungen. Gleichzeitig unterscheiden sich Pedelecs in ihrem Fahrverhalten deutlich von herkömmlichen Fahrrädern.
-	Die Motorunterstützung kann zu einer schnellen Beschleunigung führen – insbesondere beim Losfahren. Auch die Bremsanlagen moderner Pedelecs, häufig hydraulische Scheibenbremsen, reagieren deutlich kräftiger als die früher üblichen Felgenbremsen. Dies erfordert eine gewisse Eingewöhnung und einen sicheren Umgang mit dem Fahrzeug.
-	Mit der steigenden Zahl von Pedelecs nimmt leider auch die Zahl der Unfälle zu. Inzwischen verzeichnen E-Bikes mehr Unfälle mit Personenschäden als herkömmliche Fahrräder. Während die Unfallzahlen bei klassischen Fahrrädern seit Jahren rückläufig sind, steigen sie bei Pedelecs weiterhin an.
-	Ein Pedelec-Training hilft dabei, Sicherheit und Fahrgefühl zu verbessern. Besonders ältere Verkehrsteilnehmerinnen und Verkehrsteilnehmer können von praktischen Übungen profitieren, um ihr Pedelec sicher und souverän im Alltag zu nutzen.
-	<br>
-	Von unserem Vereinsmitglied Erwin Schäfer stammt die Idee, einen Pedelec-Kursus anzubieten.  Polizei Euskirchen bietet uns ein Pedelectraining auf dem NORMA-Parkplatz in Wald an. Die Teilnehmerzahl ist begrenzt. Die Teilnahme erfolgt auf eigene Gefahr. Wer mitmachen möchte, bitte kurz per <a href="mailto:info@thuerne.de">E-Mail schreiben</a>.
-	<br>
   
 	  
 <section class="section padlet-board" id="padlet">
@@ -87,19 +76,19 @@
     Weitere Informationen findest du in der
     <a href="../docs/datenschutz.html" class="padlet-link">Datenschutzerklärung</a>.<br><br>
 	Aktuelle Padlets hier: <br>
-     <!--Anmeldung zum Brotbacktermin am 11.April 2026. -->  
+     <!--Anmeldung zum Brotbacktermin am 11.Juli 2026. -->  
   </p>
     <!-- Ausgeblendet   -->
   <button class="padlet-button" id="padlet-toggle">
-    Botbacken im Juni - Padlet laden
+    Brotbacken im Juli - Padlet laden
   </button>  
   
   <div class="padlet-container hidden" id="padlet-container"></div>
-  <!---
+  
   <button class="padlet-button2" id="padlet-toggle2">
     Pflanzenbörse im Mai - Padlet laden
-  </button>
- -->
+  </button><br>
+
   <div class="padlet-container2 hidden" id="padlet-container2"></div>	
 </section>
 	<br> 
@@ -117,6 +106,15 @@
 	    
     <p><a href="../index.html">Start</a></p>
   </main>	  
+  
+	<div id="flyerPopup" class="flyer-popup">
+    <span id="closeFlyer">&times;</span>
+
+    <img id="flyerLarge"
+         src="../bilder/italienischer-abend-flyer.jpg"
+         alt="Flyer">
+	</div>
+	  
   <footer>
     &copy; Dörfergemeinschaft Thürne e.V. |
     <a href="../docs/impressum.html">Impressum</a> |

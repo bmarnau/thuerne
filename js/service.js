@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       padletContainer.classList.remove("hidden");
 
-      toggleButton.textContent = "Botbacken im April - Padlet ausblenden";
+      toggleButton.textContent = "Brotbacken im Juli - Padlet ausblenden";
       padletLoaded = true;
 
     } else {
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
       padletContainer.innerHTML = "";
       padletContainer.classList.add("hidden");
 
-      toggleButton.textContent = "Botbacken im April - Padlet laden";
+      toggleButton.textContent = "Brotbacken im Juli - Padlet laden";
       padletLoaded = false;
 
     }
@@ -76,4 +76,28 @@ if (!toggleButton2 || !padletContainer2) return;
 
   });
 
+});
+
+const flyer = document.getElementById("flyer");
+const popup = document.getElementById("flyerPopup");
+const closeFlyer = document.getElementById("closeFlyer");
+
+flyer.addEventListener("click", () => {
+    popup.style.display = "flex";
+});
+
+closeFlyer.addEventListener("click", () => {
+    popup.style.display = "none";
+});
+
+popup.addEventListener("click", (e) => {
+    if (e.target === popup) {
+        popup.style.display = "none";
+    }
+});
+
+document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+        popup.style.display = "none";
+    }
 });
