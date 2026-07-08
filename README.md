@@ -82,7 +82,10 @@ git push -u origin main
 
 ## 📄 Lizenz
 
-[LICENSE hinzufügen - z.B. MIT, GPL, etc.]
+Dieses Projekt ist unter der [MIT-Lizenz](LICENSE) lizenziert. 
+Siehe [LICENSE](LICENSE) Datei für weitere Details.
+
+**Copyright © 2024-2026 Thuerne** - Alle Rechte vorbehalten.
 
 ## 👤 Kontakt
 
