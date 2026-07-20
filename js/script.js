@@ -2,10 +2,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const menuToggle = document.getElementById("menu-toggle");
   const menu = document.getElementById("menu");
 
+  // Markiert auf jeder Seite automatisch den passenden Navigationspunkt.
+  const aktuelleDatei = window.location.pathname.split("/").pop() || "index.html";
+  document.querySelectorAll("#menu a").forEach((link) => {
+    const zielDatei = new URL(link.href, window.location.href).pathname.split("/").pop() || "index.html";
+    if (zielDatei === aktuelleDatei) link.setAttribute("aria-current", "page");
+  });
+
   if (menuToggle && menu) {
     menuToggle.addEventListener("click", () => {
       menu.classList.toggle("hidden");
       menu.classList.toggle("visible");
+      // Hält den zugänglichen Menüstatus mit der sichtbaren Darstellung synchron.
+      menuToggle.setAttribute("aria-expanded", String(menu.classList.contains("visible")));
     });
   }
 
@@ -44,20 +53,26 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  const galerieContainer = document.getElementById("galerie-container");
+  const veranstaltungsPopup = document.getElementById("italienPopup");
+  const popupSchliessen = veranstaltungsPopup?.querySelector(".veranstaltungs-popup-schliessen");
 
-  if (galerieContainer) {
-    const imageCount = 12;
-    const folder = "bilder/";
-    const prefix = "bild";
-    const extension = ".jpg";
+  if (veranstaltungsPopup) {
+    // Am Tag nach der Veranstaltung wird der Hinweis automatisch entfernt.
+    const popupEnde = new Date(2026, 7, 2);
 
-    for (let i = 1; i <= imageCount; i++) {
-      const img = document.createElement("img");
-      img.src = `${folder}${prefix}${i}${extension}`;
-      img.alt = `Bild ${i}`;
-      img.onerror = () => img.remove();
-      galerieContainer.appendChild(img);
+    if (new Date() >= popupEnde) {
+      veranstaltungsPopup.remove();
+    } else {
+      const popupEntfernen = () => veranstaltungsPopup.remove();
+      popupSchliessen?.addEventListener("click", popupEntfernen);
+      veranstaltungsPopup.addEventListener("click", (event) => {
+        if (event.target === veranstaltungsPopup) popupEntfernen();
+      });
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") popupEntfernen();
+      });
+      popupSchliessen?.focus();
     }
   }
+
 });

@@ -5,7 +5,7 @@
   "main": "index.html",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/thuerne.git"
+    "url": "https://github.com/bmarnau/thuerne.git"
   },
   "keywords": [
     "website",
@@ -15,7 +15,7 @@
   "author": "Thuerne",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/yourusername/thuerne/issues"
+    "url": "https://github.com/bmarnau/thuerne/issues"
   },
-  "homepage": "https://github.com/yourusername/thuerne#readme"
+  "homepage": "https://github.com/bmarnau/thuerne#readme"
 }

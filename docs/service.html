@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Service</title>
+  <title>Service – Dörfergemeinschaft am Thürne e. V.</title>
   <link rel="stylesheet" href="../css/style.css" />
   <link rel="stylesheet" href="../css/cookie.css" />
   <script defer src="../js/script.js"></script>	
@@ -15,7 +15,7 @@
   <header class="wrap">
     <h1>Service</h1>
    <nav id="main-nav">
-      <button id="menu-toggle">☰ Menü</button>
+      <button id="menu-toggle" type="button" aria-controls="menu" aria-expanded="false">☰ Menü</button>
        <ul id="menu" class="hidden">
         <li><a href="../index.html">Start</a></li>
         <li><a href="../docs/kalender.html">Kalender</a></li>
@@ -30,7 +30,7 @@
 	</header>
   <main class="wrap">
     
- <section class="section termine-bereich">
+ <section class="section termine-bereich" id="italienischer-abend">
   <div class="termine-container">
 
     <!-- Linke Seite: Termine -->
@@ -64,51 +64,110 @@
   </div>
 </section>
 <section class="section padlet-board" id="padlet">
-  
-	  
-<section class="section padlet-board" id="padlet">
   <h2 class="section-title">Padlet-Board</h2>
 
- 	<p class="section-text">
-    Hier findest du unser digitales Schwarzes Brett mit Ideen und Hinweisen.
-	Mit dem Klick auf „Padlet laden“ wird eine Verbindung zu Padlet hergestellt.
-    Dabei können personenbezogene Daten, insbesondere deine IP-Adresse, an Padlet übertragen werden.
-    Weitere Informationen findest du in der
-    <a href="../docs/datenschutz.html" class="padlet-link">Datenschutzerklärung</a>.<br><br>
-	Aktuelle Padlets hier: <br>
-     <!--Anmeldung zum Brotbacktermin am 11.Juli 2026. -->  
-  </p>
-    <!-- Ausgeblendet   -->
-  <button class="padlet-button" id="padlet-toggle">
-    Brotbacken im Juli - Padlet laden
-  </button>  
-  
-  <div class="padlet-container hidden" id="padlet-container"></div>
-  
-  <button class="padlet-button2" id="padlet-toggle2">
-    Pflanzenbörse im Mai - Padlet laden
-  </button><br>
+  <div class="padlet-layout">
+    <div class="padlet-bereich">
+      <p class="section-text">
+        Hier findest du unser digitales Schwarzes Brett mit Ideen und Hinweisen.
+        Mit dem Klick auf „Padlet laden“ wird eine Verbindung zu Padlet hergestellt.
+        Dabei können personenbezogene Daten, insbesondere deine IP-Adresse, an Padlet übertragen werden.
+        Weitere Informationen findest du in der
+        <a href="../docs/datenschutz.html" class="padlet-link">Datenschutzerklärung</a>.
+      </p>
 
-  <div class="padlet-container2 hidden" id="padlet-container2"></div>	
+      <h3>Aktuelle Padlets</h3>
+
+      <div class="padlet-aktionen">
+        <button class="padlet-button" id="padlet-toggle" type="button">
+          Brotbacken im Juli – Padlet laden
+        </button>
+
+        <div class="padlet-container hidden" id="padlet-container"></div>
+
+        <button class="padlet-button padlet-button2" id="padlet-toggle2" type="button">
+          Pflanzenbörse im Mai – Padlet laden
+        </button>
+
+        <div class="padlet-container padlet-container2 hidden" id="padlet-container2"></div>
+      </div>
+    </div>
+
+    <article class="besuchs-karte" id="wietzen-bericht">
+      <img
+        src="../bilder/bild20.png"
+        alt="Gäste des Kulturkreises Wietzen beim Backes in Houverath"
+        loading="lazy"
+        decoding="async">
+
+      <div class="besuchs-karte-inhalt">
+        <p class="besuchs-karte-kategorie">Besuch aus Niedersachsen</p>
+        <h3>„Backes“-Freunde aus Wietzen zu Gast</h3>
+
+        <p>
+          Am 26. Juni begrüßten wir knapp 40 Mitglieder des Kulturkreises Wietzen in Houverath.
+          Nach einem Besuch am Radioteleskop Effelsberg und beim „Decke Tönnes“ führte der Weg zum Backes.
+        </p>
+
+        <p>
+          Bei Pizza aus dem heißen Ofen, frischem Brot und Butterkuchen wurde über Holz,
+          Anfeuertechnik und gemeinsame Backtraditionen gefachsimpelt. Der gelungene Tag endete
+          mit einer Einladung zum Gegenbesuch nach Niedersachsen.
+        </p>
+
+        <a class="besuchs-karte-link" href="../docs/galerie.html#wietzen-besuch">
+          Fotos vom Besuch ansehen
+        </a>
+      </div>
+    </article>
+  </div>
 </section>
-	<br> 
-	<p><strong>Flyer 2026</strong><br><br>
-    <a href="./termine2026.pdf">Terminübersicht 2026</a><br><br>
-	  </p>
-	  
-	<p><strong>Dörfergemeinschaft Thürne e.V..</strong><br><br>
-    <a href="./Satzung.pdf">Satzung</a><br>
-	<a href="./AntragMitgliedschaft201902.pdf">Aufnahmeantrag</a>
-	  </p>
-	  
-	<br>
-	<br>
-	    
-    <p><a href="../index.html">Start</a></p>
+
+    <section class="service-links" aria-labelledby="service-links-ueberschrift">
+      <h2 id="service-links-ueberschrift">Weitere Informationen</h2>
+
+      <div class="service-links-grid">
+        <article class="service-link-karte">
+          <p class="service-link-kategorie">Termine</p>
+          <h3>Flyer 2026</h3>
+
+          <ul class="service-dokumente">
+            <li>
+              <a href="./termine2026.pdf">
+                <span>Terminübersicht 2026</span>
+                <span aria-hidden="true">→</span>
+              </a>
+            </li>
+          </ul>
+        </article>
+
+        <article class="service-link-karte">
+          <p class="service-link-kategorie">Verein</p>
+          <h3>Dörfergemeinschaft am Thürne e. V.</h3>
+
+          <ul class="service-dokumente">
+            <li>
+              <a href="./Satzung.pdf">
+                <span>Satzung</span>
+                <span aria-hidden="true">→</span>
+              </a>
+            </li>
+            <li>
+              <a href="./AntragMitgliedschaft201902.pdf">
+                <span>Aufnahmeantrag</span>
+                <span aria-hidden="true">→</span>
+              </a>
+            </li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <p class="service-zurueck"><a href="../index.html">← Zur Startseite</a></p>
   </main>	  
   
 	<div id="flyerPopup" class="flyer-popup">
-    <span id="closeFlyer">&times;</span>
+    <button id="closeFlyer" type="button" aria-label="Flyer schließen">&times;</button>
 
     <img id="flyerLarge"
          src="../bilder/italienischer-abend-flyer.jpg"
@@ -116,7 +175,7 @@
 	</div>
 	  
   <footer>
-    &copy; Dörfergemeinschaft Thürne e.V. |
+    &copy; Dörfergemeinschaft am Thürne e. V. |
     <a href="../docs/impressum.html">Impressum</a> |
     <a href="../docs/datenschutz.html">Datenschutz</a>
   </footer>

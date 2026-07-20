@@ -2,7 +2,7 @@
 
 Eine professionelle HTML-Website erstellt mit Dreamweaver.
 
-**Aktuelle Version:** [1.0.0](https://github.com/yourusername/thuerne/releases/tag/v1.0.0)
+**Aktuelle Version:** 1.0.0
 
 ## 📁 Projektstruktur
 
@@ -37,7 +37,7 @@ thuerne/
 
 1. Repository klonen:
 ```bash
-git clone https://github.com/yourusername/thuerne.git
+git clone https://github.com/bmarnau/thuerne.git
 cd thuerne
 ```
 
@@ -77,7 +77,7 @@ git merge feature/beschreibung
 2. **SSH-Keys einrichten** für sichere Verbindung
 3. **Remote hinzufügen**:
 ```bash
-git remote add origin https://github.com/yourusername/thuerne.git
+git remote add origin https://github.com/bmarnau/thuerne.git
 git branch -M main
 git push -u origin main
 ```
@@ -85,15 +85,15 @@ git push -u origin main
 4. **Branch-Protection** in GitHub-Settings aktivieren (optional)
 5. **README & Dokumentation** regelmäßig aktualisieren
 
-## � Releases & Versionierung
+## 📦 Releases & Versionierung
 
 Siehe [CHANGELOG.md](CHANGELOG.md) für die vollständige Versionshistorie.
 
 Das Projekt folgt der [Semantischen Versionierung](https://semver.org/lang/de/) (SemVer).
 
-Neue Releases sind auf [GitHub Releases](https://github.com/yourusername/thuerne/releases) verfügbar.
+Veröffentlichte Releases werden unter [GitHub Releases](https://github.com/bmarnau/thuerne/releases) aufgeführt.
 
-## �📄 Lizenz
+## 📄 Lizenz
 
 Dieses Projekt ist unter der [MIT-Lizenz](LICENSE) lizenziert. 
 Siehe [LICENSE](LICENSE) Datei für weitere Details.

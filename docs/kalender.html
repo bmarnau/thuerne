@@ -3,16 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kalender</title>
+  <title>Veranstaltungskalender – Dörfergemeinschaft am Thürne e. V.</title>
   <link rel="stylesheet" href="../css/style.css" />
   <link rel="stylesheet" href="../css/cookie.css" />
   <script defer src="../js/script.js"></script>
+  <script defer src="../js/kalender.js"></script>
 </head>
-<body>
+<body class="kalender-body">
   <header>
     <h1>Veranstaltungskalender</h1>
      <nav id="main-nav">
-      <button id="menu-toggle">☰ Menü</button>
+      <button id="menu-toggle" type="button" aria-controls="menu" aria-expanded="false">☰ Menü</button>
        <ul id="menu" class="hidden">
         <li><a href="../index.html">Start</a></li>
         <li><a href="../docs/kalender.html">Kalender</a></li>
@@ -26,15 +27,107 @@
 	  </nav>
 </header>
 
-  <main>
-    <div class="responsiveCal">
- 
-	<iframe src="https://calendar.google.com/calendar/embed?src=info%40berndmarnau.de&ctz=Europe%2FBerlin" style="border-width:0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
-</div>
+  <main class="kalender-seite">
+    <section class="monatskalender" aria-labelledby="monatskalender-ueberschrift">
+      <div class="monatskalender-kopf">
+        <p class="seiten-kategorie">Auf einen Blick</p>
+        <h2 id="monatskalender-ueberschrift">Nächste Veranstaltungen</h2>
+        <p>Hier findest du die nächsten anstehenden Termine unserer Dörfergemeinschaft.</p>
+      </div>
+
+      <!--
+        REDAKTIONSHINWEISE ZUM MONATSKALENDER:
+        - Für einen neuen Monat eine vollständige monatsgruppe kopieren.
+        - data-monat immer im Format JJJJ-MM eintragen, zum Beispiel 2026-08.
+        - Für einen neuen Termin einen vollständigen termin-karte-Block kopieren.
+        - Das maschinenlesbare Datum steht im datetime-Attribut.
+        - Das JavaScript blendet vergangene Termine aus und zeigt automatisch
+          den ersten Monat mit mindestens einer zukünftigen Veranstaltung.
+      -->
+      <div class="monatsgruppe" data-monat="2026-07" hidden>
+        <h3>Juli 2026</h3>
+        <div class="termin-grid">
+          <article class="termin-karte">
+            <time datetime="2026-07-11"><strong>11</strong><span>Juli</span></time>
+            <div><p class="termin-typ">Backes</p><h4>Backtag</h4><p>Samstag in Houverath</p></div>
+          </article>
+        </div>
+      </div>
+
+      <div class="monatsgruppe" data-monat="2026-08" hidden>
+        <h3>August 2026</h3>
+        <div class="termin-grid">
+          <article class="termin-karte">
+            <time datetime="2026-08-01"><strong>1</strong><span>August</span></time>
+            <div><p class="termin-typ">Veranstaltung</p><h4>Italienischer Abend</h4><p>Samstag in Houverath</p></div>
+          </article>
+        </div>
+      </div>
+
+      <div class="monatsgruppe" data-monat="2026-09" hidden>
+        <h3>September 2026</h3>
+        <div class="termin-grid">
+          <article class="termin-karte">
+            <time datetime="2026-09-12"><strong>12</strong><span>September</span></time>
+            <div><p class="termin-typ">Backes</p><h4>Backtag</h4><p>Samstag in Houverath</p></div>
+          </article>
+        </div>
+      </div>
+
+      <div class="monatsgruppe" data-monat="2026-10" hidden>
+        <h3>Oktober 2026</h3>
+        <div class="termin-grid">
+          <article class="termin-karte">
+            <time datetime="2026-10-17"><strong>17</strong><span>Oktober</span></time>
+            <div><p class="termin-typ">Backes</p><h4>Backtag</h4><p>Samstag in Houverath</p></div>
+          </article>
+        </div>
+      </div>
+
+      <div class="monatsgruppe" data-monat="2026-11" hidden>
+        <h3>November 2026</h3>
+        <div class="termin-grid">
+          <article class="termin-karte">
+            <time datetime="2026-11-28"><strong>28</strong><span>November</span></time>
+            <div><p class="termin-typ">Veranstaltung</p><h4>Adventsmarkt</h4><p>Samstag in Houverath</p></div>
+          </article>
+        </div>
+      </div>
+
+      <p id="keine-monatstermine" class="keine-monatstermine" hidden>
+        Derzeit sind keine zukünftigen Veranstaltungen eingetragen.
+      </p>
+    </section>
+
+    <section class="vollstaendiger-kalender" aria-labelledby="vollstaendiger-kalender-ueberschrift">
+      <h2 id="vollstaendiger-kalender-ueberschrift">Vollständiger Kalender</h2>
+      <p>
+        Der externe Google-Kalender wird erst geladen, wenn du ihn ausdrücklich öffnest.
+        Dabei wird eine Verbindung zu Google hergestellt und deine IP-Adresse kann übertragen werden.
+        Weitere Informationen findest du in unserer
+        <a href="datenschutz.html">Datenschutzerklärung</a>.
+      </p>
+
+      <button
+        id="kalender-laden"
+        class="kalender-button"
+        type="button"
+        aria-controls="kalender-container"
+        aria-expanded="false"
+        data-kalender-url="https://calendar.google.com/calendar/embed?src=info%40berndmarnau.de&amp;ctz=Europe%2FBerlin">
+        Google-Kalender laden
+      </button>
+
+      <div id="kalender-container" class="kalender-container responsiveCal hidden"></div>
+
+      <noscript>
+        <p>Zum Einblenden des externen Kalenders muss JavaScript aktiviert sein.</p>
+      </noscript>
+    </section>
   </main>
 
   <footer>
-    &copy; Dörfergemeinschaft Thürne e.V. |
+    &copy; Dörfergemeinschaft am Thürne e. V. |
     <a href="../docs/impressum.html">Impressum</a> |
     <a href="../docs/datenschutz.html">Datenschutz</a>
   </footer>

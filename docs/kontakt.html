@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kontakt – Dörfergemeinschaft Thürne e.V.</title>
+  <title>Kontakt – Dörfergemeinschaft am Thürne e. V.</title>
   <link rel="stylesheet" href="../css/style.css" />
   <link rel="stylesheet" href="../css/cookie.css" />
   <script defer src="../js/script.js"></script>
@@ -14,7 +14,7 @@
   <header>
     <h1>Kontakt</h1>
      <nav id="main-nav">
-      <button id="menu-toggle">☰ Menü</button>
+      <button id="menu-toggle" type="button" aria-controls="menu" aria-expanded="false">☰ Menü</button>
        <ul id="menu" class="hidden">
         <li><a href="../index.html">Start</a></li>
         <li><a href="../docs/kalender.html">Kalender</a></li>
@@ -29,33 +29,50 @@
  </header>
 
   <main>
-    <section>
-      <h2>Schreib uns!</h2>
-      <p>
-        Du hast Fragen zum Verein, willst mitmachen oder brauchst Informationen? Nutze einfach dieses Formular.
-      </p>
-      <form class="kontakt-form" action="mailto:info@thuerne.de" method="post" enctype="text/plain">
-        <label for="name">Name *</label><br />
-        <input type="text" id="name" name="name" required /><br /><br />
+    <section class="kontakt-bereich" aria-labelledby="kontakt-ueberschrift">
+      <div class="kontakt-info">
+        <p class="seiten-kategorie">Wir sind erreichbar</p>
+        <h2 id="kontakt-ueberschrift">Kontakt aufnehmen</h2>
 
-        <label for="email">E-Mail *</label><br />
-        <input type="email" id="email" name="email" required /><br /><br />
+        <p>
+          Du hast Fragen zum Verein, möchtest mitmachen oder hast eine Idee für unsere
+          Dörfergemeinschaft? Schreib uns gerne.
+        </p>
 
-        <label for="nachricht">Nachricht *</label><br />
-        <textarea id="nachricht" name="nachricht" rows="6" required></textarea><br /><br />
+        <div class="kontakt-direkt">
+          <h3>Direkt per E-Mail</h3>
+          <a href="mailto:info@thuerne.de">info@thuerne.de</a>
+          <p>Wir melden uns so bald wie möglich bei dir zurück.</p>
+        </div>
+      </div>
 
-        <button type="submit">Absenden</button>
-      </form>
+      <div class="kontakt-formular-karte">
+        <h3>Nachricht vorbereiten</h3>
 
-      <p style="font-size: 0.9rem; margin-top: 2rem;">
-        Mit dem Absenden erklärst du dich einverstanden, dass deine Daten zum Zweck der Kontaktaufnahme gespeichert werden. Mehr dazu in unserer
-        <a href="datenschutz.html">Datenschutzerklärung</a>.
-      </p>
+        <form class="kontakt-form" action="mailto:info@thuerne.de" method="post" enctype="text/plain">
+          <label for="name">Name *</label>
+          <input type="text" id="name" name="name" autocomplete="name" required>
+
+          <label for="email">E-Mail-Adresse *</label>
+          <input type="email" id="email" name="email" autocomplete="email" required>
+
+          <label for="nachricht">Nachricht *</label>
+          <textarea id="nachricht" name="nachricht" rows="6" required></textarea>
+
+          <button type="submit">E-Mail vorbereiten</button>
+        </form>
+
+        <p class="kontakt-hinweis">
+          Beim Absenden wird dein E-Mail-Programm geöffnet. Die Nachricht wird erst dort verschickt.
+          Weitere Informationen findest du in unserer
+          <a href="datenschutz.html">Datenschutzerklärung</a>.
+        </p>
+      </div>
     </section>
   </main>
 
   <footer>
-    &copy; 2025 Dorfverein Musterhausen |
+    &copy; Dörfergemeinschaft am Thürne e. V. |
     <a href="../docs/impressum.html">Impressum</a> |
     <a href="../docs/datenschutz.html">Datenschutz</a>
   </footer>

@@ -4,18 +4,17 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Gesundheit</title>
+  <title>Gesundheitsthemen in unseren Dörfern – Dörfergemeinschaft am Thürne e. V.</title>
   <link rel="stylesheet" href="../css/style.css" />
   <link rel="stylesheet" href="../css/cookie.css" />
   <script defer src="../js/script.js"></script>	
-  <script defer src="../js/service.js"></script>
 	
 </head>
 <body>
   <header class="wrap">
-    <h1>Gesundheit</h1>
+    <h1>Unterstützung von Gesundheitsthemen in unseren Dörfern</h1>
    <nav id="main-nav">
-      <button id="menu-toggle">☰ Menü</button>
+      <button id="menu-toggle" type="button" aria-controls="menu" aria-expanded="false">☰ Menü</button>
        <ul id="menu" class="hidden">
         <li><a href="../index.html">Start</a></li>
         <li><a href="../docs/kalender.html">Kalender</a></li>
@@ -29,34 +28,120 @@
 	  </nav>
 	</header>
 	
-  <main>
-	<section>
-      <h2>Gesundheitsthemen in unseren Dörfern!</h2>
+  <main class="gesundheit-seite">
+    <section class="gesundheit-einstieg" aria-labelledby="gesundheit-ueberschrift">
+      <p class="seiten-kategorie">Sicherheit vor Ort</p>
+      <h2 id="gesundheit-ueberschrift">Defibrillatoren in unseren Dörfern</h2>
       <p>
-        Hier finden sich Defillibratoren in der Nähe:
+        An drei Standorten in unserer Dörfergemeinschaft stehen öffentlich zugängliche
+        Defibrillatoren zur Verfügung. Die folgenden Abbildungen zeigen die jeweiligen Standorte.
       </p>
-    <div class="bild-mitte">
-      <img src="../bilder/defihoverath.jpg" alt="In Hoverath">
-	  <br><br>
-	  <img src="../bilder/defimaulbach.jpg" alt="In Maulbach">
-	  <br><br>
-	  <img src="../bilder/defiwald.jpg" alt="In Wald">	
-    </div>
-	<br>
-	<br><br>
-	<br>  
-<!--
-      <p style="font-size: 0.9rem; margin-top: 2rem;">
-        Mit dem Absenden erklärst du dich einverstanden, dass deine Daten zum Zweck der Kontaktaufnahme gespeichert werden. Mehr dazu in unserer
-        <a href="datenschutz.html">Datenschutzerklärung</a>.
-      </p>
-  -->
-	  
-  </section>
-  <p><a href="../index.html">Start</a></p>	  
+    </section>
+
+    <!--
+      REDAKTIONSHINWEIS:
+      Für einen weiteren Standort einen vollständigen figure-Block kopieren.
+      Anschließend Bildpfad, Alternativtext und Ortsbezeichnung anpassen.
+    -->
+    <section class="defi-standorte" aria-label="Standorte der Defibrillatoren">
+      <figure class="defi-karte">
+        <img src="../bilder/defihoverath.jpg" alt="Standort des Defibrillators in Houverath" loading="lazy" decoding="async">
+        <figcaption>
+          <p class="seiten-kategorie">Standort</p>
+          <h3>Houverath</h3>
+        </figcaption>
+      </figure>
+
+      <figure class="defi-karte">
+        <img src="../bilder/defimaulbach.jpg" alt="Standort des Defibrillators in Maulbach" loading="lazy" decoding="async">
+        <figcaption>
+          <p class="seiten-kategorie">Standort</p>
+          <h3>Maulbach</h3>
+        </figcaption>
+      </figure>
+
+      <figure class="defi-karte">
+        <img src="../bilder/defiwald.jpg" alt="Standort des Defibrillators in Wald" loading="lazy" decoding="async">
+        <figcaption>
+          <p class="seiten-kategorie">Standort</p>
+          <h3>Wald</h3>
+        </figcaption>
+      </figure>
+    </section>
+
+    <section class="gesundheit-infos" aria-label="Informationen zur Notfallvorsorge">
+      <article class="gesundheit-info-karte gesundheit-info-notfall">
+        <p class="seiten-kategorie">Im Notfall</p>
+        <h2>Defibrillator richtig einsetzen</h2>
+        <ol class="notfall-schritte">
+          <li><strong>Prüfen:</strong> Reagiert die Person nicht und atmet sie nicht normal?</li>
+          <li><strong>Rufen:</strong> Sofort den Notruf <a href="tel:112">112</a> wählen und weitere Personen um Hilfe bitten.</li>
+          <li><strong>Drücken:</strong> Unverzüglich mit der Herzdruckmassage beginnen.</li>
+          <li><strong>AED benutzen:</strong> Gerät einschalten, Elektroden wie abgebildet aufkleben und den Sprachanweisungen folgen.</li>
+        </ol>
+        <p class="gesundheit-merksatz">
+          Die Herzdruckmassage nicht unterbrechen, um allein einen AED zu holen. Sind mehrere
+          Helfende vor Ort, kann eine zweite Person das Gerät holen und vorbereiten.
+        </p>
+        <p class="gesundheit-hinweis">
+          Diese Kurzinformation ersetzt keinen Erste-Hilfe-Kurs. Ausführliche Hinweise bietet das
+          <a href="https://www.drk.de/hilfe-in-deutschland/erste-hilfe/herz-lungen-wiederbelebung/" target="_blank" rel="noopener noreferrer">Deutsche Rote Kreuz</a>.
+        </p>
+      </article>
+
+      <!--
+        REDAKTIONSHINWEIS ROTKREUZDOSE:
+        Sobald Termin und Ausgabeort feststehen, den Text im folgenden Artikel ergänzen.
+        Die Kennzeichnung "Aktion in Vorbereitung" kann dann durch Datum und Ort ersetzt werden.
+      -->
+      <article class="gesundheit-info-karte gesundheit-info-aktion">
+        <p class="gesundheit-status">Aktion in Vorbereitung</p>
+        <p class="seiten-kategorie">Vorsorge für den Notfall</p>
+        <h2>Die Rotkreuzdose kommt nach Thürne</h2>
+        <p>
+          Für unsere älteren Dorfbewohnerinnen und Dorfbewohner planen wir eine Aktion zur
+          Rotkreuzdose. In ihr werden wichtige persönliche und medizinische Angaben für den
+          Rettungsdienst übersichtlich aufbewahrt.
+        </p>
+        <p>
+          Die Dose wird gut auffindbar im Kühlschrank gelagert. Ein Hinweis an der Wohnungstür
+          und am Kühlschrank zeigt den Rettungskräften, dass eine Rotkreuzdose vorhanden ist.
+          Informationen zu Termin, Ausgabe und Unterstützung beim Ausfüllen folgen hier.
+        </p>
+        <a class="gesundheit-mehr-link" href="https://www.rotkreuzdose.de/startseite.html" target="_blank" rel="noopener noreferrer">
+          Mehr über die Rotkreuzdose erfahren →
+        </a>
+      </article>
+
+      <!--
+        REDAKTIONSHINWEIS DIGITALE PRAXIS:
+        Dieser Beitrag informiert über ein externes Pilotprojekt. Falls daraus später eine
+        Veranstaltung oder Initiative vor Ort entsteht, Status, Text und Link hier aktualisieren.
+      -->
+      <article class="gesundheit-info-karte gesundheit-info-digital">
+        <p class="gesundheit-status gesundheit-status-info">Mitglieder informierten sich</p>
+        <p class="seiten-kategorie">Einblick aus NRW</p>
+        <h2>Digitale Arztpraxis im ländlichen Raum</h2>
+        <p>
+          Mitglieder unserer Dörfergemeinschaft haben sich über die digitale Hausarztpraxis im
+          nordrhein-westfälischen Etteln informiert. Das dortige Pilotprojekt verbindet
+          medizinische Fachkräfte vor Ort mit ärztlicher Beratung und Diagnostik per Telemedizin.
+        </p>
+        <p>
+          Das Beispiel zeigt, wie digitale Angebote die medizinische Versorgung in ländlichen
+          Regionen künftig ergänzen könnten. Es handelt sich um einen informativen Einblick in ein
+          externes Projekt – ein entsprechendes Angebot in unseren Dörfern ist damit nicht verbunden.
+        </p>
+        <a class="gesundheit-mehr-link" href="https://www.digiderma.de/digi-derma/im-fokus/details/case-study-etteln-vier-monate-digitale-praxis-ohne-hausarzt-dafuer-mit-ki/" target="_blank" rel="noopener noreferrer">
+          Bericht über die digitale Praxis in Etteln lesen →
+        </a>
+      </article>
+    </section>
+
+    <p class="service-zurueck"><a href="../index.html">← Zur Startseite</a></p>
   </main>	  
   <footer>
-    &copy; Dörfergemeinschaft Thürne e.V. |
+    &copy; Dörfergemeinschaft am Thürne e. V. |
     <a href="../docs/impressum.html">Impressum</a> |
     <a href="../docs/datenschutz.html">Datenschutz</a>
   </footer>

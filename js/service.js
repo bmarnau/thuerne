@@ -82,22 +82,25 @@ const flyer = document.getElementById("flyer");
 const popup = document.getElementById("flyerPopup");
 const closeFlyer = document.getElementById("closeFlyer");
 
-flyer.addEventListener("click", () => {
+// Der Flyer ist nur auf der Service-Seite vorhanden; andere Seiten bleiben fehlerfrei.
+if (flyer && popup && closeFlyer) {
+  flyer.addEventListener("click", () => {
     popup.style.display = "flex";
-});
+  });
 
-closeFlyer.addEventListener("click", () => {
+  closeFlyer.addEventListener("click", () => {
     popup.style.display = "none";
-});
+  });
 
-popup.addEventListener("click", (e) => {
+  popup.addEventListener("click", (e) => {
     if (e.target === popup) {
-        popup.style.display = "none";
+      popup.style.display = "none";
     }
-});
+  });
 
-document.addEventListener("keydown", (e) => {
+  document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
-        popup.style.display = "none";
+      popup.style.display = "none";
     }
-});
+  });
+}

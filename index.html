@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dörfergemeinschaft Thürne e.V.</title>
+  <title>Startseite – Dörfergemeinschaft am Thürne e. V.</title>
   <link rel="stylesheet" href="css/style.css?v=20260702">
   <link rel="stylesheet" href="css/cookie.css" />	
   <script defer src="js/script.js"></script>		
@@ -12,17 +12,13 @@
   rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
   />
-  <link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-  />
 	
 </head>
 <body>
   <header>
-    <h1>Dörfergemeinschaft Thürne e.V.</h1>
+    <h1>Dörfergemeinschaft am Thürne e. V.</h1>
     <nav id="main-nav">
-      <button id="menu-toggle">☰ Menü</button>
+      <button id="menu-toggle" type="button" aria-controls="menu" aria-expanded="false">☰ Menü</button>
        <ul id="menu" class="hidden">
         <li><a href="index.html">Start</a></li>
         <li><a href="docs/kalender.html">Kalender</a></li>
@@ -37,56 +33,248 @@
   </header>
 
   <main>
-    <section>
-      <h2>Willkommen bei der Dörfergemeinschaft Thürne e.V.</h2>
-      <p>Die Dörfer <a href="https://de.wikipedia.org/wiki/Eichen_(Bad_M%C3%BCnstereifel)">Eichen</a>, <a href="https://de.wikipedia.org/wiki/Hoverath_(Bad_M%C3%BCnstereifel)">Houverath</a>, <a href="https://de.wikipedia.org/wiki/Lanzerath_(Bad_M%C3%BCnstereifel)">Lanzerath</a>, <a href="https://de.wikipedia.org/wiki/Limbach_(Bad_M%C3%BCnstereifel)">Limbach</a>, <a href="https://de.wikipedia.org/wiki/Maulbach_(Bad_M%C3%BCnstereifel)">Maulbach</a>, <a href="https://de.wikipedia.org/wiki/Scheuren_(Bad_M%C3%BCnstereifel)">Scheuren</a> und <a href="https://de.wikipedia.org/wiki/Wald_(Bad_M%C3%BCnstereifel)">Wald</a>
-		  liegen in landschaftlich reizvoller Lage zwischen Bad Münstereifel, Rheinbach und dem Ahrtal rund um den
-		  499 Meter hohen, markanten Vulkanberg Hochthürmen. Hauptort ist Houverath.</p>
-		  
-		 <p>Die Region bietet als Lebensraum und Naherholungsbiet für Jung und Alt viele Annehmlichkeiten, durch die Internetanbindung via Glasfaserkabel sind moderne Kommunikations- und Arbeitsmodelle möglich. Attraktive Ausflugsmöglichkeiten sind u.a. das <a href="https://www.cityoutletbadmuenstereifel.com" target="_blank">City Outlet Bad Münstereifel</a> und das größte <a href="https://www.mpifr-bonn.mpg.de/effelsberg" target="_blank" >europäische Radioteleskop</a> (100 m Durchmesser) in Effelsberg.</p>
-		
-		<h2>Thürne e.V.</h2>
-		<p>Durch private Initiative wurde 2012 der Verein Thürne e.V. gegründet. Die Themen, die wir im Verein bearbeiten sind vielfältig geworden. 
-		</p>
+    <section class="start-einstieg" aria-labelledby="start-einstieg-ueberschrift">
+      <div class="start-einstieg-layout">
+        <div class="start-einstieg-text">
+          <p class="start-kategorie">Willkommen am Thürne</p>
+          <h2 id="start-einstieg-ueberschrift">Gemeinsam rund um den Hochthürmen</h2>
+
+          <p class="start-einstieg-lead">
+            Unsere sieben Dörfer liegen zwischen Bad Münstereifel, Rheinbach und dem Ahrtal –
+            umgeben von einer reizvollen Landschaft und verbunden durch eine lebendige Dorfgemeinschaft.
+          </p>
+
+          <p>
+            Zur Dörfergemeinschaft gehören
+            <a href="https://de.wikipedia.org/wiki/Eichen_(Bad_M%C3%BCnstereifel)">Eichen</a>,
+            <a href="https://de.wikipedia.org/wiki/Hoverath_(Bad_M%C3%BCnstereifel)">Houverath</a>,
+            <a href="https://de.wikipedia.org/wiki/Lanzerath_(Bad_M%C3%BCnstereifel)">Lanzerath</a>,
+            <a href="https://de.wikipedia.org/wiki/Limbach_(Bad_M%C3%BCnstereifel)">Limbach</a>,
+            <a href="https://de.wikipedia.org/wiki/Maulbach_(Bad_M%C3%BCnstereifel)">Maulbach</a>,
+            <a href="https://de.wikipedia.org/wiki/Scheuren_(Bad_M%C3%BCnstereifel)">Scheuren</a>
+            und <a href="https://de.wikipedia.org/wiki/Wald_(Bad_M%C3%BCnstereifel)">Wald</a>.
+            Hauptort ist Houverath.
+          </p>
+
+          <p>
+            Die Region bietet einen attraktiven Lebens- und Naherholungsraum. Moderne Glasfaseranschlüsse
+            ermöglichen zeitgemäße Kommunikations- und Arbeitsmodelle. Beliebte Ausflugsziele sind das
+            <a href="https://www.cityoutletbadmuenstereifel.com" target="_blank" rel="noopener noreferrer">City Outlet Bad Münstereifel</a>
+            und das
+            <a href="https://www.mpifr-bonn.mpg.de/effelsberg" target="_blank" rel="noopener noreferrer">100-Meter-Radioteleskop Effelsberg</a>.
+          </p>
+        </div>
+
+        <aside class="start-fakten" aria-label="Kurzinformationen zur Dörfergemeinschaft">
+          <div>
+            <strong>7</strong>
+            <span>Dörfer</span>
+          </div>
+          <div>
+            <strong>499 m</strong>
+            <span>Hochthürmen</span>
+          </div>
+          <div>
+            <strong>2012</strong>
+            <span>Vereinsgründung</span>
+          </div>
+        </aside>
+      </div>
+
+      <div class="start-verein">
+        <div>
+          <p class="start-kategorie">Unser Verein</p>
+          <h2>Thürne e. V.</h2>
+        </div>
+
+        <p>
+          Der Verein wurde 2012 aus privater Initiative gegründet. Heute bringen sich Menschen
+          mit unterschiedlichen Interessen, Ideen und Fähigkeiten ein und gestalten das Leben
+          in unseren Dörfern gemeinsam.
+        </p>
+      </div>
     </section>
 
-    <section>
-      <h2>Unsere Themen</h2>
-      <ul>
-        <li>Bau und Betrieb eines Backes mit monatlichen Backmöglichkeiten für jedermann</li>
-        <li>Veranstaltungen, wie z.B. Italienischer Abend und Adventsmarkt</li>
-		<li>Wartung der Spielplätze</li>
-        <li>Jährliche Pflanzenbörse</li>
-     	<li>Müllsammelaktionen</li>
-   		<li>Entfernung des Jakobskreuzkrauts</li>
- 		<li>Freizeitaktionen für Jugendliche</li>
-		<li>Herbstwanderung gemeinsam mit der DJK Hoverath</li>  
-		<li>Wanderweg Parcour der biologischen Vielfalt (wegen zerstörten Brücken leider im Augenblick gesperrt)</li>	
+    <section class="themen" aria-labelledby="themen-ueberschrift">
+      <div class="themen-kopf">
+        <p class="themen-kategorie">Was uns bewegt</p>
+        <h2 id="themen-ueberschrift">Unsere Themen</h2>
+        <p>Gemeinsam gestalten wir das Leben in unseren Dörfern aktiv und vielfältig.</p>
+      </div>
+
+      <!--
+        REDAKTIONSHINWEIS ZU DEN THEMEN:
+        Einen vollständigen li-Block kopieren, bearbeiten oder löschen.
+        Die kurze Überschrift steht im strong-Element, darunter folgt die Beschreibung.
+      -->
+      <ul class="themen-grid">
+        <li>
+          <strong>Unser Backes</strong>
+          <span>Bau und Betrieb des Dorfbackofens mit monatlichen Backmöglichkeiten für alle.</span>
+        </li>
+        <li>
+          <strong>Veranstaltungen</strong>
+          <span>Gemeinsame Feste wie der Italienische Abend und der Adventsmarkt.</span>
+        </li>
+        <li>
+          <strong>Spielplätze</strong>
+          <span>Pflege und Wartung der Spielplätze in unserer Dörfergemeinschaft.</span>
+        </li>
+        <li>
+          <strong>Pflanzenbörse</strong>
+          <span>Jährlicher Austausch von Pflanzen, Wissen und Gartenerfahrungen.</span>
+        </li>
+        <li>
+          <strong>Saubere Dörfer</strong>
+          <span>Gemeinsame Müllsammelaktionen in unseren Orten und der Umgebung.</span>
+        </li>
+        <li>
+          <strong>Naturschutz</strong>
+          <span>Aktionen zur Entfernung des Jakobskreuzkrauts und zum Schutz der Natur.</span>
+        </li>
+        <li>
+          <strong>Jugend</strong>
+          <span>Freizeitaktionen und gemeinsame Angebote für Jugendliche.</span>
+        </li>
+        <li>
+          <strong>Gemeinsam unterwegs</strong>
+          <span>Herbstwanderung gemeinsam mit der DJK Houverath.</span>
+        </li>
+        <li>
+          <strong>Biologische Vielfalt</strong>
+          <span>Wanderweg-Parcours zur biologischen Vielfalt.</span>
+          <small class="thema-hinweis">Wegen zerstörter Brücken derzeit gesperrt</small>
+        </li>
       </ul>
     </section>
 	  
-	<section>
-      <h2>Aktuelles</h2>
-      <ul>
-        <li><strong>Neues aus der Redaktion:</strong><br>
-		Es gibt eine weitere Informationsseite zu <a href="docs/gesundheit.html">Gesundheitsthemen!</a>
-		In Kürze wird es Informationen über die Vorsorge mittels Rotkreuzdosen auf dieser Seite geben.
-		<br>Wir unterstützen den Schutz der seltenen Feuersalamander in unserer Dörfergemeinschaft.<br>
-		Für Wünsche und Hinweise wird hier ein <a href="https://padlet.com/info34264/schwarzes-brett-ej7wbiey5tu20cpn" target="_blank">Kommentarbereich</a> angeboten. Mit dem Klick können personenbezogene Daten, insbesondere deine IP-Adresse, an Padlet übertragen werden.  Weitere Informationen findest du in der
-    <a href="docs/datenschutz.html" class="padlet-link">Datenschutzerklärung</a>.<br>
-		</li>  
-      </ul>
+    <section class="aktuelles" aria-labelledby="aktuelles-ueberschrift">
+      <div class="aktuelles-kopf">
+        <div>
+          <p class="aktuelles-kategorie">Aus der Dörfergemeinschaft</p>
+          <h2 id="aktuelles-ueberschrift">Aktuelles</h2>
+        </div>
+      </div>
+
+      <!--
+        REDAKTIONSHINWEISE FÜR „AKTUELLES“:
+        - Die neueste Meldung immer als ersten article-Block einfügen.
+        - Zum Ersetzen einer Meldung den vollständigen Block zwischen
+          „MELDUNG START“ und „MELDUNG ENDE“ bearbeiten oder löschen.
+        - Für eine neue Meldung einen vorhandenen article-Block kopieren.
+        - Kategorie, Datum, Überschrift, Kurztext und Link lassen sich direkt ändern.
+        - Die Klasse „aktuell-wichtig“ hebt eine Veranstaltung dezent hervor.
+      -->
+      <div class="aktuelles-grid">
+
+        <!-- MELDUNG START: Italienischer Abend -->
+        <article class="aktuelles-karte aktuell-wichtig">
+          <div class="aktuelles-meta">
+            <p class="aktuelles-typ">Veranstaltung</p>
+            <time datetime="2026-08-01">1. August 2026</time>
+          </div>
+
+          <h3>Italienischer Abend 2026</h3>
+
+          <p>
+            Am Samstag, 1. August 2026, lädt die Dörfergemeinschaft zum Italienischen Abend ein.
+            Weitere Informationen und den Flyer findest du auf unserer Serviceseite.
+          </p>
+
+          <a href="docs/service.html#italienischer-abend">
+            Informationen und Flyer ansehen →
+          </a>
+        </article>
+        <!-- MELDUNG ENDE: Italienischer Abend -->
+
+        <!-- MELDUNG START: Besuch aus Wietzen -->
+        <article class="aktuelles-karte">
+          <div class="aktuelles-meta">
+            <p class="aktuelles-typ">Rückschau</p>
+            <time datetime="2026-06-26">26. Juni 2026</time>
+          </div>
+
+          <h3>„Backes“-Freunde aus Wietzen zu Gast</h3>
+
+          <p>
+            Knapp 40 Mitglieder des Kulturkreises Wietzen besuchten Houverath.
+            Gemeinsam wurden regionale Ziele erkundet, Pizza gebacken und Erfahrungen
+            rund um das traditionelle Backhandwerk ausgetauscht.
+          </p>
+
+          <a href="docs/service.html#wietzen-bericht">
+            Bericht und Fotos ansehen →
+          </a>
+        </article>
+        <!-- MELDUNG ENDE: Besuch aus Wietzen -->
+
+      </div>
     </section>
-	<section>
-      <h2>Bild des Monats</h2>
- 	<div class="bild-mitte-klein">
-      <img src="bilder/eule.jpg" alt="Uhu Uhu">
-	 <p class="bild-text">
-    Fotoquelle: Yvonne Juni 2026
-  </p>	
-    </div>
-	    
-	  </section>
+
+    <section class="aktuelles monatsmedien" aria-labelledby="monatsmedien-ueberschrift">
+      <div class="aktuelles-kopf">
+        <div>
+          <p class="aktuelles-kategorie">Monatsauswahl</p>
+          <h2 id="monatsmedien-ueberschrift">Bild und Film des Monats</h2>
+        </div>
+      </div>
+
+      <div class="aktuelles-grid monatsmedien-grid">
+        <!-- Linke Karte: Film des Monats -->
+        <article class="aktuelles-karte monatsmedium-karte">
+          <div class="aktuelles-meta">
+            <p class="aktuelles-typ">Film</p>
+            <time datetime="2026-07">Juli 2026</time>
+          </div>
+          <h3>Film des Monats</h3>
+
+          <!--
+            REDAKTIONSHINWEIS ZUM MINIFILM:
+            1. Filmdatei zum Beispiel als bilder/film-des-monats.mp4 ablegen.
+            2. Den Platzhalter unten entfernen.
+            3. Anschließend diese Video-Vorlage aus dem Kommentar kopieren:
+
+            <video class="monatsmedium" controls preload="metadata">
+              Hier ein source-Element mit dem Pfad zur MP4-Datei einsetzen.
+              Dein Browser kann dieses Video nicht wiedergeben.
+            </video>
+
+            Beispiel für den einzusetzenden Dateipfad: bilder/film-des-monats.mp4
+            4. Monat im time-Element, Titel und Beschreibung redaktionell anpassen.
+          -->
+          <div class="monatsfilm-platzhalter" role="img" aria-label="Platzhalter für den Film des Monats">
+            <span aria-hidden="true">▶</span>
+            <strong>Minifilm wird vorbereitet</strong>
+          </div>
+
+          <p>
+            Hier kann künftig ein kurzer Film aus der Dörfergemeinschaft vorgestellt werden.
+          </p>
+        </article>
+
+        <!-- Rechte Karte: Bild des Monats -->
+        <article class="aktuelles-karte monatsmedium-karte">
+          <div class="aktuelles-meta">
+            <p class="aktuelles-typ">Fotografie</p>
+            <time datetime="2026-07">Juli 2026</time>
+          </div>
+          <h3>Bild des Monats</h3>
+
+          <!-- Für ein neues Monatsbild Monat, src, alt und Bildunterschrift ändern. -->
+          <figure class="monatsmedium-figure">
+            <img
+              class="monatsmedium"
+              src="bilder/eule.jpg"
+              alt="Uhu"
+              width="2048"
+              height="2048"
+              loading="lazy"
+              decoding="async">
+            <figcaption>Foto: Yvonne · Aufnahme Juni 2026</figcaption>
+          </figure>
+        </article>
+      </div>
+    </section>
 	  
 	<section id="unterstuetzen">
   		<h2>Unterstützen Sie uns</h2>
@@ -94,6 +282,19 @@
     	Mitmachen kann jeder, der sich nach Neigung, Ideen und Kenntnissen einbringen will. Aber allein schon mit Ihrer kostenlosen Mitgliedschaft unterstützen Sie uns. <a href="docs/AntragMitgliedschaft201902.pdf">Hier</a>  geht’s zum Mitgliedsantrag.  Sie können gerne mit unserem Verein <a href="docs/kontakt.html">Kontakt</a> aufnehmen.
   		</p>
 	</section>
+
+    <section class="kontakt-teaser">
+      <div>
+        <p class="seiten-kategorie">Mitmachen und mitgestalten</p>
+        <h2>Du möchtest uns etwas mitteilen?</h2>
+        <p>
+          Wir freuen uns über Fragen, Ideen und Menschen, die sich in unserer
+          Dörfergemeinschaft einbringen möchten.
+        </p>
+      </div>
+
+      <a class="kontakt-teaser-link" href="docs/kontakt.html">Kontakt aufnehmen →</a>
+    </section>
 	
 	  <!--  
 	
@@ -101,17 +302,19 @@
   </main>
 	
     <footer>
-    &copy; Dörfergemeinschaft Thürne e.V. |
+    &copy; Dörfergemeinschaft am Thürne e. V. |
 	<a href="https://www.facebook.com/people/D%C3%B6rfergemeinschaft-am-Th%C3%BCrne-e-V/100064824753371/?ref=page_internal"
    	target="_blank"
    	rel="noopener noreferrer"
-    class="social-link facebook">
+    class="social-link facebook"
+    aria-label="Facebook-Auftritt der Dörfergemeinschaft">
    <i class="fa-brands fa-facebook"></i>
    </a>|
   <a href="https://www.instagram.com/thuerne/"
    target="_blank"
    rel="noopener noreferrer"
-   class="social-link instagram">
+   class="social-link instagram"
+   aria-label="Instagram-Auftritt der Dörfergemeinschaft">
   <i class="fa-brands fa-instagram"></i>
   </a> |
     
@@ -123,7 +326,7 @@
     Diese Website verwendet Cookies. Mit der Nutzung erklärst du dich einverstanden. Sie stimmen der Nutzung von Cookies und unseren 
     <a href="docs/datenschutz.html" target="_blank">Datenschutzbestimmungen</a> zu.
   </p>
-  <button id="cookie-accept">Verstanden</button>
+  <button id="cookie-accept" type="button">Verstanden</button>
  </div>
 	
 
@@ -131,48 +334,27 @@
 	
 <!-- direkt vor </body> -->
 	
-<div id="italienPopup" style="
-  position:fixed;
-  top:0;
-  left:0;
-  width:100vw;
-  height:100vh;
-  background:rgba(0,0,0,.65);
-  z-index:999999;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:15px;
-  box-sizing:border-box;
-">
+<div id="italienPopup" class="veranstaltungs-popup" role="dialog" aria-modal="true" aria-labelledby="italienPopupTitel">
 
-  <div style="position:relative; max-width:900px; width:100%;">
+  <div class="veranstaltungs-popup-inhalt">
     
     <img src="bilder/italienischer-abend-popup.png"
-         style="width:100%; height:auto; display:block; border-radius:6px;">
+         alt="Ankündigung: Italienischer Abend am 1. August 2026 im Pfarrheim Houverath"
+         width="1402"
+         height="1122"
+         decoding="async">
     
-    <button onclick="document.getElementById('italienPopup').remove();"
-      style="
-        position:absolute;
-        top:-12px;
-        right:-12px;
-        width:40px;
-        height:40px;
-        border:none;
-        border-radius:50%;
-        background:white;
-        font-size:26px;
-        cursor:pointer;
-        box-shadow:0 3px 10px rgba(0,0,0,.35);
-      ">
+    <button type="button"
+      aria-label="Veranstaltungshinweis schließen"
+      class="veranstaltungs-popup-schliessen">
       ×
     </button>
 
+    <span id="italienPopupTitel" class="visually-hidden">Italienischer Abend am 1. August 2026</span>
+
   </div>
 </div>
-		
-	
-	
- <button id="back-to-top" title="Zurück nach oben">↑</button>	
+
+ <button id="back-to-top" type="button" title="Zurück nach oben" aria-label="Zurück nach oben">↑</button>
 </body>
 </html>

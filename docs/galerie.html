@@ -7,14 +7,14 @@
  <link rel="stylesheet" href="../css/style.css" />
   <link rel="stylesheet" href="../css/cookie.css" />
   <script defer src="../js/script.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
   <script defer src="../js/galerie.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 </head>
 <body>
   <header>
     <h1>Fotogalerie</h1>
      <nav id="main-nav">
-      <button id="menu-toggle">☰ Menü</button>
+      <button id="menu-toggle" type="button" aria-controls="menu" aria-expanded="false">☰ Menü</button>
        <ul id="menu" class="hidden">
         <li><a href="../index.html">Start</a></li>
         <li><a href="../docs/kalender.html">Kalender</a></li>
@@ -29,13 +29,44 @@
 </header>
 
   <main>
-    <section>
-      <h2>Unsere Vereinsmomente</h2>
-      <p>Hier findest du eine Auswahl an Fotos von vergangenen Veranstaltungen, Aktionen und besonderen Momenten.</p>
+    <section class="galerie-einleitung">
+      <p><button
+        class="galerie-beschriftungen-schalter"
+        id="galerie-beschriftungen-schalter"
+        type="button"
+        aria-pressed="false"
+        title="Bilddateinamen ein- oder ausblenden">Hier</button> findest du eine Auswahl an Fotos von vergangenen Veranstaltungen, Aktionen und besonderen Momenten.</p>
     </section>
 
-    <section class="galerie-grid" id="galerie-container">
-      <!-- Bilder werden per JavaScript eingefügt -->
+    <!--
+      Neues Ereignis immer oberhalb der bestehenden Ereignisse einfügen:
+
+      <section class="galerie-ereignis">
+        <h2>Name des Ereignisses</h2>
+        <div class="galerie-grid automatische-galerie" data-von="25" data-bis="19"></div>
+      </section>
+
+      data-von ist die höchste, data-bis die niedrigste Bildnummer.
+      Erlaubte Dateinamen sind bildXX.jpeg, bildXX.jpg und bildXX.png.
+    -->
+    <section class="galerie-ereignis" id="wietzen-besuch">
+      <h2>„Backes“-Freunde aus Wietzen in Niedersachsen zu Gast</h2>
+      <div class="galerie-grid automatische-galerie" data-von="24" data-bis="19"></div>
+    </section>
+
+    <section class="galerie-ereignis">
+      <h2>Sommerfest 2026</h2>
+      <div class="galerie-grid automatische-galerie" data-von="18" data-bis="14"></div>
+    </section>
+
+    <section class="galerie-ereignis">
+      <h2>Pflanzenbörse 2026</h2>
+      <div class="galerie-grid automatische-galerie" data-von="13" data-bis="8"></div>
+    </section>
+
+    <section class="galerie-ereignis">
+      <h2>Dorffest 2025</h2>
+      <div class="galerie-grid automatische-galerie" data-von="7" data-bis="1"></div>
     </section>
   </main>
 
