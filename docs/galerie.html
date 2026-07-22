@@ -35,38 +35,159 @@
         id="galerie-beschriftungen-schalter"
         type="button"
         aria-pressed="false"
+        aria-controls="galerie-nummernkreise"
         title="Bilddateinamen ein- oder ausblenden">Hier</button> findest du eine Auswahl an Fotos von vergangenen Veranstaltungen, Aktionen und besonderen Momenten.</p>
+
+      <aside class="galerie-nummernkreise" id="galerie-nummernkreise" aria-label="Zuordnung der Galerie-Nummernkreise" hidden>
+        <strong>Zuordnung der Nummernkreise</strong>
+        <ul>
+          <li><span>Aktionen</span><code>a1bild01, a1bild02 …</code></li>
+          <li><span>Astronomie</span><code>a2bild01, a2bild02 …</code></li>
+          <li><span>Wettbewerbe</span><code>a3bild01, a3bild02 …</code></li>
+          <li><span>Natur</span><code>a4bild01, a4bild02 …</code></li>
+          <li><span>Wanderwege</span><code>a6bild01, a6bild02 …</code></li>
+          <li><span>Noch nicht zugeordnet</span><code>a5bild01, a5bild02 …</code></li>
+          <li><span>Wietzen</span><code>e1bild01 bis e1bild06</code></li>
+          <li><span>Sommerfest</span><code>e2bild01 bis e2bild05</code></li>
+          <li><span>Pflanzenbörse</span><code>e3bild01 bis e3bild06</code></li>
+          <li><span>Dorffest</span><code>e4bild01 bis e4bild07</code></li>
+        </ul>
+
+        <div class="galerie-sortierung">
+          <strong>Reihenfolge der Abschnitte</strong>
+          <p>Mit den Pfeilen kannst du die Galerieabschnitte verschieben. Die Reihenfolge wird in diesem Browser gespeichert.</p>
+          <ol id="galerie-sortierliste" aria-label="Reihenfolge der Galerieabschnitte"></ol>
+          <button class="galerie-sortierung-zuruecksetzen" id="galerie-sortierung-zuruecksetzen" type="button">
+            Standardreihenfolge wiederherstellen
+          </button>
+        </div>
+      </aside>
     </section>
 
     <!--
-      Neues Ereignis immer oberhalb der bestehenden Ereignisse einfügen:
+      REDAKTIONSHINWEIS ZU DEN THEMENGALERIEN:
+      - Alle Fotos werden im Ordner "bilder" gespeichert.
+      - Aktionen:     a1bild01.jpg, a1bild02.png, a1bild03.jpeg usw.
+      - Astronomie:   a2bild01.jpg, a2bild02.png, a2bild03.jpeg usw.
+      - Wettbewerbe:  a3bild01.jpg, a3bild02.png, a3bild03.jpeg usw.
+      - Natur:        a4bild01.jpg, a4bild02.png, a4bild03.jpeg usw.
+      - Wanderwege:   a6bild01.jpg, a6bild02.png, a6bild03.jpeg usw.
+      - Noch nicht zugeordnet: a5bild01.jpg, a5bild02.png, a5bild03.jpeg usw.
+      - Erlaubte Dateiendungen sind .jpeg, .jpg und .png.
+      - Neue Bilder mit der nächsten freien Nummer werden automatisch erkannt.
+        data-von muss dafür nicht mehr geändert werden.
+      - Einzelne fehlende Nummern werden übersprungen und verursachen keinen Fehler.
+      - Der bekannte Bestand wird zuerst angezeigt. Die Suche nach neuen Bildern
+        erfolgt anschließend im Hintergrund in Blöcken zu 20 Nummern.
+      - Die nachgelagerte Suche endet nach einem vollständig leeren Block.
+        Bei ungewöhnlich großen Lücken kann data-suchblock erhöht werden.
+      - data-von kennzeichnet nur noch den bisher bekannten Bestand,
+        data-bis die niedrigste zu prüfende Bildnummer.
+      - data-stellen="2" erzeugt die zweistellige Nummer 01, 02, 03 usw.
+      - Das Foto mit der höchsten Nummer wird immer zuerst angezeigt.
 
-      <section class="galerie-ereignis">
-        <h2>Name des Ereignisses</h2>
-        <div class="galerie-grid automatische-galerie" data-von="25" data-bis="19"></div>
-      </section>
-
-      data-von ist die höchste, data-bis die niedrigste Bildnummer.
-      Erlaubte Dateinamen sind bildXX.jpeg, bildXX.jpg und bildXX.png.
+      Auch die Ereignisgalerien besitzen eigene Nummernkreise:
+      - Wietzen:       e1bild01 bis e1bild06
+      - Sommerfest:    e2bild01 bis e2bild05
+      - Pflanzenbörse: e3bild01 bis e3bild06
+      - Dorffest:      e4bild01 bis e4bild07
+      Neue fortlaufend nummerierte Ereignisbilder werden ebenfalls automatisch erkannt.
     -->
+    <section class="galerie-ereignis galerie-thema" id="galerie-aktionen">
+      <p class="seiten-kategorie">Themengalerie</p>
+      <h2>Aktionen</h2>
+      <div
+        class="galerie-grid automatische-galerie"
+        data-praefix="a1bild"
+        data-von="1"
+        data-bis="1"
+        data-stellen="2"></div>
+      <p class="galerie-leer">Noch keine Fotos vorhanden.</p>
+    </section>
+
+    <section class="galerie-ereignis galerie-thema" id="galerie-astronomie">
+      <p class="seiten-kategorie">Themengalerie</p>
+      <h2>Astronomie</h2>
+      <div
+        class="galerie-grid automatische-galerie"
+        data-praefix="a2bild"
+        data-von="1"
+        data-bis="1"
+        data-stellen="2"></div>
+      <p class="galerie-leer">Noch keine Fotos vorhanden.</p>
+    </section>
+
+    <section class="galerie-ereignis galerie-thema" id="galerie-wettbewerbe">
+      <p class="seiten-kategorie">Themengalerie</p>
+      <h2>Wettbewerbe</h2>
+      <div
+        class="galerie-grid automatische-galerie"
+        data-praefix="a3bild"
+        data-von="1"
+        data-bis="1"
+        data-stellen="2"></div>
+      <p class="galerie-leer">Noch keine Fotos vorhanden.</p>
+    </section>
+
+    <section class="galerie-ereignis galerie-thema" id="galerie-natur">
+      <p class="seiten-kategorie">Themengalerie</p>
+      <h2>Natur</h2>
+      <div
+        class="galerie-grid automatische-galerie"
+        data-praefix="a4bild"
+        data-von="1"
+        data-bis="1"
+        data-stellen="2"></div>
+      <p class="galerie-leer">Noch keine Fotos vorhanden.</p>
+    </section>
+
+    <!-- Bestehende Ereignisgalerien mit getrennten Nummernkreisen e1 bis e4. -->
     <section class="galerie-ereignis" id="wietzen-besuch">
+      <p class="seiten-kategorie">Rückblick</p>
       <h2>„Backes“-Freunde aus Wietzen in Niedersachsen zu Gast</h2>
-      <div class="galerie-grid automatische-galerie" data-von="24" data-bis="19"></div>
+      <div class="galerie-grid automatische-galerie" data-praefix="e1bild" data-von="6" data-bis="1" data-stellen="2"></div>
     </section>
 
-    <section class="galerie-ereignis">
+    <section class="galerie-ereignis" id="galerie-sommerfest-2026">
+      <p class="seiten-kategorie">Rückblick</p>
       <h2>Sommerfest 2026</h2>
-      <div class="galerie-grid automatische-galerie" data-von="18" data-bis="14"></div>
+      <div class="galerie-grid automatische-galerie" data-praefix="e2bild" data-von="5" data-bis="1" data-stellen="2"></div>
     </section>
 
-    <section class="galerie-ereignis">
+    <section class="galerie-ereignis" id="galerie-pflanzenboerse-2026">
+      <p class="seiten-kategorie">Rückblick</p>
       <h2>Pflanzenbörse 2026</h2>
-      <div class="galerie-grid automatische-galerie" data-von="13" data-bis="8"></div>
+      <div class="galerie-grid automatische-galerie" data-praefix="e3bild" data-von="6" data-bis="1" data-stellen="2"></div>
     </section>
 
-    <section class="galerie-ereignis">
+    <section class="galerie-ereignis" id="galerie-dorffest-2025">
+      <p class="seiten-kategorie">Rückblick</p>
       <h2>Dorffest 2025</h2>
-      <div class="galerie-grid automatische-galerie" data-von="7" data-bis="1"></div>
+      <div class="galerie-grid automatische-galerie" data-praefix="e4bild" data-von="7" data-bis="1" data-stellen="2"></div>
+    </section>
+
+    <section class="galerie-ereignis galerie-thema" id="galerie-wanderwege">
+      <p class="seiten-kategorie">Themengalerie</p>
+      <h2>Wanderwege</h2>
+      <div
+        class="galerie-grid automatische-galerie"
+        data-praefix="a6bild"
+        data-von="1"
+        data-bis="1"
+        data-stellen="2"></div>
+      <p class="galerie-leer">Noch keine Fotos vorhanden.</p>
+    </section>
+
+    <section class="galerie-ereignis galerie-thema" id="galerie-nicht-zugeordnet">
+      <p class="seiten-kategorie">Vorläufige Ablage</p>
+      <h2>Noch nicht zugeordnet</h2>
+      <div
+        class="galerie-grid automatische-galerie"
+        data-praefix="a5bild"
+        data-von="1"
+        data-bis="1"
+        data-stellen="2"></div>
+      <p class="galerie-leer">Noch keine Fotos vorhanden.</p>
     </section>
   </main>
 
