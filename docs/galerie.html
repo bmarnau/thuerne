@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="galerie-reihenfolge-api" content="/api/galerie-reihenfolge" />
   <title>Fotogalerie – Dörfergemeinschaft am Thürne e. V.</title>
  <link rel="stylesheet" href="../css/style.css" />
   <link rel="stylesheet" href="../css/cookie.css" />
@@ -55,7 +56,8 @@
 
         <div class="galerie-sortierung">
           <strong>Reihenfolge der Abschnitte</strong>
-          <p>Mit den Pfeilen kannst du die Galerieabschnitte verschieben. Die Reihenfolge wird in diesem Browser gespeichert.</p>
+          <p>Mit den Pfeilen kannst du die Galerieabschnitte verschieben. Die Reihenfolge wird zentral gespeichert und gilt für alle Besucher.</p>
+          <p class="galerie-sortierung-status" id="galerie-sortierung-status" role="status" aria-live="polite"></p>
           <ol id="galerie-sortierliste" aria-label="Reihenfolge der Galerieabschnitte"></ol>
           <button class="galerie-sortierung-zuruecksetzen" id="galerie-sortierung-zuruecksetzen" type="button">
             Standardreihenfolge wiederherstellen
