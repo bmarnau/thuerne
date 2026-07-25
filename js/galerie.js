@@ -210,14 +210,14 @@ document.addEventListener("DOMContentLoaded", () => {
     } catch (fehler) {
       aktuelleReihenfolge = vorherigeReihenfolge;
       reihenfolgeAnwenden();
-      statusAnzeigen(feherText(feher), true);
+      statusAnzeigen(fehlerText(feher), true);
     } finally {
       speichernLaeuft = false;
       sortierlisteAnzeigen();
     }
   }
 
-  function feherText(fehler) {
+  function fehlerText(fehler) {
     return fehler instanceof Error ? fehler.message : "Die Reihenfolge konnte nicht gespeichert werden.";
   }
 
@@ -235,7 +235,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     } catch (fehler) {
       statusAnzeigen(
-        `Zentrale Reihenfolge nicht erreichbar. Lokale Ersatzreihenfolge wird verwendet. ${feherText(fehler)}`,
+        `Zentrale Reihenfolge nicht erreichbar. Lokale Ersatzreihenfolge wird verwendet. ${fehlerText(fehler)}`,
         true
       );
     }
@@ -257,7 +257,7 @@ document.addEventListener("DOMContentLoaded", () => {
     } catch (fehler) {
       aktuelleReihenfolge = vorherigeReihenfolge;
       reihenfolgeAnwenden();
-      statusAnzeigen(feherText(fehler), true);
+      statusAnzeigen(fehlerText(fehler), true);
     } finally {
       speichernLaeuft = false;
       sortierlisteAnzeigen();
