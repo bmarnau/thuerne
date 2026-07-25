@@ -42,6 +42,5 @@ echo "ADMIN_TOKEN=ein-langes-testkennwort" > .dev.vars
 npx wrangler dev
 ```
 
-Die Datei `.dev.vars` wird durch die bestehende `.gitignore`-Regel `.env*`
-nicht vollständig abgedeckt und darf nicht committed werden. Ergänze sie lokal
-zur globalen Git-Ignorierliste oder lösche sie nach dem Test.
+Die lokale Datei `.dev.vars` wird durch `.gitignore` ausgeschlossen und darf
+niemals committed werden.
