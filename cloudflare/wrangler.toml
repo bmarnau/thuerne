@@ -1,0 +1,14 @@
+name = "thuerne-galerie-reihenfolge"
+main = "worker.js"
+compatibility_date = "2026-07-25"
+
+[vars]
+# Bei Betrieb unter derselben Domain genügt deren Origin.
+# Mehrere Origins werden durch Kommas getrennt.
+ALLOWED_ORIGINS = "https://DEINE-DOMAIN.DE"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "thuerne-galerie"
+database_id = "D1-DATENBANK-ID-EINTRAGEN"
+migrations_dir = "migrations"

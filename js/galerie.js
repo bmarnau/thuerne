@@ -9,8 +9,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const galerieAbschnitte = [...document.querySelectorAll(".galerie-ereignis")];
   const standardReihenfolge = galerieAbschnitte.map((abschnitt) => abschnitt.id);
   const speicherSchluessel = "thuerne-galerie-reihenfolge";
+  const adminSchluessel = "thuerne-galerie-admin-token";
+  const apiUrl =
+    document.querySelector('meta[name="galerie-reihenfolge-api"]')?.content.trim() || "";
+  const sortierungStatus = document.getElementById("galerie-sortierung-status");
   let beschriftungenSichtbar = false;
   let aktuelleReihenfolge = [...standardReihenfolge];
+  let speichernLaeuft = false;
 
   function nummernkreiseInAbschnittenErgaenzen() {
     galerieAbschnitte.forEach((abschnitt) => {
@@ -46,24 +51,69 @@ document.addEventListener("DOMContentLoaded", () => {
 
   nummernkreiseInAbschnittenErgaenzen();
 
-  function gespeicherteReihenfolgeLesen() {
-    try {
-      const gespeichert = JSON.parse(localStorage.getItem(speicherSchluessel));
-      if (!Array.isArray(gespeichert)) return [...standardReihenfolge];
+  function statusAnzeigen(text, istFehler = false) {
+    if (!sortierungStatus) return;
+    sortierungStatus.textContent = text;
+    sortierungStatus.classList.toggle("galerie-sortierung-fehler", istFehler);
+  }
 
-      const bekannteIds = gespeichert.filter((id) => standardReihenfolge.includes(id));
-      const neueIds = standardReihenfolge.filter((id) => !bekannteIds.includes(id));
-      const nichtZugeordnetIndex = bekannteIds.indexOf("galerie-nicht-zugeordnet");
+  function reihenfolgeBereinigen(reihenfolge) {
+    if (!Array.isArray(reihenfolge)) return [...standardReihenfolge];
 
-      if (nichtZugeordnetIndex >= 0) {
-        bekannteIds.splice(nichtZugeordnetIndex, 0, ...neueIds);
-        return bekannteIds;
+    const bereitsEnthalten = new Set();
+    const bekannteIds = reihenfolge.filter((id) => {
+      if (
+        typeof id !== "string" ||
+        !standardReihenfolge.includes(id) ||
+        bereitsEnthalten.has(id)
+      ) {
+        return false;
       }
+      bereitsEnthalten.add(id);
+      return true;
+    });
+    const neueIds = standardReihenfolge.filter((id) => !bereitsEnthalten.has(id));
+    const nichtZugeordnetIndex = bekannteIds.indexOf("galerie-nicht-zugeordnet");
 
-      return [...bekannteIds, ...neueIds];
+    if (nichtZugeordnetIndex >= 0) {
+      bekannteIds.splice(nichtZugeordnetIndex, 0, ...neueIds);
+      return bekannteIds;
+    }
+
+    return [...bekannteIds, ...neueIds];
+  }
+
+  function lokaleReihenfolgeLesen() {
+    try {
+      return reihenfolgeBereinigen(JSON.parse(localStorage.getItem(speicherSchluessel)));
     } catch {
       return [...standardReihenfolge];
     }
+  }
+
+  function lokaleReihenfolgeSpeichern() {
+    try {
+      localStorage.setItem(speicherSchluessel, JSON.stringify(aktuelleReihenfolge));
+    } catch {
+      // Die zentrale Speicherung bleibt davon unberührt.
+    }
+  }
+
+  async function zentraleReihenfolgeLesen() {
+    if (!apiUrl || window.location.protocol === "file:") {
+      statusAnzeigen("Lokale Vorschau: Die Reihenfolge gilt nur in diesem Browser.");
+      return lokaleReihenfolgeLesen();
+    }
+
+    const antwort = await fetch(apiUrl, {
+      method: "GET",
+      headers: { Accept: "application/json" },
+      cache: "no-store"
+    });
+    if (!antwort.ok) throw new Error(`Abruf fehlgeschlagen (HTTP ${antwort.status})`);
+
+    const daten = await antwort.json();
+    return reihenfolgeBereinigen(daten.reihenfolge);
   }
 
   function reihenfolgeAnwenden() {
@@ -73,12 +123,37 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  function reihenfolgeSpeichern() {
-    try {
-      localStorage.setItem(speicherSchluessel, JSON.stringify(aktuelleReihenfolge));
-    } catch {
-      // Die Sortierung funktioniert auch dann für die aktuelle Sitzung weiter.
+  async function reihenfolgeSpeichern() {
+    if (!apiUrl || window.location.protocol === "file:") {
+      lokaleReihenfolgeSpeichern();
+      statusAnzeigen("Lokal gespeichert. Auf der veröffentlichten Seite wird zentral gespeichert.");
+      return;
     }
+
+    let adminToken = sessionStorage.getItem(adminSchluessel);
+    if (!adminToken) {
+      adminToken = window.prompt("Administrator-Kennwort zum Speichern der Reihenfolge:");
+      if (!adminToken) throw new Error("Speichern wurde abgebrochen.");
+      sessionStorage.setItem(adminSchluessel, adminToken);
+    }
+
+    const antwort = await fetch(apiUrl, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${adminToken}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ reihenfolge: aktuelleReihenfolge })
+    });
+
+    if (antwort.status === 401) {
+      sessionStorage.removeItem(adminSchluessel);
+      throw new Error("Das Administrator-Kennwort ist nicht gültig.");
+    }
+    if (!antwort.ok) throw new Error(`Speichern fehlgeschlagen (HTTP ${antwort.status})`);
+
+    lokaleReihenfolgeSpeichern();
+    statusAnzeigen("Reihenfolge zentral gespeichert.");
   }
 
   function sortierlisteAnzeigen() {
@@ -99,13 +174,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
       nachOben.type = "button";
       nachOben.textContent = "↑";
-      nachOben.disabled = index === 0;
+      nachOben.disabled = speichernLaeuft || index === 0;
       nachOben.setAttribute("aria-label", `${titel} nach oben verschieben`);
       nachOben.addEventListener("click", () => abschnittVerschieben(index, -1));
 
       nachUnten.type = "button";
       nachUnten.textContent = "↓";
-      nachUnten.disabled = index === aktuelleReihenfolge.length - 1;
+      nachUnten.disabled = speichernLaeuft || index === aktuelleReihenfolge.length - 1;
       nachUnten.setAttribute("aria-label", `${titel} nach unten verschieben`);
       nachUnten.addEventListener("click", () => abschnittVerschieben(index, 1));
 
@@ -113,32 +188,80 @@ document.addEventListener("DOMContentLoaded", () => {
       eintrag.append(beschriftung, aktionen);
       sortierliste.appendChild(eintrag);
     });
+
+    if (sortierungZuruecksetzen) sortierungZuruecksetzen.disabled = speichernLaeuft;
   }
 
-  function abschnittVerschieben(index, richtung) {
+  async function abschnittVerschieben(index, richtung) {
+    if (speichernLaeuft) return;
     const zielIndex = index + richtung;
     if (zielIndex < 0 || zielIndex >= aktuelleReihenfolge.length) return;
 
+    const vorherigeReihenfolge = [...aktuelleReihenfolge];
     [aktuelleReihenfolge[index], aktuelleReihenfolge[zielIndex]] =
       [aktuelleReihenfolge[zielIndex], aktuelleReihenfolge[index]];
     reihenfolgeAnwenden();
-    reihenfolgeSpeichern();
+    speichernLaeuft = true;
     sortierlisteAnzeigen();
+    statusAnzeigen("Reihenfolge wird gespeichert …");
+
+    try {
+      await reihenfolgeSpeichern();
+    } catch (fehler) {
+      aktuelleReihenfolge = vorherigeReihenfolge;
+      reihenfolgeAnwenden();
+      statusAnzeigen(fehlerText(fehler), true);
+    } finally {
+      speichernLaeuft = false;
+      sortierlisteAnzeigen();
+    }
   }
 
-  aktuelleReihenfolge = gespeicherteReihenfolgeLesen();
-  reihenfolgeAnwenden();
-  sortierlisteAnzeigen();
+  function fehlerText(fehler) {
+    return fehler instanceof Error ? fehler.message : "Die Reihenfolge konnte nicht gespeichert werden.";
+  }
 
-  sortierungZuruecksetzen?.addEventListener("click", () => {
+  async function initialisiereReihenfolge() {
+    aktuelleReihenfolge = lokaleReihenfolgeLesen();
+    reihenfolgeAnwenden();
+    sortierlisteAnzeigen();
+
+    try {
+      aktuelleReihenfolge = await zentraleReihenfolgeLesen();
+      reihenfolgeAnwenden();
+      sortierlisteAnzeigen();
+      if (apiUrl && window.location.protocol !== "file:") {
+        statusAnzeigen("Zentrale Reihenfolge geladen.");
+      }
+    } catch (fehler) {
+      statusAnzeigen(
+        `Zentrale Reihenfolge nicht erreichbar. Lokale Ersatzreihenfolge wird verwendet. ${fehlerText(fehler)}`,
+        true
+      );
+    }
+  }
+
+  initialisiereReihenfolge();
+
+  sortierungZuruecksetzen?.addEventListener("click", async () => {
+    if (speichernLaeuft) return;
+    const vorherigeReihenfolge = [...aktuelleReihenfolge];
     aktuelleReihenfolge = [...standardReihenfolge];
     reihenfolgeAnwenden();
-    try {
-      localStorage.removeItem(speicherSchluessel);
-    } catch {
-      // Die Standardreihenfolge ist trotzdem für die aktuelle Sitzung aktiv.
-    }
+    speichernLaeuft = true;
     sortierlisteAnzeigen();
+    statusAnzeigen("Standardreihenfolge wird gespeichert …");
+
+    try {
+      await reihenfolgeSpeichern();
+    } catch (fehler) {
+      aktuelleReihenfolge = vorherigeReihenfolge;
+      reihenfolgeAnwenden();
+      statusAnzeigen(fehlerText(fehler), true);
+    } finally {
+      speichernLaeuft = false;
+      sortierlisteAnzeigen();
+    }
   });
 
   if (beschriftungenSchalter) {

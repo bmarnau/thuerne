@@ -1462,3 +1462,20 @@ nav ul li a[aria-current="page"] {
   margin-bottom: 0.65rem;
   line-height: 1.6;
 }
+
+
+.galerie-sortierung-status {
+  min-height: 1.45em;
+  margin-block: 0.75rem;
+  color: #205f3a;
+  font-weight: bold;
+}
+
+.galerie-sortierung-status.galerie-sortierung-fehler {
+  color: #9c2f25;
+}
+
+.galerie-sortierung-zuruecksetzen:disabled {
+  opacity: 0.55;
+  cursor: wait;
+}
