@@ -210,7 +210,7 @@ document.addEventListener("DOMContentLoaded", () => {
     } catch (fehler) {
       aktuelleReihenfolge = vorherigeReihenfolge;
       reihenfolgeAnwenden();
-      statusAnzeigen(fehlerText(feher), true);
+      statusAnzeigen(fehlerText(fehler), true);
     } finally {
       speichernLaeuft = false;
       sortierlisteAnzeigen();
