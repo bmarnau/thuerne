@@ -8,6 +8,7 @@
  <link rel="stylesheet" href="../css/style.css" />
   <link rel="stylesheet" href="../css/cookie.css" />
   <script defer src="../js/script.js"></script>
+  <!-- galerie.js liest die vollständige Cloudflare-Adresse aus dem Meta-Eintrag oben. -->
   <script defer src="../js/galerie.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 </head>
@@ -53,18 +54,49 @@
           <li><span>Pflanzenbörse</span><code>e3bild01 bis e3bild06</code></li>
           <li><span>Dorffest</span><code>e4bild01 bis e4bild07</code></li>
         </ul>
+        <button class="galerie-zuordnung-kopieren" id="galerie-zuordnung-kopieren" type="button">
+          Zuordnung kopieren
+        </button>
+        <p class="galerie-zuordnung-status" id="galerie-zuordnung-status" role="status" aria-live="polite"></p>
 
         <div class="galerie-sortierung">
           <strong>Reihenfolge der Abschnitte</strong>
-          <p>Mit den Pfeilen kannst du die Galerieabschnitte verschieben. Die Reihenfolge wird zentral gespeichert und gilt für alle Besucher.</p>
-          <p class="galerie-sortierung-status" id="galerie-sortierung-status" role="status" aria-live="polite"></p>
+
+          <p>Mit den Pfeilen kannst du die Galerieabschnitte verschieben. Mit der Redaktions-PIN wird die Reihenfolge anschließend für alle Endgeräte gespeichert.</p>
+
           <ol id="galerie-sortierliste" aria-label="Reihenfolge der Galerieabschnitte"></ol>
-          <button class="galerie-sortierung-zuruecksetzen" id="galerie-sortierung-zuruecksetzen" type="button">
-            Standardreihenfolge wiederherstellen
+          <button class="galerie-sortierung-speichern" id="galerie-sortierung-speichern" type="button">
+            Reihenfolge speichern
           </button>
+          <p class="galerie-sortierung-status" id="galerie-sortierung-status" role="status" aria-live="polite"></p>
+          <!--
+            REDAKTIONSHINWEIS:
+            Die Reihenfolge wird über den geschützten Cloudflare-Dienst gespeichert.
+            Die geheime Redaktions-PIN darf niemals im HTML oder JavaScript stehen.
+          -->
         </div>
       </aside>
     </section>
+
+    <dialog class="galerie-speicherdialog" id="galerie-speicherdialog" aria-labelledby="galerie-speicherdialog-titel">
+      <h2 id="galerie-speicherdialog-titel">Reihenfolge speichern?</h2>
+      <p>Soll diese Reihenfolge für alle Besucher gültig sein?</p>
+      <label class="galerie-pin-label" for="galerie-redaktions-pin">
+        Redaktions-PIN
+        <input
+          id="galerie-redaktions-pin"
+          type="password"
+          inputmode="text"
+          autocomplete="current-password"
+          minlength="8"
+          required />
+      </label>
+      <p class="galerie-dialog-status" id="galerie-dialog-status" role="status" aria-live="polite"></p>
+      <div class="galerie-speicherdialog-aktionen">
+        <button id="galerie-speichern-abbrechen" type="button">Abbrechen</button>
+        <button id="galerie-speichern-bestaetigen" type="button">Ja, speichern</button>
+      </div>
+    </dialog>
 
     <!--
       REDAKTIONSHINWEIS ZU DEN THEMENGALERIEN:
@@ -95,24 +127,24 @@
       - Dorffest:      e4bild01 bis e4bild07
       Neue fortlaufend nummerierte Ereignisbilder werden ebenfalls automatisch erkannt.
     -->
-    <section class="galerie-ereignis galerie-thema" id="galerie-aktionen">
-      <p class="seiten-kategorie">Themengalerie</p>
-      <h2>Aktionen</h2>
-      <div
-        class="galerie-grid automatische-galerie"
-        data-praefix="a1bild"
-        data-von="1"
-        data-bis="1"
-        data-stellen="2"></div>
-      <p class="galerie-leer">Noch keine Fotos vorhanden.</p>
-    </section>
-
     <section class="galerie-ereignis galerie-thema" id="galerie-astronomie">
       <p class="seiten-kategorie">Themengalerie</p>
       <h2>Astronomie</h2>
       <div
         class="galerie-grid automatische-galerie"
         data-praefix="a2bild"
+        data-von="1"
+        data-bis="1"
+        data-stellen="2"></div>
+      <p class="galerie-leer">Noch keine Fotos vorhanden.</p>
+    </section>
+
+    <section class="galerie-ereignis galerie-thema" id="galerie-aktionen">
+      <p class="seiten-kategorie">Themengalerie</p>
+      <h2>Aktionen</h2>
+      <div
+        class="galerie-grid automatische-galerie"
+        data-praefix="a1bild"
         data-von="1"
         data-bis="1"
         data-stellen="2"></div>

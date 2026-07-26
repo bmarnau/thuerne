@@ -1,21 +1,27 @@
-document.addEventListener("DOMContentLoaded", () => {
+(() => {
   const dateiendungen = ["jpeg", "jpg", "png"];
   const bilderVerzeichnis = "../bilder/";
   const beschriftungenSchalter = document.getElementById("galerie-beschriftungen-schalter");
   const nummernkreisHinweis = document.getElementById("galerie-nummernkreise");
   const sortierliste = document.getElementById("galerie-sortierliste");
-  const sortierungZuruecksetzen = document.getElementById("galerie-sortierung-zuruecksetzen");
+  const sortierungSpeichern = document.getElementById("galerie-sortierung-speichern");
+  const sortierungStatus = document.getElementById("galerie-sortierung-status");
+  const zuordnungKopieren = document.getElementById("galerie-zuordnung-kopieren");
+  const zuordnungStatus = document.getElementById("galerie-zuordnung-status");
+  const speicherdialog = document.getElementById("galerie-speicherdialog");
+  const speichernAbbrechen = document.getElementById("galerie-speichern-abbrechen");
+  const speichernBestaetigen = document.getElementById("galerie-speichern-bestaetigen");
+  const redaktionsPin = document.getElementById("galerie-redaktions-pin");
+  const dialogStatus = document.getElementById("galerie-dialog-status");
   const galerieHauptbereich = document.querySelector("main");
   const galerieAbschnitte = [...document.querySelectorAll(".galerie-ereignis")];
-  const standardReihenfolge = galerieAbschnitte.map((abschnitt) => abschnitt.id);
-  const speicherSchluessel = "thuerne-galerie-reihenfolge";
-  const adminSchluessel = "thuerne-galerie-admin-token";
-  const apiUrl =
-    document.querySelector('meta[name="galerie-reihenfolge-api"]')?.content.trim() || "";
-  const sortierungStatus = document.getElementById("galerie-sortierung-status");
+  const htmlReihenfolge = galerieAbschnitte.map((abschnitt) => abschnitt.id);
+  // Die vollständige API-Adresse steht im HTML. Dadurch ist keine zusätzliche
+  // Konfigurationsdatei nötig und der Worker-Pfad wird nicht doppelt ergänzt.
+  const galerieApiMeta = document.querySelector('meta[name="galerie-reihenfolge-api"]');
+  const galerieApiUrl = String(galerieApiMeta?.content || "").replace(/\/+$/, "");
   let beschriftungenSichtbar = false;
-  let aktuelleReihenfolge = [...standardReihenfolge];
-  let speichernLaeuft = false;
+  let aktuelleReihenfolge = [...htmlReihenfolge];
 
   function nummernkreiseInAbschnittenErgaenzen() {
     galerieAbschnitte.forEach((abschnitt) => {
@@ -51,28 +57,63 @@ document.addEventListener("DOMContentLoaded", () => {
 
   nummernkreiseInAbschnittenErgaenzen();
 
-  function statusAnzeigen(text, istFehler = false) {
-    if (!sortierungStatus) return;
-    sortierungStatus.textContent = text;
-    sortierungStatus.classList.toggle("galerie-sortierung-fehler", istFehler);
+  function kompakteZuordnungErstellen() {
+    const zuordnungen = [...document.querySelectorAll("#galerie-nummernkreise > ul > li")]
+      .map((eintrag) => {
+        const name = eintrag.querySelector("span")?.textContent.trim();
+        const nummernkreis = eintrag.querySelector("code")?.textContent;
+        const kuerzel = nummernkreis?.match(/[ae]\d+bild/i)?.[0];
+        return name && kuerzel ? `${name}: ${kuerzel}XX` : null;
+      })
+      .filter(Boolean);
+
+    return [
+      "Thürne-Galerie – Bildzuordnung",
+      ...zuordnungen,
+      "Dateiname: Kürzel + zweistellige Nummer + .jpg/.jpeg/.png",
+      "Beispiel: a1bild01.jpg"
+    ].join("\n");
   }
 
-  function reihenfolgeBereinigen(reihenfolge) {
-    if (!Array.isArray(reihenfolge)) return [...standardReihenfolge];
+  async function textInZwischenablageKopieren(text) {
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(text);
+      return;
+    }
 
-    const bereitsEnthalten = new Set();
-    const bekannteIds = reihenfolge.filter((id) => {
-      if (
-        typeof id !== "string" ||
-        !standardReihenfolge.includes(id) ||
-        bereitsEnthalten.has(id)
-      ) {
-        return false;
+    const textfeld = document.createElement("textarea");
+    textfeld.value = text;
+    textfeld.setAttribute("readonly", "");
+    textfeld.style.position = "fixed";
+    textfeld.style.opacity = "0";
+    document.body.appendChild(textfeld);
+    textfeld.select();
+    const erfolgreich = document.execCommand("copy");
+    textfeld.remove();
+    if (!erfolgreich) throw new Error("Kopieren nicht möglich");
+  }
+
+  zuordnungKopieren?.addEventListener("click", async () => {
+    try {
+      await textInZwischenablageKopieren(kompakteZuordnungErstellen());
+      if (zuordnungStatus) zuordnungStatus.textContent = "Übersicht kopiert.";
+    } catch {
+      if (zuordnungStatus) {
+        zuordnungStatus.textContent =
+          "Kopieren war nicht möglich. Bitte die Seite über thuerne.de öffnen.";
       }
-      bereitsEnthalten.add(id);
-      return true;
-    });
-    const neueIds = standardReihenfolge.filter((id) => !bereitsEnthalten.has(id));
+    }
+  });
+
+  function reihenfolgeVervollstaendigen(reihenfolge) {
+    if (!Array.isArray(reihenfolge)) return [...htmlReihenfolge];
+
+    const bekannteIds = reihenfolge.filter(
+      (id, index) =>
+        htmlReihenfolge.includes(id) &&
+        reihenfolge.indexOf(id) === index
+    );
+    const neueIds = htmlReihenfolge.filter((id) => !bekannteIds.includes(id));
     const nichtZugeordnetIndex = bekannteIds.indexOf("galerie-nicht-zugeordnet");
 
     if (nichtZugeordnetIndex >= 0) {
@@ -83,37 +124,8 @@ document.addEventListener("DOMContentLoaded", () => {
     return [...bekannteIds, ...neueIds];
   }
 
-  function lokaleReihenfolgeLesen() {
-    try {
-      return reihenfolgeBereinigen(JSON.parse(localStorage.getItem(speicherSchluessel)));
-    } catch {
-      return [...standardReihenfolge];
-    }
-  }
-
-  function lokaleReihenfolgeSpeichern() {
-    try {
-      localStorage.setItem(speicherSchluessel, JSON.stringify(aktuelleReihenfolge));
-    } catch {
-      // Die zentrale Speicherung bleibt davon unberührt.
-    }
-  }
-
-  async function zentraleReihenfolgeLesen() {
-    if (!apiUrl || window.location.protocol === "file:") {
-      statusAnzeigen("Lokale Vorschau: Die Reihenfolge gilt nur in diesem Browser.");
-      return lokaleReihenfolgeLesen();
-    }
-
-    const antwort = await fetch(apiUrl, {
-      method: "GET",
-      headers: { Accept: "application/json" },
-      cache: "no-store"
-    });
-    if (!antwort.ok) throw new Error(`Abruf fehlgeschlagen (HTTP ${antwort.status})`);
-
-    const daten = await antwort.json();
-    return reihenfolgeBereinigen(daten.reihenfolge);
+  function veroeffentlichteReihenfolgeLesen() {
+    return reihenfolgeVervollstaendigen(window.thuerneGalerieReihenfolge);
   }
 
   function reihenfolgeAnwenden() {
@@ -121,39 +133,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const abschnitt = document.getElementById(id);
       if (abschnitt && galerieHauptbereich) galerieHauptbereich.appendChild(abschnitt);
     });
-  }
-
-  async function reihenfolgeSpeichern() {
-    if (!apiUrl || window.location.protocol === "file:") {
-      lokaleReihenfolgeSpeichern();
-      statusAnzeigen("Lokal gespeichert. Auf der veröffentlichten Seite wird zentral gespeichert.");
-      return;
-    }
-
-    let adminToken = sessionStorage.getItem(adminSchluessel);
-    if (!adminToken) {
-      adminToken = window.prompt("Administrator-Kennwort zum Speichern der Reihenfolge:");
-      if (!adminToken) throw new Error("Speichern wurde abgebrochen.");
-      sessionStorage.setItem(adminSchluessel, adminToken);
-    }
-
-    const antwort = await fetch(apiUrl, {
-      method: "PUT",
-      headers: {
-        Authorization: `Bearer ${adminToken}`,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ reihenfolge: aktuelleReihenfolge })
-    });
-
-    if (antwort.status === 401) {
-      sessionStorage.removeItem(adminSchluessel);
-      throw new Error("Das Administrator-Kennwort ist nicht gültig.");
-    }
-    if (!antwort.ok) throw new Error(`Speichern fehlgeschlagen (HTTP ${antwort.status})`);
-
-    lokaleReihenfolgeSpeichern();
-    statusAnzeigen("Reihenfolge zentral gespeichert.");
   }
 
   function sortierlisteAnzeigen() {
@@ -174,13 +153,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
       nachOben.type = "button";
       nachOben.textContent = "↑";
-      nachOben.disabled = speichernLaeuft || index === 0;
+      nachOben.disabled = index === 0;
       nachOben.setAttribute("aria-label", `${titel} nach oben verschieben`);
       nachOben.addEventListener("click", () => abschnittVerschieben(index, -1));
 
       nachUnten.type = "button";
       nachUnten.textContent = "↓";
-      nachUnten.disabled = speichernLaeuft || index === aktuelleReihenfolge.length - 1;
+      nachUnten.disabled = index === aktuelleReihenfolge.length - 1;
       nachUnten.setAttribute("aria-label", `${titel} nach unten verschieben`);
       nachUnten.addEventListener("click", () => abschnittVerschieben(index, 1));
 
@@ -189,78 +168,129 @@ document.addEventListener("DOMContentLoaded", () => {
       sortierliste.appendChild(eintrag);
     });
 
-    if (sortierungZuruecksetzen) sortierungZuruecksetzen.disabled = speichernLaeuft;
   }
 
-  async function abschnittVerschieben(index, richtung) {
-    if (speichernLaeuft) return;
+  function abschnittVerschieben(index, richtung) {
     const zielIndex = index + richtung;
     if (zielIndex < 0 || zielIndex >= aktuelleReihenfolge.length) return;
 
-    const vorherigeReihenfolge = [...aktuelleReihenfolge];
     [aktuelleReihenfolge[index], aktuelleReihenfolge[zielIndex]] =
       [aktuelleReihenfolge[zielIndex], aktuelleReihenfolge[index]];
     reihenfolgeAnwenden();
-    speichernLaeuft = true;
     sortierlisteAnzeigen();
-    statusAnzeigen("Reihenfolge wird gespeichert …");
-
-    try {
-      await reihenfolgeSpeichern();
-    } catch (fehler) {
-      aktuelleReihenfolge = vorherigeReihenfolge;
-      reihenfolgeAnwenden();
-      statusAnzeigen(fehlerText(fehler), true);
-    } finally {
-      speichernLaeuft = false;
-      sortierlisteAnzeigen();
+    if (sortierungStatus) {
+      sortierungStatus.textContent = "Reihenfolge geändert – bitte noch speichern.";
     }
   }
 
-  function fehlerText(fehler) {
-    return fehler instanceof Error ? fehler.message : "Die Reihenfolge konnte nicht gespeichert werden.";
-  }
+  aktuelleReihenfolge = veroeffentlichteReihenfolgeLesen();
+  reihenfolgeAnwenden();
+  sortierlisteAnzeigen();
 
-  async function initialisiereReihenfolge() {
-    aktuelleReihenfolge = lokaleReihenfolgeLesen();
-    reihenfolgeAnwenden();
-    sortierlisteAnzeigen();
+  async function zentraleReihenfolgeLaden() {
+    if (!galerieApiUrl) {
+      if (sortierungStatus) {
+        sortierungStatus.textContent =
+          "Der zentrale Speicher wird noch eingerichtet. Zurzeit gilt die hinterlegte Reihenfolge.";
+      }
+      return;
+    }
 
     try {
-      aktuelleReihenfolge = await zentraleReihenfolgeLesen();
+      // Die Meta-Angabe enthält bereits den vollständigen Worker-Pfad.
+      const antwort = await fetch(galerieApiUrl, {
+        method: "GET",
+        cache: "no-store"
+      });
+      const daten = await antwort.json();
+      if (!antwort.ok || !Array.isArray(daten.reihenfolge)) {
+        throw new Error(daten.fehler || "Reihenfolge konnte nicht geladen werden.");
+      }
+
+      aktuelleReihenfolge = reihenfolgeVervollstaendigen(daten.reihenfolge);
       reihenfolgeAnwenden();
       sortierlisteAnzeigen();
-      if (apiUrl && window.location.protocol !== "file:") {
-        statusAnzeigen("Zentrale Reihenfolge geladen.");
+      if (sortierungStatus) sortierungStatus.textContent = "";
+    } catch {
+      if (sortierungStatus) {
+        sortierungStatus.textContent =
+          "Der zentrale Speicher ist momentan nicht erreichbar. Die hinterlegte Reihenfolge wird verwendet.";
+      }
+    }
+  }
+
+  zentraleReihenfolgeLaden();
+
+  async function reihenfolgeZentralSpeichern(pin) {
+    if (!galerieApiUrl) {
+      throw new Error("Der zentrale Speicher ist noch nicht eingerichtet.");
+    }
+    if (!/^[\x20-\x7E]{8,128}$/.test(pin)) {
+      throw new Error("Die Redaktions-PIN muss mindestens acht Zeichen lang sein.");
+    }
+
+    // Der Bearer-Token wird nur für diesen Speichervorgang übertragen.
+    // Er wird weder im Browser gespeichert noch in den Quellcode geschrieben.
+    const antwort = await fetch(galerieApiUrl, {
+      method: "PUT",
+      headers: {
+        "Authorization": `Bearer ${pin}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ reihenfolge: aktuelleReihenfolge })
+    });
+    const daten = await antwort.json();
+    if (!antwort.ok) {
+      throw new Error(daten.fehler || "Speichern war nicht möglich.");
+    }
+    return daten;
+  }
+
+  sortierungSpeichern?.addEventListener("click", () => {
+    if (speicherdialog?.showModal) {
+      if (dialogStatus) dialogStatus.textContent = "";
+      if (redaktionsPin) redaktionsPin.value = "";
+      speicherdialog.showModal();
+      redaktionsPin?.focus();
+      return;
+    }
+
+    const pin = window.prompt("Redaktions-PIN eingeben:");
+    if (pin) {
+      reihenfolgeZentralSpeichern(pin)
+        .then(() => {
+          if (sortierungStatus) {
+            sortierungStatus.textContent =
+              "Reihenfolge gespeichert. Sie gilt jetzt für alle Endgeräte.";
+          }
+        })
+        .catch((fehler) => {
+          if (sortierungStatus) sortierungStatus.textContent = fehler.message;
+        });
+    }
+  });
+
+  speichernAbbrechen?.addEventListener("click", () => {
+    if (redaktionsPin) redaktionsPin.value = "";
+    speicherdialog?.close();
+  });
+  speichernBestaetigen?.addEventListener("click", async () => {
+    const pin = redaktionsPin?.value || "";
+    if (dialogStatus) dialogStatus.textContent = "";
+    speichernBestaetigen.disabled = true;
+
+    try {
+      await reihenfolgeZentralSpeichern(pin);
+      if (redaktionsPin) redaktionsPin.value = "";
+      speicherdialog?.close();
+      if (sortierungStatus) {
+        sortierungStatus.textContent =
+          "Reihenfolge gespeichert. Sie gilt jetzt für alle Endgeräte.";
       }
     } catch (fehler) {
-      statusAnzeigen(
-        `Zentrale Reihenfolge nicht erreichbar. Lokale Ersatzreihenfolge wird verwendet. ${fehlerText(fehler)}`,
-        true
-      );
-    }
-  }
-
-  initialisiereReihenfolge();
-
-  sortierungZuruecksetzen?.addEventListener("click", async () => {
-    if (speichernLaeuft) return;
-    const vorherigeReihenfolge = [...aktuelleReihenfolge];
-    aktuelleReihenfolge = [...standardReihenfolge];
-    reihenfolgeAnwenden();
-    speichernLaeuft = true;
-    sortierlisteAnzeigen();
-    statusAnzeigen("Standardreihenfolge wird gespeichert …");
-
-    try {
-      await reihenfolgeSpeichern();
-    } catch (fehler) {
-      aktuelleReihenfolge = vorherigeReihenfolge;
-      reihenfolgeAnwenden();
-      statusAnzeigen(fehlerText(fehler), true);
+      if (dialogStatus) dialogStatus.textContent = fehler.message;
     } finally {
-      speichernLaeuft = false;
-      sortierlisteAnzeigen();
+      speichernBestaetigen.disabled = false;
     }
   });
 
@@ -447,4 +477,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
     nachgelagerteSuchePlanen(() => weitereBilderSuchen(hoechsteNummer + 1));
   });
-});
+})();
