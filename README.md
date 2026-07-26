@@ -29,9 +29,41 @@ thuerne/
 ├── images/                # Bilder und Icons
 └── js/
     ├── script.js          # Hauptscript
+    ├── start-hinweis.js   # Startfenster: Veranstaltungen und Galeriebilder
     ├── galerie.js         # Galerie-Funktionalität
     └── service.js         # Service-Funktionalität
 ```
+
+## 🖼️ Startfenster redaktionell pflegen
+
+Die Inhalte des Startfensters stehen gesammelt am Anfang von
+`js/start-hinweis.js`. Der technische Teil darunter muss für die redaktionelle
+Arbeit nicht geändert werden.
+
+### Neue Veranstaltung eintragen
+
+1. Das neue Einladungsbild in `bilder/` ablegen.
+2. In `START_VERANSTALTUNGEN` einen vorhandenen Block von `{` bis `}` kopieren.
+3. `titel`, `beginn`, `bild`, `bildAlt`, `text`, `link` und `linkText` anpassen.
+4. Das Beginndatum vollständig mit Uhrzeit und Zeitzone eintragen, zum Beispiel
+   `2026-12-05T16:00:00+01:00`.
+5. Die Änderung mit `npm test` prüfen.
+
+Vor dem Beginn wird automatisch die zeitlich nächste Veranstaltung gezeigt.
+Ab dem eingetragenen Beginn ist die Einladung ungültig und wird automatisch
+durch ein Galeriebild ersetzt.
+
+### Ersatzbilder bearbeiten
+
+Die erlaubten Ersatzbilder stehen in `START_GALERIEBILDER`. Jeder Eintrag
+benötigt einen vorhandenen Bildpfad und eine verständliche Beschreibung in
+`bildAlt`. Der Browser vermeidet beim nächsten Seitenstart das zuletzt gezeigte
+Bild. Fehlerhafte Bilder werden automatisch übersprungen.
+
+> **Wichtig für die Veröffentlichung:** Wird `js/start-hinweis.js` geändert,
+> die Versionsnummer `?v=...` am zugehörigen Script in `index.html` ebenfalls
+> aktualisieren. Dadurch erhalten Besucher nicht versehentlich eine alte
+> zwischengespeicherte Einladung.
 
 ## 🚀 Erste Schritte
 

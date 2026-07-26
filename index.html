@@ -4,9 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Startseite – Dörfergemeinschaft am Thürne e. V.</title>
-  <link rel="stylesheet" href="css/style.css?v=20260702">
+  <!--
+    TECHNISCHER HINWEIS:
+    Die Versionsnummer nach ?v= bei CSS- und JavaScript-Dateien nach einer
+    Änderung anpassen. So lädt der Browser die neue Fassung statt einer alten
+    Datei aus seinem Zwischenspeicher.
+  -->
+  <link rel="stylesheet" href="css/style.css?v=20260726">
   <link rel="stylesheet" href="css/cookie.css" />	
-  <script defer src="js/script.js"></script>		
+  <script defer src="js/script.js"></script>
+  <!-- Veranstaltungen und Ersatzbilder werden redaktionell in dieser Datei gepflegt. -->
+  <script defer src="js/start-hinweis.js?v=20260726"></script>
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
   <link
   rel="stylesheet"
@@ -329,31 +337,36 @@
   <button id="cookie-accept" type="button">Verstanden</button>
  </div>
 	
+  <!--
+    REDAKTIONSHINWEIS ZUM STARTFENSTER:
+    Titel, Beginn, Text, Bild und Link werden ausschließlich in
+    js/start-hinweis.js geändert. Dieses neutrale HTML-Grundgerüst muss beim
+    Austausch einer Einladung nicht bearbeitet werden.
+  -->
+  <dialog id="start-hinweis" class="start-hinweis" aria-labelledby="start-hinweis-titel">
+    <article class="start-hinweis-inhalt">
+      <button
+        type="button"
+        class="start-hinweis-schliessen"
+        aria-label="Startfenster schließen">
+        ×
+      </button>
 
-	
-	
-<!-- direkt vor </body> -->
-	
-<div id="italienPopup" class="veranstaltungs-popup" role="dialog" aria-modal="true" aria-labelledby="italienPopupTitel">
+      <img
+        id="start-hinweis-bild"
+        class="start-hinweis-bild"
+        src=""
+        alt=""
+        decoding="async">
 
-  <div class="veranstaltungs-popup-inhalt">
-    
-    <img src="bilder/italienischer-abend-popup.png"
-         alt="Ankündigung: Italienischer Abend am 1. August 2026 im Pfarrheim Houverath"
-         width="1402"
-         height="1122"
-         decoding="async">
-    
-    <button type="button"
-      aria-label="Veranstaltungshinweis schließen"
-      class="veranstaltungs-popup-schliessen">
-      ×
-    </button>
-
-    <span id="italienPopupTitel" class="visually-hidden">Italienischer Abend am 1. August 2026</span>
-
-  </div>
-</div>
+      <div class="start-hinweis-text">
+        <p id="start-hinweis-kategorie" class="start-hinweis-kategorie"></p>
+        <h2 id="start-hinweis-titel"></h2>
+        <p id="start-hinweis-beschreibung"></p>
+        <a id="start-hinweis-link" class="start-hinweis-link" href="docs/galerie.html"></a>
+      </div>
+    </article>
+  </dialog>
 
  <button id="back-to-top" type="button" title="Zurück nach oben" aria-label="Zurück nach oben">↑</button>
 </body>

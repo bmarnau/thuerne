@@ -12,7 +12,7 @@ im Test gespeichert oder übertragen.
 
 | Teststufe | Ergebnis |
 | --- | --- |
-| Lokale Struktur-, UI-, Galerie- und Worker-Tests | 12 bestanden, 0 fehlgeschlagen |
+| Lokale Struktur-, UI-, Startfenster-, Galerie- und Worker-Tests | 18 bestanden, 0 fehlgeschlagen |
 | Live-Test der öffentlichen Seiten und API | 2 bestanden, 0 fehlgeschlagen |
 
 ## Geprüfte Bereiche
@@ -25,6 +25,11 @@ im Test gespeichert oder übertragen.
 | Navigation | mobiles Menü und `aria-expanded` |
 | Datenschutz | Cookie-Einwilligung und lokale Speicherung |
 | Bedienung | Nach-oben-Schaltfläche |
+| Startfenster | nächste Veranstaltung vor Beginn; Galeriebild ab Beginn |
+| Startfenster-Zufall | aufeinanderfolgende Starts zeigen unterschiedliche Bilder |
+| Startfenster-Fehlerfall | Reservebilder und sichtbarer Text bei Bildfehlern |
+| Startfenster-Bedienung | Schließen über Schaltfläche und Hintergrund |
+| Startfenster-Darstellung | Breiten-/Höhenbegrenzung, `object-fit` und Querformat-Regel |
 | Kalender | externe Einbettung erst nach Klick; Ein-/Ausblenden |
 | Service | beide Padlets; Flyer öffnen und schließen |
 | Galerie | zentrale Reihenfolge laden, Abschnitte verschieben, Beschriftungen, PIN-Prüfung und Speichern |
@@ -55,7 +60,8 @@ meldet das Ergebnis als grünen oder roten Check.
 ## Grenzen
 
 - Darstellung und Bedienkomfort auf konkreten Endgeräten bleiben zusätzlich
-  manuell zu prüfen.
+  manuell zu prüfen. Die automatische Prüfung bestätigt die dafür vorgesehenen
+  responsiven CSS-Regeln, ersetzt aber keinen Test auf einem physischen Gerät.
 - Der produktive Schreibvorgang mit der geheimen PIN wird aus Sicherheitsgründen
   nicht automatisiert.
 - Externe Dienste wie Google Kalender und Padlet werden nur bis zur korrekt

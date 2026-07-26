@@ -4,6 +4,7 @@ import { JSDOM } from "jsdom";
 import { dateiLesen, ereignisseVerarbeiten, seiteLaden } from "./helpers.mjs";
 
 test("Navigation, Cookie-Hinweis und Nach-oben-Schaltfläche funktionieren", async () => {
+  // Der allgemeine Seitencode bleibt unabhängig vom redaktionellen Startfenster.
   const dom = await seiteLaden("index.html", ["js/script.js"]);
   const { document, Event } = dom.window;
   const menue = document.getElementById("menu");
