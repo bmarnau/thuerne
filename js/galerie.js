@@ -16,7 +16,10 @@
   const galerieHauptbereich = document.querySelector("main");
   const galerieAbschnitte = [...document.querySelectorAll(".galerie-ereignis")];
   const htmlReihenfolge = galerieAbschnitte.map((abschnitt) => abschnitt.id);
-  const galerieApiUrl = String(window.thuerneGalerieApiUrl || "").replace(/\/+$/, "");
+  // Die vollständige API-Adresse steht im HTML. Dadurch ist keine zusätzliche
+  // Konfigurationsdatei nötig und der Worker-Pfad wird nicht doppelt ergänzt.
+  const galerieApiMeta = document.querySelector('meta[name="galerie-reihenfolge-api"]');
+  const galerieApiUrl = String(galerieApiMeta?.content || "").replace(/\/+$/, "");
   let beschriftungenSichtbar = false;
   let aktuelleReihenfolge = [...htmlReihenfolge];
 
@@ -194,16 +197,17 @@
     }
 
     try {
-      const antwort = await fetch(`${galerieApiUrl}/reihenfolge`, {
+      // Die Meta-Angabe enthält bereits den vollständigen Worker-Pfad.
+      const antwort = await fetch(galerieApiUrl, {
         method: "GET",
         cache: "no-store"
       });
       const daten = await antwort.json();
-      if (!antwort.ok || !Array.isArray(daten.order)) {
-        throw new Error(daten.error || "Reihenfolge konnte nicht geladen werden.");
+      if (!antwort.ok || !Array.isArray(daten.reihenfolge)) {
+        throw new Error(daten.fehler || "Reihenfolge konnte nicht geladen werden.");
       }
 
-      aktuelleReihenfolge = reihenfolgeVervollstaendigen(daten.order);
+      aktuelleReihenfolge = reihenfolgeVervollstaendigen(daten.reihenfolge);
       reihenfolgeAnwenden();
       sortierlisteAnzeigen();
       if (sortierungStatus) sortierungStatus.textContent = "";
@@ -225,17 +229,19 @@
       throw new Error("Die Redaktions-PIN muss mindestens acht Zeichen lang sein.");
     }
 
-    const antwort = await fetch(`${galerieApiUrl}/reihenfolge`, {
+    // Der Bearer-Token wird nur für diesen Speichervorgang übertragen.
+    // Er wird weder im Browser gespeichert noch in den Quellcode geschrieben.
+    const antwort = await fetch(galerieApiUrl, {
       method: "PUT",
       headers: {
         "Authorization": `Bearer ${pin}`,
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ order: aktuelleReihenfolge })
+      body: JSON.stringify({ reihenfolge: aktuelleReihenfolge })
     });
     const daten = await antwort.json();
     if (!antwort.ok) {
-      throw new Error(daten.error || "Speichern war nicht möglich.");
+      throw new Error(daten.fehler || "Speichern war nicht möglich.");
     }
     return daten;
   }
