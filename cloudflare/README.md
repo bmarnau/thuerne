@@ -4,34 +4,86 @@ Der Worker stellt `GET` und `PUT /api/galerie-reihenfolge` bereit. D1 speichert 
 eine aktuelle Reihenfolge. Schreibzugriffe benötigen das Cloudflare-Secret
 `ADMIN_TOKEN`; das Kennwort gehört niemals in Git oder in eine HTML-Datei.
 
-## Einmalige Einrichtung
+## Verwendete Werte
 
-1. Bei Cloudflare anmelden und im Projektordner ausführen:
+| Einstellung | Wert |
+| --- | --- |
+| Worker | `thuerne-galerie` |
+| D1-Datenbank | `thuerne-galerie` |
+| D1-Binding | `DB` |
+| Variable | `ALLOWED_ORIGINS` |
+| Erlaubte Origins | `https://bmarnau.github.io,https://thuerne.de,https://www.thuerne.de` |
+| Secret | `ADMIN_TOKEN` |
+| API-Pfad | `/api/galerie-reihenfolge` |
+| Aktuelle API-Adresse | `https://thuerne-galerie.broad-butterfly-074a.workers.dev/api/galerie-reihenfolge` |
 
-   ```bash
-   npx wrangler login
-   cd cloudflare
-   npx wrangler d1 create thuerne-galerie --location weur
+## Kontrolle und Einrichtung im Cloudflare-Dashboard
+
+1. Unter **Storage & Databases > D1 SQL Database** muss die Datenbank
+   `thuerne-galerie` vorhanden sein.
+2. In `thuerne-galerie` unter **Console** muss die Tabelle mit folgendem SQL
+   angelegt sein:
+
+   ```sql
+   CREATE TABLE IF NOT EXISTS galerie_reihenfolge (
+     id INTEGER PRIMARY KEY CHECK (id = 1),
+     reihenfolge TEXT NOT NULL CHECK (json_valid(reihenfolge)),
+     aktualisiert_am TEXT NOT NULL
+   );
    ```
 
-2. Die ausgegebene `database_id` in `wrangler.toml` eintragen.
-3. In `wrangler.toml` `ALLOWED_ORIGINS` auf die öffentliche Website setzen.
-4. Datenbank und Administrator-Kennwort einrichten:
+3. Unter **Workers & Pages > Overview > thuerne-galerie > Bindings**
+   muss ein D1-Binding mit dem Variablennamen `DB` auf `thuerne-galerie` zeigen.
+4. Unter **Settings > Variables and Secrets** muss die normale Textvariable
+   `ALLOWED_ORIGINS` den oben genannten Wert enthalten.
+5. Im selben Menü muss `ADMIN_TOKEN` als Typ **Secret** hinterlegt sein.
+6. Unter **Settings > Domains & Routes** muss die verwendete `workers.dev`-Adresse
+   aktiv sein.
 
-   ```bash
-   npx wrangler d1 migrations apply thuerne-galerie --remote
-   npx wrangler secret put ADMIN_TOKEN
-   npx wrangler deploy
-   ```
+## Alternative Einrichtung mit Wrangler
 
-5. Im Cloudflare-Dashboard eine Route für den Worker anlegen:
-   `DEINE-DOMAIN.DE/api/galerie-reihenfolge*`.
-6. In `docs/galerie.html` prüfen, dass der Meta-Eintrag
-   `galerie-reihenfolge-api` auf `/api/galerie-reihenfolge` zeigt.
+Wenn die Datenbank neu angelegt werden muss:
 
-Bei einer separaten `workers.dev`-Adresse muss im Meta-Eintrag stattdessen die
-vollständige HTTPS-Adresse stehen. `ALLOWED_ORIGINS` muss dann weiterhin die
-Origin der Website enthalten.
+```bash
+npx wrangler login
+cd cloudflare
+npx wrangler d1 create thuerne-galerie --location weur
+```
+
+Danach die ausgegebene `database_id` in `wrangler.toml` eintragen und ausführen:
+
+```bash
+npx wrangler d1 migrations apply thuerne-galerie --remote
+npx wrangler secret put ADMIN_TOKEN
+npx wrangler deploy
+```
+
+Die PIN wird bei `secret put` verdeckt abgefragt:
+
+```text
+npx wrangler secret put ADMIN_TOKEN
+Enter a secret value: [PIN verdeckt eingeben]
+```
+
+## Verbindung zur Galerie
+
+`docs/galerie.html` enthält die vollständige API-Adresse im Meta-Eintrag
+`galerie-reihenfolge-api`. `js/galerie.js` verwendet diese Adresse unverändert.
+Client und Worker verwenden dasselbe JSON-Format:
+
+```json
+{
+  "reihenfolge": ["galerie-aktionen", "galerie-astronomie"]
+}
+```
+
+Die PIN wird beim Speichern als Bearer-Token übertragen:
+
+```text
+Authorization: Bearer [ADMIN_TOKEN]
+```
+
+Sie wird nicht im Browser gespeichert.
 
 ## Lokaler Test
 
