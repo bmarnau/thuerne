@@ -328,22 +328,11 @@
         const dateiendung = dateiendungen[endungsIndex];
         endungsIndex += 1;
 
-        bild.onload = async () => {
+        bild.onload = () => {
           bild.alt = `Galeriebild ${formatierteNummer}`;
           bild.loading = "lazy";
           bild.decoding = "async";
           bild.dataset.bildnummer = String(bildnummer);
-
-          // Erst nach vollständig abgeschlossener Dekodierung in die Galerie einsetzen.
-          // Das verhindert kurzzeitig weiße Bildflächen bei größeren PNG-Dateien.
-          if (typeof bild.decode === "function") {
-            try {
-              await bild.decode();
-            } catch {
-              // Manche Browser melden trotz erfolgreich geladenem Bild einen Decode-Fehler.
-            }
-          }
-
           resolve(bild);
         };
 
@@ -371,7 +360,7 @@
     const niedrigsteNummer = Number.parseInt(galerie.dataset.bis, 10);
     const dateipraefix = galerie.dataset.praefix || "bild";
     const stellenzahl = Number.parseInt(galerie.dataset.stellen || "1", 10);
-    const suchblockGroesse = Number.parseInt(galerie.dataset.suchblock || "20", 10);
+    const suchblockGroesse = Number.parseInt(galerie.dataset.suchblock || "5", 10);
     const suchgrenze = Number.parseInt(galerie.dataset.suchgrenze || "999", 10);
     const leerHinweis = galerie.parentElement.querySelector(".galerie-leer");
 
