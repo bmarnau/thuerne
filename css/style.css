@@ -445,6 +445,31 @@ footer {
   overflow-wrap: anywhere;
 }
 
+.galerie-zuordnung-kopieren {
+  margin-top: 0.85rem;
+  padding: 0.42rem 0.65rem;
+  color: #205f3a;
+  background: #fff;
+  border: 1px solid #2c7a4b;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-weight: bold;
+}
+
+.galerie-zuordnung-kopieren:hover,
+.galerie-zuordnung-kopieren:focus-visible {
+  color: #fff;
+  background: #2c7a4b;
+}
+
+.galerie-zuordnung-status {
+  min-height: 1.2em;
+  margin: 0.35rem 0 0;
+  color: #205f3a;
+  font-size: 0.8rem;
+}
+
 @media (max-width: 500px) {
   .galerie-nummernkreise li {
     grid-template-columns: 1fr;
@@ -536,7 +561,7 @@ footer {
 }
 
 .galerie-sortieraktionen button,
-.galerie-sortierung-zuruecksetzen {
+.galerie-sortierung-speichern {
   border: 1px solid #2c7a4b;
   color: #205f3a;
   background-color: #fff;
@@ -556,10 +581,108 @@ footer {
   cursor: default;
 }
 
-.galerie-sortierung-zuruecksetzen {
+.galerie-sortierung-speichern {
   margin-top: 0.85rem;
   padding: 0.55rem 0.75rem;
   font-weight: bold;
+}
+
+.galerie-sortierung-speichern:hover,
+.galerie-sortierung-speichern:focus-visible {
+  color: #fff;
+  background-color: #2c7a4b;
+}
+
+.galerie-sortierung-status {
+  min-height: 1.4em;
+  margin: 0.65rem 0 0;
+  color: #205f3a;
+  font-size: 0.85rem;
+}
+
+.galerie-speicherdialog {
+  width: min(90vw, 430px);
+  padding: 1.4rem;
+  color: #222;
+  background: #fff;
+  border: 1px solid #cfddd2;
+  border-radius: 12px;
+  box-shadow: 0 16px 45px rgba(18, 62, 36, 0.22);
+}
+
+.galerie-speicherdialog::backdrop {
+  background: rgba(20, 45, 30, 0.45);
+}
+
+.galerie-speicherdialog h2 {
+  margin: 0 0 0.65rem;
+  color: #205f3a;
+}
+
+.galerie-speicherdialog p {
+  margin: 0;
+}
+
+.galerie-pin-label {
+  display: grid;
+  gap: 0.35rem;
+  margin-top: 1rem;
+  color: #205f3a;
+  font-weight: bold;
+}
+
+.galerie-pin-label input {
+  width: 100%;
+  padding: 0.6rem 0.7rem;
+  color: #222;
+  background: #fff;
+  border: 1px solid #9aaca0;
+  border-radius: 6px;
+  font: inherit;
+}
+
+.galerie-pin-label input:focus {
+  border-color: #2c7a4b;
+  outline: 2px solid rgba(44, 122, 75, 0.2);
+  outline-offset: 1px;
+}
+
+.galerie-dialog-status {
+  min-height: 1.35em;
+  margin-top: 0.6rem !important;
+  color: #a22b24;
+  font-size: 0.86rem;
+}
+
+.galerie-speicherdialog-aktionen {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.65rem;
+  margin-top: 1.25rem;
+}
+
+.galerie-speicherdialog-aktionen button {
+  padding: 0.6rem 0.85rem;
+  border: 1px solid #2c7a4b;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+#galerie-speichern-abbrechen {
+  color: #205f3a;
+  background: #fff;
+}
+
+#galerie-speichern-bestaetigen {
+  color: #fff;
+  background: #2c7a4b;
+}
+
+#galerie-speichern-bestaetigen:disabled {
+  opacity: 0.55;
+  cursor: wait;
 }
 
 .galerie-grid figure {
