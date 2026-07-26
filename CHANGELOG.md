@@ -15,12 +15,16 @@ und dieses Projekt folgt der [Semantischen Versionierung](https://semver.org/lan
 - Automatisierte Struktur-, UI-, Galerie- und Worker-Tests
 - Lesender Live-Test für Webseite und Galerie-API
 - GitHub-Actions-Statusprüfung bei Pull Requests und Änderungen an `main`
+- Datumsabhängiges, responsives Startfenster für Veranstaltungseinladungen
+- Zufällige Galerie-Ersatzanzeige mit Bildwechsel und Fehlerbehandlung
+- Automatisierte Tests für Ablaufdatum, Bildwechsel, Bedienung und Darstellung
 
 ### Changed
 - README.md mit Lizenzinformation aktualisiert
 - Galerie lädt den bekannten Bildbestand schneller und sucht neue Bilder in
   kleineren Hintergrundblöcken
 - Dateiaustausch über GitHub und GitHub Desktop dokumentiert
+- Redaktionelle Pflege des Startfensters in einer eigenen, kommentierten Datei
 
 ## [1.0.0] - 2026-07-08
 

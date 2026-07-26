@@ -1519,44 +1519,123 @@ nav ul li a[aria-current="page"] {
   border: 0;
 }
 
-/* Veranstaltungshinweis der Startseite */
-.veranstaltungs-popup {
-  position: fixed;
-  inset: 0;
-  z-index: 999999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 15px;
-  background: rgba(0, 0, 0, 0.65);
+/*
+  STARTFENSTER DER STARTSEITE
+  Die Größen sind sowohl an die Fensterbreite als auch an die Fensterhöhe
+  gebunden. Dadurch bleibt das Fenster auf Smartphone, Tablet und Desktop
+  vollständig bedienbar. Redaktionelle Inhalte stehen in js/start-hinweis.js.
+*/
+.start-hinweis {
+  width: min(900px, calc(100% - 2rem));
+  max-width: none;
+  max-height: calc(100dvh - 2rem);
+  padding: 0;
+  overflow: auto;
+  border: 0;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 12px 45px rgba(0, 0, 0, 0.45);
 }
 
-.veranstaltungs-popup-inhalt {
+.start-hinweis::backdrop {
+  background: rgba(0, 0, 0, 0.68);
+}
+
+.start-hinweis-inhalt {
   position: relative;
-  width: 100%;
-  max-width: 900px;
+  display: grid;
+  margin: 0;
 }
 
-.veranstaltungs-popup-inhalt > img {
+.start-hinweis-bild {
   display: block;
   width: 100%;
-  height: auto;
-  border-radius: 6px;
+  max-height: min(62dvh, 650px);
+  background: #e7eee9;
+  object-fit: contain;
 }
 
-.veranstaltungs-popup-schliessen {
+/* Wird nur gesetzt, wenn kein hinterlegtes Bild geladen werden konnte. */
+.start-hinweis-bild[hidden] {
+  display: none;
+}
+
+.start-hinweis-text {
+  padding: 1.25rem 1.5rem 1.5rem;
+}
+
+.start-hinweis-kategorie {
+  margin: 0 0 0.35rem;
+  color: #2c7a4b;
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.start-hinweis-text h2 {
+  margin: 0 3rem 0.6rem 0;
+  color: #205f3a;
+}
+
+.start-hinweis-text p {
+  line-height: 1.55;
+}
+
+.start-hinweis-link {
+  display: inline-block;
+  color: #205f3a;
+  font-weight: bold;
+}
+
+.start-hinweis-link[hidden] {
+  display: none;
+}
+
+.start-hinweis-schliessen {
   position: absolute;
-  top: -12px;
-  right: -12px;
-  width: 40px;
-  height: 40px;
+  z-index: 1;
+  top: 0.65rem;
+  right: 0.65rem;
+  width: 44px;
+  height: 44px;
   padding: 0;
-  border: 0;
+  border: 2px solid #205f3a;
   border-radius: 50%;
-  background: #fff;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.35);
-  font-size: 26px;
+  color: #153f27;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 2px 9px rgba(0, 0, 0, 0.3);
+  font-size: 30px;
+  line-height: 1;
   cursor: pointer;
+}
+
+.start-hinweis-schliessen:hover,
+.start-hinweis-schliessen:focus-visible {
+  color: #fff;
+  background: #205f3a;
+  outline: 3px solid #f9c74f;
+  outline-offset: 2px;
+}
+
+/*
+  Auf flachen Bildschirmen (zum Beispiel Smartphone im Querformat) stehen Bild
+  und Text nebeneinander. Das verhindert unnötiges vertikales Scrollen.
+*/
+@media (orientation: landscape) and (max-height: 600px) {
+  .start-hinweis-inhalt {
+    grid-template-columns: minmax(0, 1.2fr) minmax(260px, 0.8fr);
+  }
+
+  .start-hinweis-bild {
+    height: calc(100dvh - 2rem);
+    max-height: none;
+  }
+
+  .start-hinweis-text {
+    align-self: center;
+    padding: 1.25rem;
+  }
 }
 
 /* Lesefreundliche Darstellung für Impressum und Datenschutz */

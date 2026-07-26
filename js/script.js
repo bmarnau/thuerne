@@ -53,26 +53,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  const veranstaltungsPopup = document.getElementById("italienPopup");
-  const popupSchliessen = veranstaltungsPopup?.querySelector(".veranstaltungs-popup-schliessen");
-
-  if (veranstaltungsPopup) {
-    // Am Tag nach der Veranstaltung wird der Hinweis automatisch entfernt.
-    const popupEnde = new Date(2026, 7, 2);
-
-    if (new Date() >= popupEnde) {
-      veranstaltungsPopup.remove();
-    } else {
-      const popupEntfernen = () => veranstaltungsPopup.remove();
-      popupSchliessen?.addEventListener("click", popupEntfernen);
-      veranstaltungsPopup.addEventListener("click", (event) => {
-        if (event.target === veranstaltungsPopup) popupEntfernen();
-      });
-      document.addEventListener("keydown", (event) => {
-        if (event.key === "Escape") popupEntfernen();
-      });
-      popupSchliessen?.focus();
-    }
-  }
-
+  /*
+    Das Startfenster wird bewusst nicht hier gesteuert.
+    Redaktionelle Veranstaltungen und Galeriebilder stehen getrennt und
+    ausführlich kommentiert in js/start-hinweis.js.
+  */
 });
