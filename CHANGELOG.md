@@ -11,9 +11,16 @@ und dieses Projekt folgt der [Semantischen Versionierung](https://semver.org/lan
 - MIT Lizenz hinzugefügt
 - Versionierungssystem implementiert
 - CHANGELOG.md erstellt
+- Vollständige Cloudflare-Betriebsdokumentation
+- Automatisierte Struktur-, UI-, Galerie- und Worker-Tests
+- Lesender Live-Test für Webseite und Galerie-API
+- GitHub-Actions-Statusprüfung bei Pull Requests und Änderungen an `main`
 
 ### Changed
 - README.md mit Lizenzinformation aktualisiert
+- Galerie lädt den bekannten Bildbestand schneller und sucht neue Bilder in
+  kleineren Hintergrundblöcken
+- Dateiaustausch über GitHub und GitHub Desktop dokumentiert
 
 ## [1.0.0] - 2026-07-08
 
