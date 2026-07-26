@@ -1,5 +1,7 @@
 # Thuerne - Website
 
+[![Website-Funktionstest](https://github.com/bmarnau/thuerne/actions/workflows/website-tests.yml/badge.svg)](https://github.com/bmarnau/thuerne/actions/workflows/website-tests.yml)
+
 Eine professionelle HTML-Website erstellt mit Dreamweaver.
 
 **Aktuelle Version:** 1.0.0
@@ -49,6 +51,41 @@ git add .
 git commit -m "Beschreibung der Änderungen"
 git push origin main
 ```
+
+## ✅ Funktionstest
+
+Nach dem Klonen oder Aktualisieren einmalig die Testabhängigkeiten installieren:
+
+```bash
+npm ci
+```
+
+Danach:
+
+```bash
+npm test
+npm run test:live
+```
+
+- `npm test` prüft Dateien, Links, JavaScript, Bedienfunktionen und den
+  Cloudflare Worker lokal.
+- `npm run test:live` prüft die öffentlich erreichbare Webseite und API
+  ausschließlich lesend.
+- GitHub führt beide Prüfungen bei Pull Requests und Änderungen an `main`
+  automatisch aus.
+- Das zuletzt dokumentierte Ergebnis steht in [TESTBERICHT.md](TESTBERICHT.md).
+
+## 🔄 Einfacher Dateiaustausch mit GitHub Desktop
+
+GitHub ist der verbindliche Projektstand. Auf Windows:
+
+1. In GitHub Desktop das Repository `bmarnau/thuerne` öffnen.
+2. **Fetch origin** und anschließend bei Bedarf **Pull origin** wählen.
+3. Die benötigten Dateien liegen danach im lokalen Projektordner.
+4. Für Variomedia nur die im jeweiligen Commit genannten Dateien hochladen.
+
+Dateizeitstempel dienen nicht zur Versionsprüfung. Maßgeblich sind der aktuelle
+Branch und die Commit-Nummer in GitHub Desktop.
 
 ## 📝 Git-Workflow
 
