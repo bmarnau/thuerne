@@ -7,6 +7,8 @@ und dieses Projekt folgt der [Semantischen Versionierung](https://semver.org/lan
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-07-27
+
 ### Added
 - MIT Lizenz hinzugefügt
 - Versionierungssystem implementiert
@@ -18,6 +20,8 @@ und dieses Projekt folgt der [Semantischen Versionierung](https://semver.org/lan
 - Datumsabhängiges, responsives Startfenster für Veranstaltungseinladungen
 - Zufällige Galerie-Ersatzanzeige mit Bildwechsel und Fehlerbehandlung
 - Automatisierte Tests für Ablaufdatum, Bildwechsel, Bedienung und Darstellung
+- Redaktioneller Ein-/Aus-Schalter für das Startfenster
+- Automatischer Abgleich zwischen Startbild-Pool und Galerie-Dateibestand
 
 ### Changed
 - README.md mit Lizenzinformation aktualisiert
@@ -25,6 +29,8 @@ und dieses Projekt folgt der [Semantischen Versionierung](https://semver.org/lan
   kleineren Hintergrundblöcken
 - Dateiaustausch über GitHub und GitHub Desktop dokumentiert
 - Redaktionelle Pflege des Startfensters in einer eigenen, kommentierten Datei
+- Zufallsauswahl des Startfensters von 5 auf alle 42 Galeriebilder erweitert
+- Datenschutzerklärung um Cloudflare Workers und Cloudflare D1 ergänzt
 
 ## [1.0.0] - 2026-07-08
 

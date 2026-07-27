@@ -4,7 +4,7 @@
 
 Eine professionelle HTML-Website erstellt mit Dreamweaver.
 
-**Aktuelle Version:** 1.0.0
+**Aktuelle Version:** 1.1.0
 
 ## 📁 Projektstruktur
 
@@ -40,6 +40,20 @@ Die Inhalte des Startfensters stehen gesammelt am Anfang von
 `js/start-hinweis.js`. Der technische Teil darunter muss für die redaktionelle
 Arbeit nicht geändert werden.
 
+### Startfenster ein- oder ausschalten
+
+Ganz oben in `js/start-hinweis.js` steht der zentrale Schalter:
+
+```js
+const STARTBILD_AKTIV = true;
+```
+
+- `true`: Das Startfenster wird angezeigt.
+- `false`: Das Startfenster bleibt vollständig ausgeschaltet.
+
+Nur `true` oder `false` ändern. Bei `false` werden weder ein Veranstaltungsbild
+noch ein zufälliges Galeriebild geladen.
+
 ### Neue Veranstaltung eintragen
 
 1. Das neue Einladungsbild in `bilder/` ablegen.
@@ -53,11 +67,13 @@ Vor dem Beginn wird automatisch die zeitlich nächste Veranstaltung gezeigt.
 Ab dem eingetragenen Beginn ist die Einladung ungültig und wird automatisch
 durch ein Galeriebild ersetzt.
 
-### Ersatzbilder bearbeiten
+### Vollständigen Galeriebild-Pool pflegen
 
-Die erlaubten Ersatzbilder stehen in `START_GALERIEBILDER`. Jeder Eintrag
-benötigt einen vorhandenen Bildpfad und eine verständliche Beschreibung in
-`bildAlt`. Der Browser vermeidet beim nächsten Seitenstart das zuletzt gezeigte
+Die Ersatzbilder stehen nach Bereichen geordnet in `START_GALERIEGRUPPEN`.
+Der Pool enthält alle aktuell 42 nummerierten Bilder der Galerie. Wird ein neues
+Galeriebild ergänzt, muss sein exakter Dateiname zusätzlich in der passenden
+Gruppe eingetragen werden. `npm test` vergleicht beide Bestände und meldet jede
+Abweichung. Der Browser vermeidet beim nächsten Seitenstart das zuletzt gezeigte
 Bild. Fehlerhafte Bilder werden automatisch übersprungen.
 
 > **Wichtig für die Veröffentlichung:** Wird `js/start-hinweis.js` geändert,
