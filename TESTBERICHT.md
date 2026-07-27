@@ -1,6 +1,6 @@
 # Testbericht der Thürne-Webseite
 
-Stand: 26. Juli 2026
+Stand: 27. Juli 2026
 
 ## Status
 
@@ -12,7 +12,7 @@ im Test gespeichert oder übertragen.
 
 | Teststufe | Ergebnis |
 | --- | --- |
-| Lokale Struktur-, UI-, Startfenster-, Galerie- und Worker-Tests | 18 bestanden, 0 fehlgeschlagen |
+| Lokale Struktur-, UI-, Startfenster-, Galerie- und Worker-Tests | 20 bestanden, 0 fehlgeschlagen |
 | Live-Test der öffentlichen Seiten und API | 2 bestanden, 0 fehlgeschlagen |
 
 ## Geprüfte Bereiche
@@ -26,6 +26,8 @@ im Test gespeichert oder übertragen.
 | Datenschutz | Cookie-Einwilligung und lokale Speicherung |
 | Bedienung | Nach-oben-Schaltfläche |
 | Startfenster | nächste Veranstaltung vor Beginn; Galeriebild ab Beginn |
+| Startfenster-Schalter | vollständiges Ausschalten ohne Bildabruf oder Speicherung |
+| Startfenster-Bildpool | alle 42 nummerierten Galeriebilder enthalten; keine Doppelungen |
 | Startfenster-Zufall | aufeinanderfolgende Starts zeigen unterschiedliche Bilder |
 | Startfenster-Fehlerfall | Reservebilder und sichtbarer Text bei Bildfehlern |
 | Startfenster-Bedienung | Schließen über Schaltfläche und Hintergrund |
