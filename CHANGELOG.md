@@ -28,6 +28,8 @@ und dieses Projekt folgt der [Semantischen Versionierung](https://semver.org/lan
   Worker-/D1-Live-Prüfung erweitert
 - Weiterführende Wartungsdokumente öffnen aus dem Panel in einem neuen Tab
 - Tagebucheinträge verlinken vorhandene GitHub-Tags und Commit-Kennungen
+- Systemstatus meldet offene, konfliktbehaftete oder noch unklare
+  GitHub-Synchronisationsvorgänge
 
 ## [1.1.0] - 2026-07-27
 

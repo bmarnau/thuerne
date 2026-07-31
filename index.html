@@ -536,6 +536,7 @@
         role="tabpanel"
         aria-labelledby="wartung-tab-system"
         data-worker-url="https://thuerne-galerie.broad-butterfly-074a.workers.dev/api/galerie-reihenfolge"
+        data-github-pulls-url="https://api.github.com/repos/bmarnau/thuerne/pulls?state=open&amp;per_page=5"
         hidden>
         <h3>Systemstatus</h3>
 
@@ -558,6 +559,14 @@
             <div>
               <strong>Galerie-Worker und D1</strong>
               <small id="wartungsstatus-worker-text" aria-live="polite">Wird beim Öffnen einmal lesend geprüft.</small>
+            </div>
+          </li>
+          <li id="wartungsstatus-github">
+            <span class="wartungsstatus-punkt wartungsstatus-grau" aria-label="Noch nicht geprüft"></span>
+            <div>
+              <strong>GitHub-Synchronisation</strong>
+              <small id="wartungsstatus-github-text" aria-live="polite">Offene Pull Requests werden beim Öffnen geprüft.</small>
+              <a id="wartungsstatus-github-link" href="https://github.com/bmarnau/thuerne/pulls" target="_blank" rel="noopener noreferrer">Synchronisationsvorgänge ansehen</a>
             </div>
           </li>
           <li>

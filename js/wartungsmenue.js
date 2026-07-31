@@ -10,7 +10,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const systemPanel = document.getElementById("wartung-panel-system");
   const workerStatus = document.getElementById("wartungsstatus-worker");
   const workerStatusText = document.getElementById("wartungsstatus-worker-text");
+  const githubStatus = document.getElementById("wartungsstatus-github");
+  const githubStatusText = document.getElementById("wartungsstatus-github-text");
+  const githubStatusLink = document.getElementById("wartungsstatus-github-link");
   let workerPruefungGestartet = false;
+  let githubPruefungGestartet = false;
   const fokusElementeSelektor = [
     "button:not([disabled])",
     "a[href]",
@@ -29,7 +33,102 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (fokusSetzen) tab.focus();
 
-    if (tab.id === "wartung-tab-system") workerPruefen();
+    if (tab.id === "wartung-tab-system") {
+      workerPruefen();
+      githubPruefen();
+    }
+  }
+
+  function githubStatusSetzen(farbe, beschriftung, text, url) {
+    const punkt = githubStatus?.querySelector(".wartungsstatus-punkt");
+    if (!punkt || !githubStatusText) return;
+
+    punkt.className = `wartungsstatus-punkt wartungsstatus-${farbe}`;
+    punkt.setAttribute("aria-label", beschriftung);
+    githubStatusText.textContent = text;
+    if (url && githubStatusLink) githubStatusLink.href = url;
+  }
+
+  async function githubPruefen() {
+    if (
+      githubPruefungGestartet ||
+      !systemPanel ||
+      !githubStatus ||
+      !githubStatusText ||
+      typeof window.fetch !== "function"
+    ) return;
+
+    githubPruefungGestartet = true;
+    githubStatusText.textContent = "GitHub-Status wird geprüft …";
+
+    try {
+      const listeAntwort = await window.fetch(systemPanel.dataset.githubPullsUrl, {
+        method: "GET",
+        cache: "no-store"
+      });
+      if (!listeAntwort.ok) throw new Error(`HTTP ${listeAntwort.status}`);
+
+      const offenePullRequests = await listeAntwort.json();
+      if (!Array.isArray(offenePullRequests)) throw new Error("Antwortformat ungültig");
+
+      if (offenePullRequests.length === 0) {
+        githubStatusSetzen(
+          "gruen",
+          "Kein offener Synchronisationsvorgang",
+          "Keine offenen Pull Requests · GitHub meldet keinen ausstehenden Abgleich"
+        );
+        return;
+      }
+
+      const details = await Promise.all(
+        offenePullRequests.map(async (pullRequest) => {
+          const antwort = await window.fetch(pullRequest.url, {
+            method: "GET",
+            cache: "no-store"
+          });
+          if (!antwort.ok) throw new Error(`HTTP ${antwort.status}`);
+          return antwort.json();
+        })
+      );
+
+      const konflikt = details.find((pullRequest) => pullRequest.mergeable === false);
+      const unklar = details.find((pullRequest) => pullRequest.mergeable == null);
+      const entwuerfe = details.filter((pullRequest) => pullRequest.draft);
+      const ersterPullRequest = konflikt || unklar || details[0];
+      const link = ersterPullRequest.html_url;
+
+      if (konflikt) {
+        githubStatusSetzen(
+          "rot",
+          "GitHub-Konflikt",
+          `PR #${konflikt.number} enthält Konflikte und muss aufgelöst werden`,
+          link
+        );
+      } else if (unklar) {
+        githubStatusSetzen(
+          "grau",
+          "GitHub-Zustand unklar",
+          `PR #${unklar.number}: GitHub konnte die Zusammenführbarkeit noch nicht bestimmen`,
+          link
+        );
+      } else {
+        const beschreibung = entwuerfe.length
+          ? `${details.length} offen, davon ${entwuerfe.length} Entwurf`
+          : `${details.length} offen und zusammenführbar`;
+        githubStatusSetzen(
+          "gelb",
+          "Synchronisation noch offen",
+          `Pull Requests: ${beschreibung}`,
+          link
+        );
+      }
+    } catch {
+      githubStatusSetzen(
+        "grau",
+        "GitHub-Status nicht erreichbar",
+        "GitHub-Zustand konnte nicht geprüft werden · manuell kontrollieren"
+      );
+    }
   }
 
   async function workerPruefen() {
