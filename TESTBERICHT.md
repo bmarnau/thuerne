@@ -12,7 +12,7 @@ im Test gespeichert oder übertragen.
 
 | Teststufe | Ergebnis |
 | --- | --- |
-| Lokale Struktur-, UI-, Startfenster-, Galerie-, Versionierungs- und Worker-Tests | 27 bestanden, 0 fehlgeschlagen |
+| Lokale Struktur-, UI-, Startfenster-, Galerie-, Versionierungs- und Worker-Tests | 28 bestanden, 0 fehlgeschlagen |
 | Live-Test der öffentlichen Seiten und API | nicht erneut ausgeführt; letzter dokumentierter Stand vom 27.07.2026: 2 bestanden, 0 fehlgeschlagen |
 | Sichtprüfung Wartungsmenü | Desktop 1280 × 720 und Mobil 390 × 844 bestanden |
 
@@ -38,6 +38,7 @@ im Test gespeichert oder übertragen.
 | Kalender | externe Einbettung erst nach Klick; Ein-/Ausblenden |
 | Service | beide Padlets; Flyer öffnen und schließen |
 | Galerie | zentrale Reihenfolge laden, Abschnitte verschieben, Beschriftungen, PIN-Prüfung und Speichern |
+| Galerie-Speicherschutz | nur auf Live-Domains und nach erfolgreichem Laden einer aktiven D1-Reihenfolge |
 | Galeriebilder | bekannter Bestand stimmt mit den vorhandenen nummerierten Dateien überein |
 | Cloudflare Worker | Lesen, Schreiben, Authentifizierung, Datenprüfung, CORS, Pfade und Methoden |
 | Live-System | öffentliche Seiten, Galerie-API und CORS über separaten Live-Test |

@@ -99,6 +99,18 @@ Stand: Projektversion 1.1.0
    werden. Eine neue Abschnitts-ID wird automatisch in die vorhandene
    Reihenfolge aufgenommen.
 
+## Schutz der zentralen Reihenfolge
+
+- Auf lokalen Vorschauen und fremden Domains bleibt **„Reihenfolge speichern“**
+  immer gesperrt.
+- Auf der Live-Seite wird Speichern erst freigegeben, wenn eine aktive
+  Reihenfolge erfolgreich aus Cloudflare D1 geladen wurde.
+- Ist der Worker nicht erreichbar oder enthält D1 keine aktive Reihenfolge,
+  wird nur die HTML-Grundreihenfolge angezeigt; sie kann nicht versehentlich
+  zurückgespeichert werden.
+- Der Systemstatus zeigt bei erfolgreicher Prüfung die Anzahl der gespeicherten
+  Bereiche und den Zeitpunkt der letzten D1-Änderung.
+
 ## Abschlusskontrolle
 
 - Überschrift und Zuordnungsliste stimmen überein.
@@ -109,4 +121,3 @@ Stand: Projektversion 1.1.0
 - Lokale Tests und Live-Tests sind erfolgreich.
 - Dokumentation, Versionsnummer und Changelog wurden bei einer
   Veröffentlichung aktualisiert.
-

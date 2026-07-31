@@ -66,9 +66,32 @@ test("Systemansicht prüft Worker und D1 einmalig und rein lesend", async () => 
         })
       };
     }
+    if (url.includes("api.github.com/repos/bmarnau/thuerne/issues?")) {
+      return {
+        ok: true,
+        json: async () => ([
+          {
+            number: 12,
+            title: "Worker-Konfiguration prüfen",
+            html_url: "https://github.com/bmarnau/thuerne/issues/12",
+            updated_at: "2026-07-31T05:00:00Z",
+            labels: [{ name: "high priority" }]
+          },
+          {
+            number: 6,
+            title: "Dieser Pull Request ist keine Aufgabe",
+            pull_request: {},
+            labels: []
+          }
+        ])
+      };
+    }
     return {
       ok: true,
-      json: async () => ({ reihenfolge: ["galerie-aktionen"] })
+      json: async () => ({
+        reihenfolge: ["galerie-aktionen"],
+        aktualisiertAm: "2026-07-31T05:00:00.000Z"
+      })
     };
   };
   dom.window.eval(await dateiLesen("js/wartungsmenue.js"));
@@ -83,7 +106,10 @@ test("Systemansicht prüft Worker und D1 einmalig und rein lesend", async () => 
   assert.equal(workerAnfragen.length, 1);
   assert.equal(workerAnfragen[0].optionen.method, "GET");
   assert.equal(workerAnfragen[0].optionen.cache, "no-store");
-  assert.match(document.getElementById("wartungsstatus-worker-text").textContent, /D1-Antwort gültig/);
+  assert.match(
+    document.getElementById("wartungsstatus-worker-text").textContent,
+    /Aktiv.*1 Bereiche.*zuletzt geändert/
+  );
   assert.ok(
     document.querySelector("#wartungsstatus-worker .wartungsstatus-punkt")
       .classList.contains("wartungsstatus-gruen")
@@ -103,6 +129,13 @@ test("Systemansicht prüft Worker und D1 einmalig und rein lesend", async () => 
   );
   assert.ok(
     document.querySelector("#wartungsstatus-github .wartungsstatus-punkt")
+      .classList.contains("wartungsstatus-gelb")
+  );
+  assert.match(document.getElementById("wartungsaufgaben-status").textContent, /1 offene Aufgabe/);
+  assert.equal(document.querySelectorAll("#wartungsaufgaben-liste > li").length, 1);
+  assert.match(document.querySelector("#wartungsaufgaben-liste a").textContent, /Worker-Konfiguration/);
+  assert.ok(
+    document.querySelector("#wartungsaufgaben-liste li > i")
       .classList.contains("wartungsstatus-gelb")
   );
   dom.window.close();

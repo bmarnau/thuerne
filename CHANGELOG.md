@@ -30,6 +30,12 @@ und dieses Projekt folgt der [Semantischen Versionierung](https://semver.org/lan
 - Tagebucheinträge verlinken vorhandene GitHub-Tags und Commit-Kennungen
 - Systemstatus meldet offene, konfliktbehaftete oder noch unklare
   GitHub-Synchronisationsvorgänge
+- Offene Wartungsaufgaben aus GitHub Issues werden nach Dringlichkeit geordnet
+  im Systemstatus angezeigt
+- Galeriereihenfolge kann nur auf erlaubten Live-Domains und erst nach
+  erfolgreichem Laden einer aktiven D1-Reihenfolge gespeichert werden
+- Systemstatus zeigt Anzahl und letzten Änderungszeitpunkt der aktiven
+  D1-Galeriereihenfolge
 
 ## [1.1.0] - 2026-07-27
 

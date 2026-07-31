@@ -402,6 +402,94 @@
   height: 0.5rem;
 }
 
+.wartungsaufgaben {
+  margin: 0 0 1rem;
+  padding: 0.8rem;
+  border: 1px solid #d8e2da;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.wartungsaufgaben-kopf {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.45rem;
+}
+
+.wartungsaufgaben-kopf h4 {
+  margin: 0;
+  color: #205f3a;
+  font-size: 0.92rem;
+}
+
+.wartungsaufgaben-kopf a {
+  flex: 0 0 auto;
+  font-size: 0.75rem;
+}
+
+.wartungsaufgaben .wartungsmenue-hinweis {
+  margin: 0;
+}
+
+.wartungsaufgaben-liste {
+  display: grid;
+  gap: 0.55rem;
+  margin: 0.65rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.wartungsaufgaben-liste[hidden] {
+  display: none;
+}
+
+.wartungsaufgaben-liste li {
+  display: grid;
+  grid-template-columns: 0.65rem minmax(0, 1fr);
+  gap: 0.55rem;
+  margin: 0;
+  padding-top: 0.55rem;
+  border-top: 1px solid #e4ebe6;
+}
+
+.wartungsaufgaben-liste li > i {
+  width: 0.58rem;
+  height: 0.58rem;
+  margin-top: 0.28rem;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.wartungsaufgaben-inhalt {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.wartungsaufgaben-inhalt a {
+  line-height: 1.35;
+}
+
+.wartungsaufgaben-meta {
+  color: #627068;
+  font-size: 0.72rem;
+}
+
+.wartungsaufgaben-labels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.wartungsaufgaben-labels span {
+  padding: 0.08rem 0.35rem;
+  border-radius: 999px;
+  color: #4f5c54;
+  background: #edf1ee;
+  font-size: 0.66rem;
+}
+
 body.wartungsmenue-offen {
   overflow: hidden;
 }

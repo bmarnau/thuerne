@@ -62,10 +62,15 @@
         <div class="galerie-sortierung">
           <strong>Reihenfolge der Abschnitte</strong>
 
-          <p>Mit den Pfeilen kannst du die Galerieabschnitte verschieben. Mit der Redaktions-PIN wird die Reihenfolge anschließend für alle Endgeräte gespeichert.</p>
+          <p>Mit den Pfeilen kannst du die Galerieabschnitte verschieben. Speichern wird nur auf der Live-Seite freigegeben, nachdem die aktive zentrale Reihenfolge erfolgreich geladen wurde.</p>
 
           <ol id="galerie-sortierliste" aria-label="Reihenfolge der Galerieabschnitte"></ol>
-          <button class="galerie-sortierung-speichern" id="galerie-sortierung-speichern" type="button">
+          <button
+            class="galerie-sortierung-speichern"
+            id="galerie-sortierung-speichern"
+            type="button"
+            disabled
+            aria-describedby="galerie-sortierung-status">
             Reihenfolge speichern
           </button>
           <p class="galerie-sortierung-status" id="galerie-sortierung-status" role="status" aria-live="polite"></p>

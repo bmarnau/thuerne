@@ -13,8 +13,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const githubStatus = document.getElementById("wartungsstatus-github");
   const githubStatusText = document.getElementById("wartungsstatus-github-text");
   const githubStatusLink = document.getElementById("wartungsstatus-github-link");
+  const aufgabenStatus = document.getElementById("wartungsaufgaben-status");
+  const aufgabenListe = document.getElementById("wartungsaufgaben-liste");
   let workerPruefungGestartet = false;
   let githubPruefungGestartet = false;
+  let aufgabenPruefungGestartet = false;
   const fokusElementeSelektor = [
     "button:not([disabled])",
     "a[href]",
@@ -36,6 +39,93 @@ document.addEventListener("DOMContentLoaded", () => {
     if (tab.id === "wartung-tab-system") {
       workerPruefen();
       githubPruefen();
+      wartungsaufgabenLaden();
+    }
+  }
+
+  function aufgabenFarbe(labels) {
+    const namen = labels.map((label) => label.name.toLowerCase());
+    if (namen.some((name) => /kritisch|critical|blocker|security|bug/.test(name))) return "rot";
+    if (namen.some((name) => /hoch|high|wichtig|priority/.test(name))) return "gelb";
+    return "grau";
+  }
+
+  function wartungsaufgabeDarstellen(issue) {
+    const eintrag = document.createElement("li");
+    const punkt = document.createElement("i");
+    const inhalt = document.createElement("div");
+    const link = document.createElement("a");
+    const meta = document.createElement("span");
+    const labels = document.createElement("span");
+    const farbe = aufgabenFarbe(issue.labels || []);
+
+    punkt.className = `wartungsstatus-${farbe}`;
+    punkt.setAttribute("aria-label", farbe === "rot" ? "Dringend" : farbe === "gelb" ? "Wichtig" : "Normal");
+    inhalt.className = "wartungsaufgaben-inhalt";
+    link.href = issue.html_url;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.textContent = issue.title;
+    meta.className = "wartungsaufgaben-meta";
+    meta.textContent = `Issue #${issue.number} · aktualisiert ${new Date(issue.updated_at).toLocaleDateString("de-DE")}`;
+    labels.className = "wartungsaufgaben-labels";
+
+    (issue.labels || []).slice(0, 3).forEach((label) => {
+      const marke = document.createElement("span");
+      marke.textContent = label.name;
+      labels.append(marke);
+    });
+
+    inhalt.append(link, meta);
+    if (labels.childElementCount) inhalt.append(labels);
+    eintrag.append(punkt, inhalt);
+    return eintrag;
+  }
+
+  async function wartungsaufgabenLaden() {
+    if (
+      aufgabenPruefungGestartet ||
+      !systemPanel ||
+      !aufgabenStatus ||
+      !aufgabenListe ||
+      typeof window.fetch !== "function"
+    ) return;
+
+    aufgabenPruefungGestartet = true;
+    aufgabenStatus.textContent = "Offene Wartungsaufgaben werden geladen …";
+
+    try {
+      const antwort = await window.fetch(systemPanel.dataset.githubIssuesUrl, {
+        method: "GET",
+        cache: "no-store"
+      });
+      if (!antwort.ok) throw new Error(`HTTP ${antwort.status}`);
+
+      const ergebnisse = await antwort.json();
+      if (!Array.isArray(ergebnisse)) throw new Error("Antwortformat ungültig");
+
+      const issues = ergebnisse
+        .filter((eintrag) => !eintrag.pull_request)
+        .sort((a, b) => {
+          const farben = { rot: 0, gelb: 1, grau: 2 };
+          return farben[aufgabenFarbe(a.labels || [])] - farben[aufgabenFarbe(b.labels || [])];
+        });
+
+      aufgabenListe.replaceChildren();
+      if (!issues.length) {
+        aufgabenListe.hidden = true;
+        aufgabenStatus.textContent = "Keine offenen Wartungsaufgaben in GitHub Issues.";
+        return;
+      }
+
+      issues.slice(0, 5).forEach((issue) => {
+        aufgabenListe.append(wartungsaufgabeDarstellen(issue));
+      });
+      aufgabenListe.hidden = false;
+      aufgabenStatus.textContent = `${issues.length} offene ${issues.length === 1 ? "Aufgabe" : "Aufgaben"} · dringende zuerst`;
+    } catch {
+      aufgabenListe.hidden = true;
+      aufgabenStatus.textContent = "Wartungsaufgaben konnten nicht geladen werden · GitHub Issues manuell prüfen.";
     }
   }
 
@@ -164,9 +254,20 @@ document.addEventListener("DOMContentLoaded", () => {
         throw new Error("Antwortformat ungültig");
       }
 
-      punkt.className = "wartungsstatus-punkt wartungsstatus-gruen";
-      punkt.setAttribute("aria-label", "Erfolgreich");
-      workerStatusText.textContent = `Erreichbar · D1-Antwort gültig · ${new Date().toLocaleString("de-DE")}`;
+      const geaendertAm = daten.aktualisiertAm
+        ? new Date(daten.aktualisiertAm).toLocaleString("de-DE")
+        : "Zeitpunkt unbekannt";
+
+      if (daten.reihenfolge.length === 0) {
+        punkt.className = "wartungsstatus-punkt wartungsstatus-gelb";
+        punkt.setAttribute("aria-label", "Keine aktive Reihenfolge");
+        workerStatusText.textContent = "Worker erreichbar · keine aktive D1-Reihenfolge gespeichert";
+      } else {
+        punkt.className = "wartungsstatus-punkt wartungsstatus-gruen";
+        punkt.setAttribute("aria-label", "Aktive Reihenfolge");
+        workerStatusText.textContent =
+          `Aktiv · ${daten.reihenfolge.length} Bereiche · zuletzt geändert: ${geaendertAm}`;
+      }
     } catch {
       punkt.className = "wartungsstatus-punkt wartungsstatus-rot";
       punkt.setAttribute("aria-label", "Fehler");
