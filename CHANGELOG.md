@@ -7,6 +7,8 @@ und dieses Projekt folgt der [Semantischen Versionierung](https://semver.org/lan
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-07-27
+
 ### Added
 - Kompakte Wartungshilfe auf der Startseite mit Architekturübersicht,
   Entwicklungstagebuch und aktuellem Systemstand
