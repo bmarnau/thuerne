@@ -4,9 +4,7 @@
 
 Eine professionelle HTML-Website erstellt mit Dreamweaver.
 
-**Aktuelle Version:** 1.1.0
-
-**Aktueller Arbeitsstand:** Unreleased · Dokumentationsstand 31.07.2026
+**Aktuelle Version:** 1.0.0
 
 ## 📁 Projektstruktur
 
@@ -42,20 +40,6 @@ Die Inhalte des Startfensters stehen gesammelt am Anfang von
 `js/start-hinweis.js`. Der technische Teil darunter muss für die redaktionelle
 Arbeit nicht geändert werden.
 
-### Startfenster ein- oder ausschalten
-
-Ganz oben in `js/start-hinweis.js` steht der zentrale Schalter:
-
-```js
-const STARTBILD_AKTIV = true;
-```
-
-- `true`: Das Startfenster wird angezeigt.
-- `false`: Das Startfenster bleibt vollständig ausgeschaltet.
-
-Nur `true` oder `false` ändern. Bei `false` werden weder ein Veranstaltungsbild
-noch ein zufälliges Galeriebild geladen.
-
 ### Neue Veranstaltung eintragen
 
 1. Das neue Einladungsbild in `bilder/` ablegen.
@@ -69,13 +53,11 @@ Vor dem Beginn wird automatisch die zeitlich nächste Veranstaltung gezeigt.
 Ab dem eingetragenen Beginn ist die Einladung ungültig und wird automatisch
 durch ein Galeriebild ersetzt.
 
-### Vollständigen Galeriebild-Pool pflegen
+### Ersatzbilder bearbeiten
 
-Die Ersatzbilder stehen nach Bereichen geordnet in `START_GALERIEGRUPPEN`.
-Der Pool enthält alle aktuell 42 nummerierten Bilder der Galerie. Wird ein neues
-Galeriebild ergänzt, muss sein exakter Dateiname zusätzlich in der passenden
-Gruppe eingetragen werden. `npm test` vergleicht beide Bestände und meldet jede
-Abweichung. Der Browser vermeidet beim nächsten Seitenstart das zuletzt gezeigte
+Die erlaubten Ersatzbilder stehen in `START_GALERIEBILDER`. Jeder Eintrag
+benötigt einen vorhandenen Bildpfad und eine verständliche Beschreibung in
+`bildAlt`. Der Browser vermeidet beim nächsten Seitenstart das zuletzt gezeigte
 Bild. Fehlerhafte Bilder werden automatisch übersprungen.
 
 > **Wichtig für die Veröffentlichung:** Wird `js/start-hinweis.js` geändert,
@@ -124,24 +106,6 @@ npm run test:live
 - GitHub führt beide Prüfungen bei Pull Requests und Änderungen an `main`
   automatisch aus.
 - Das zuletzt dokumentierte Ergebnis steht in [TESTBERICHT.md](TESTBERICHT.md).
-
-## 🛠️ Kompakte Wartungshilfe
-
-Der unauffällige Drei-Punkte-Button unten rechts auf der Startseite öffnet eine
-Kurzreferenz für Wartungsarbeiten. Sie enthält Projektorientierung, einen
-kompakten Entwicklungsverlauf und den dokumentierten technischen Systemstand.
-
-Die Anzeige ersetzt keine Quelldokumentation:
-
-- `README.md` beschreibt Aufbau und Pflege.
-- `CHANGELOG.md` bleibt die verbindliche Versionshistorie.
-- `docs/entwicklung.html` enthält den ausführlichen Entwickler-Leitfaden.
-- `cloudflare/README.md` dokumentiert Worker und D1.
-
-Bei wesentlichen funktionalen Änderungen werden der Abschnitt `Unreleased` im
-Changelog und – falls sich Architektur, Funktionen oder Version ändern – die
-kompakte Wartungshilfe gemeinsam aktualisiert. Commit-Nummern werden erst
-eingetragen, wenn sie tatsächlich vorhanden sind.
 
 ## 🔄 Einfacher Dateiaustausch mit GitHub Desktop
 
@@ -195,22 +159,6 @@ git push -u origin main
 Siehe [CHANGELOG.md](CHANGELOG.md) für die vollständige Versionshistorie.
 
 Das Projekt folgt der [Semantischen Versionierung](https://semver.org/lang/de/) (SemVer).
-
-Die drei Arten von Versionsangaben sind bewusst getrennt:
-
-- `package.json` ist die zentrale Quelle für die veröffentlichte
-  **Projektversion**.
-- `CHANGELOG.md` sammelt noch nicht veröffentlichte Änderungen unter
-  **Unreleased**.
-- `siteMetadata.cacheVersion` in `package.json` ist die gemeinsame
-  **Cache-Kennung** aller lokalen CSS- und JavaScript-Einbindungen.
-- Ein Datums- oder Fassungsstand in einer einzelnen Dokumentation bezeichnet
-  nur dieses Dokument, nicht automatisch eine neue Projektversion.
-
-Bei einem Release werden Projektversion, `package-lock.json`, README,
-Wartungshilfe und Changelog gemeinsam aktualisiert. Die Cache-Kennung wird bei
-jeder veröffentlichten Änderung an lokalen CSS- oder JavaScript-Dateien erneuert
-und anschließend auf allen HTML-Seiten einheitlich verwendet.
 
 Veröffentlichte Releases werden unter [GitHub Releases](https://github.com/bmarnau/thuerne/releases) aufgeführt.
 

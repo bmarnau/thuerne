@@ -5,12 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="galerie-reihenfolge-api" content="https://thuerne-galerie.broad-butterfly-074a.workers.dev/api/galerie-reihenfolge" />
   <title>Fotogalerie – Dörfergemeinschaft am Thürne e. V.</title>
- <link rel="stylesheet" href="../css/style.css" />
-  <link rel="stylesheet" href="../css/cookie.css" />
-  <script defer src="../js/script.js"></script>
-  <script defer src="../js/galerie-api.js"></script>
-  <script defer src="../js/galerie-reihenfolge.js"></script>
-  <script defer src="../js/galerie.js"></script>
+ <link rel="stylesheet" href="../css/style.css?v=20260731">
+  <link rel="stylesheet" href="../css/cookie.css?v=20260731">
+  <script defer src="../js/script.js?v=20260731"></script>
+  <!-- galerie.js liest die vollständige Cloudflare-Adresse aus dem Meta-Eintrag oben. -->
+  <script defer src="../js/galerie.js?v=20260731"></script>
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -51,8 +50,8 @@
           <li><span>Wanderwege</span><code>a6bild01, a6bild02 …</code></li>
           <li><span>Noch nicht zugeordnet</span><code>a5bild01, a5bild02 …</code></li>
           <li><span>Wietzen</span><code>e1bild01 bis e1bild06</code></li>
-          <li><span>Sommerfest</span><code>e2bild01 bis e2bild05</code></li>
-          <li><span>Pflanzenbörse</span><code>e3bild01 bis e3bild06</code></li>
+          <li><span>Sommerfest</span><code>e2bild01, e2bild03, e2bild04</code></li>
+          <li><span>Pflanzenbörse</span><code>e3bild01–03, e3bild05–09</code></li>
           <li><span>Dorffest</span><code>e4bild01 bis e4bild07</code></li>
         </ul>
         <button class="galerie-zuordnung-kopieren" id="galerie-zuordnung-kopieren" type="button">
@@ -113,7 +112,7 @@
         data-von muss dafür nicht mehr geändert werden.
       - Einzelne fehlende Nummern werden übersprungen und verursachen keinen Fehler.
       - Der bekannte Bestand wird zuerst angezeigt. Die Suche nach neuen Bildern
-        erfolgt anschließend im Hintergrund in Blöcken zu 20 Nummern.
+        erfolgt anschließend im Hintergrund in kleinen Blöcken zu 5 Nummern.
       - Die nachgelagerte Suche endet nach einem vollständig leeren Block.
         Bei ungewöhnlich großen Lücken kann data-suchblock erhöht werden.
       - data-von kennzeichnet nur noch den bisher bekannten Bestand,
@@ -123,8 +122,8 @@
 
       Auch die Ereignisgalerien besitzen eigene Nummernkreise:
       - Wietzen:       e1bild01 bis e1bild06
-      - Sommerfest:    e2bild01 bis e2bild05
-      - Pflanzenbörse: e3bild01 bis e3bild06
+      - Sommerfest:    e2bild01, e2bild03, e2bild04
+      - Pflanzenbörse: e3bild01 bis e3bild03 sowie e3bild05 bis e3bild09
       - Dorffest:      e4bild01 bis e4bild07
       Neue fortlaufend nummerierte Ereignisbilder werden ebenfalls automatisch erkannt.
     -->
@@ -134,7 +133,7 @@
       <div
         class="galerie-grid automatische-galerie"
         data-praefix="a2bild"
-        data-von="1"
+        data-von="6"
         data-bis="1"
         data-stellen="2"></div>
       <p class="galerie-leer">Noch keine Fotos vorhanden.</p>
@@ -166,11 +165,11 @@
 
     <section class="galerie-ereignis galerie-thema" id="galerie-natur">
       <p class="seiten-kategorie">Themengalerie</p>
-      <h2>Natur</h2>
+      <h2>Biologische Vielfalt rund um den Thürne</h2>
       <div
         class="galerie-grid automatische-galerie"
         data-praefix="a4bild"
-        data-von="1"
+        data-von="9"
         data-bis="1"
         data-stellen="2"></div>
       <p class="galerie-leer">Noch keine Fotos vorhanden.</p>
@@ -185,19 +184,19 @@
 
     <section class="galerie-ereignis" id="galerie-sommerfest-2026">
       <p class="seiten-kategorie">Rückblick</p>
-      <h2>Sommerfest 2026</h2>
-      <div class="galerie-grid automatische-galerie" data-praefix="e2bild" data-von="5" data-bis="1" data-stellen="2"></div>
+      <h2>Italienischer Abend</h2>
+      <div class="galerie-grid automatische-galerie" data-praefix="e2bild" data-von="4" data-bis="1" data-stellen="2"></div>
     </section>
 
     <section class="galerie-ereignis" id="galerie-pflanzenboerse-2026">
       <p class="seiten-kategorie">Rückblick</p>
       <h2>Pflanzenbörse 2026</h2>
-      <div class="galerie-grid automatische-galerie" data-praefix="e3bild" data-von="6" data-bis="1" data-stellen="2"></div>
+      <div class="galerie-grid automatische-galerie" data-praefix="e3bild" data-von="9" data-bis="1" data-stellen="2"></div>
     </section>
 
     <section class="galerie-ereignis" id="galerie-dorffest-2025">
       <p class="seiten-kategorie">Rückblick</p>
-      <h2>Dorffest 2025</h2>
+      <h2>Aktivitäten</h2>
       <div class="galerie-grid automatische-galerie" data-praefix="e4bild" data-von="7" data-bis="1" data-stellen="2"></div>
     </section>
 
@@ -207,7 +206,7 @@
       <div
         class="galerie-grid automatische-galerie"
         data-praefix="a6bild"
-        data-von="1"
+        data-von="5"
         data-bis="1"
         data-stellen="2"></div>
       <p class="galerie-leer">Noch keine Fotos vorhanden.</p>
