@@ -1,11 +1,12 @@
-name = "thuerne-galerie-reihenfolge"
+# Der Name entspricht der bereits verwendeten workers.dev-Adresse.
+name = "thuerne-galerie"
 main = "worker.js"
 compatibility_date = "2026-07-25"
 
 [vars]
-# Bei Betrieb unter derselben Domain genügt deren Origin.
-# Mehrere Origins werden durch Kommas getrennt.
-ALLOWED_ORIGINS = "https://DEINE-DOMAIN.DE"
+# GitHub Pages ist die aktuelle Veröffentlichung. thuerne.de und www.thuerne.de
+# sind bereits freigegeben, damit ein späterer Domainwechsel keinen Codeumbau braucht.
+ALLOWED_ORIGINS = "https://bmarnau.github.io,https://thuerne.de,https://www.thuerne.de"
 
 [[d1_databases]]
 binding = "DB"

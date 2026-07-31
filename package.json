@@ -1,8 +1,18 @@
 {
   "name": "thuerne",
-  "version": "1.0.0",
+  "version": "1.1.0",
+  "siteMetadata": {
+    "status": "unreleased",
+    "documentationDate": "2026-07-31",
+    "cacheVersion": "20260731"
+  },
+  "type": "module",
   "description": "Eine professionelle HTML-Website erstellt mit Dreamweaver",
   "main": "index.html",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "test:live": "RUN_LIVE_TESTS=true node --test tests/live.test.mjs"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/bmarnau/thuerne.git"
@@ -17,5 +27,8 @@
   "bugs": {
     "url": "https://github.com/bmarnau/thuerne/issues"
   },
-  "homepage": "https://github.com/bmarnau/thuerne#readme"
+  "homepage": "https://github.com/bmarnau/thuerne#readme",
+  "devDependencies": {
+    "jsdom": "^26.1.0"
+  }
 }

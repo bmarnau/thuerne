@@ -698,15 +698,6 @@ footer {
   object-fit: cover;
 }
 
-.galerie-grid > figure:only-child {
-  justify-self: start;
-}
-
-.galerie-grid > figure:only-child img {
-  width: auto;
-  max-width: 100%;
-}
-
 .galerie-grid figcaption {
   padding-top: 0.5rem;
   color: #444;

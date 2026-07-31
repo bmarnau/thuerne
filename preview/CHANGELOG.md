@@ -8,28 +8,6 @@ und dieses Projekt folgt der [Semantischen Versionierung](https://semver.org/lan
 ## [Unreleased]
 
 ### Added
-- Kompakte Wartungshilfe auf der Startseite mit Architekturübersicht,
-  Entwicklungstagebuch und aktuellem Systemstand
-- Tastaturbedienbare Reiter, Fokusführung und automatisierte Tests für das
-  Wartungsmenü
-- Einheitliche Cache-Versionierung für lokale CSS- und JavaScript-Dateien mit
-  automatischer Konsistenzprüfung
-
-### Changed
-- Projektversion, Arbeitsstand, Dokumentationsstand und Cache-Kennung klar
-  voneinander getrennt und zentral in `package.json` beschrieben
-- Veraltete Versionsangaben im Entwicklerleitfaden synchronisiert
-- Galerie-Konfiguration und Startbild-Pool mit dem vorhandenen Bildbestand
-  abgeglichen
-- Wartungszugang dezent in den Footer verschoben, Tagebuch um die belegbare
-  Vorgeschichte ergänzt und Systemübersicht um Zustände sowie eine lesende
-  Worker-/D1-Live-Prüfung erweitert
-- Weiterführende Wartungsdokumente öffnen aus dem Panel in einem neuen Tab
-- Tagebucheinträge verlinken vorhandene GitHub-Tags und Commit-Kennungen
-
-## [1.1.0] - 2026-07-27
-
-### Added
 - MIT Lizenz hinzugefügt
 - Versionierungssystem implementiert
 - CHANGELOG.md erstellt
@@ -40,8 +18,6 @@ und dieses Projekt folgt der [Semantischen Versionierung](https://semver.org/lan
 - Datumsabhängiges, responsives Startfenster für Veranstaltungseinladungen
 - Zufällige Galerie-Ersatzanzeige mit Bildwechsel und Fehlerbehandlung
 - Automatisierte Tests für Ablaufdatum, Bildwechsel, Bedienung und Darstellung
-- Redaktioneller Ein-/Aus-Schalter für das Startfenster
-- Automatischer Abgleich zwischen Startbild-Pool und Galerie-Dateibestand
 
 ### Changed
 - README.md mit Lizenzinformation aktualisiert
@@ -49,8 +25,6 @@ und dieses Projekt folgt der [Semantischen Versionierung](https://semver.org/lan
   kleineren Hintergrundblöcken
 - Dateiaustausch über GitHub und GitHub Desktop dokumentiert
 - Redaktionelle Pflege des Startfensters in einer eigenen, kommentierten Datei
-- Zufallsauswahl des Startfensters von 5 auf alle 42 Galeriebilder erweitert
-- Datenschutzerklärung um Cloudflare Workers und Cloudflare D1 ergänzt
 
 ## [1.0.0] - 2026-07-08
 
