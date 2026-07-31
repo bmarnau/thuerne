@@ -537,6 +537,7 @@
         aria-labelledby="wartung-tab-system"
         data-worker-url="https://thuerne-galerie.broad-butterfly-074a.workers.dev/api/galerie-reihenfolge"
         data-github-pulls-url="https://api.github.com/repos/bmarnau/thuerne/pulls?state=open&amp;per_page=5"
+        data-github-issues-url="https://api.github.com/repos/bmarnau/thuerne/issues?state=open&amp;per_page=10"
         hidden>
         <h3>Systemstatus</h3>
 
@@ -548,7 +549,7 @@
         <ul class="wartungsstatus-liste" aria-label="Aktuelle Systemzustände">
           <li>
             <span class="wartungsstatus-punkt wartungsstatus-gruen" aria-label="Erfolgreich"></span>
-            <div><strong>Lokale Tests</strong><small>27 bestanden, 0 fehlgeschlagen · 31.07.2026</small></div>
+            <div><strong>Lokale Tests</strong><small>28 bestanden, 0 fehlgeschlagen · 31.07.2026</small></div>
           </li>
           <li>
             <span class="wartungsstatus-punkt wartungsstatus-gruen" aria-label="Erfolgreich"></span>
@@ -585,6 +586,17 @@
           <span><i class="wartungsstatus-rot"></i>Fehler</span>
           <span><i class="wartungsstatus-grau"></i>unbekannt</span>
         </p>
+
+        <section class="wartungsaufgaben" aria-labelledby="wartungsaufgaben-titel">
+          <div class="wartungsaufgaben-kopf">
+            <h4 id="wartungsaufgaben-titel">Offene Wartungsaufgaben</h4>
+            <a href="https://github.com/bmarnau/thuerne/issues" target="_blank" rel="noopener noreferrer">Alle Issues</a>
+          </div>
+          <p id="wartungsaufgaben-status" class="wartungsmenue-hinweis" aria-live="polite">
+            Aufgaben werden beim Öffnen aus GitHub Issues geladen.
+          </p>
+          <ol id="wartungsaufgaben-liste" class="wartungsaufgaben-liste" hidden></ol>
+        </section>
 
         <dl class="wartungsmenue-system">
           <div><dt>Version</dt><dd>1.1.0</dd></div>

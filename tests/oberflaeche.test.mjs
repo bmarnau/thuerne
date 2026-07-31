@@ -74,11 +74,20 @@ test("Galerie lädt, sortiert, zeigt Beschriftungen und schützt das Speichern",
   dom.window.fetch = async (_url, optionen = {}) => {
     anfragen.push(optionen);
     if ((optionen.method || "GET") === "PUT") {
-      return { ok: true, json: async () => ({ gespeichert: true }) };
+      return {
+        ok: true,
+        json: async () => ({
+          gespeichert: true,
+          aktualisiertAm: "2026-07-31T05:30:00.000Z"
+        })
+      };
     }
     return {
       ok: true,
-      json: async () => ({ reihenfolge: [...abschnittIds].reverse(), aktualisiertAm: null })
+      json: async () => ({
+        reihenfolge: [...abschnittIds].reverse(),
+        aktualisiertAm: "2026-07-31T05:00:00.000Z"
+      })
     };
   };
   dom.window.HTMLDialogElement.prototype.showModal = function showModal() {
@@ -89,6 +98,11 @@ test("Galerie lädt, sortiert, zeigt Beschriftungen und schützt das Speichern",
   };
 
   dom.window.eval(await dateiLesen("js/galerie.js"));
+  assert.equal(
+    document.getElementById("galerie-sortierung-speichern").disabled,
+    true,
+    "Speichern ist vor dem zentralen Laden nicht gesperrt"
+  );
   await ereignisseVerarbeiten();
   await ereignisseVerarbeiten();
 
@@ -98,6 +112,11 @@ test("Galerie lädt, sortiert, zeigt Beschriftungen und schützt das Speichern",
     "zentrale Reihenfolge wurde nicht angewendet"
   );
   assert.equal(document.querySelectorAll("#galerie-sortierliste > li").length, abschnittIds.length);
+  assert.equal(document.getElementById("galerie-sortierung-speichern").disabled, false);
+  assert.match(
+    document.getElementById("galerie-sortierung-status").textContent,
+    /Zentrale Reihenfolge aktiv.*zuletzt geändert/i
+  );
 
   const ersterTitel = document.querySelector("#galerie-sortierliste > li span").textContent;
   document.querySelector("#galerie-sortierliste > li button:nth-child(2)").click();
@@ -125,5 +144,33 @@ test("Galerie lädt, sortiert, zeigt Beschriftungen und schützt das Speichern",
   await ereignisseVerarbeiten();
   assert.equal(anfragen.filter(({ method }) => method === "PUT").length, 1);
   assert.match(document.getElementById("galerie-sortierung-status").textContent, /gespeichert/i);
+  dom.window.close();
+});
+
+test("Galeriespeichern bleibt außerhalb der Live-Seite vollständig gesperrt", async () => {
+  const html = await dateiLesen("docs/galerie.html");
+  const dom = new JSDOM(html, {
+    runScripts: "outside-only",
+    url: "http://127.0.0.1:8765/docs/galerie.html"
+  });
+  const { document } = dom.window;
+  let anfragen = 0;
+  dom.window.fetch = async () => {
+    anfragen += 1;
+    return {
+      ok: true,
+      json: async () => ({
+        reihenfolge: ["galerie-aktionen"],
+        aktualisiertAm: "2026-07-31T05:00:00.000Z"
+      })
+    };
+  };
+
+  dom.window.eval(await dateiLesen("js/galerie.js"));
+  await ereignisseVerarbeiten();
+
+  assert.equal(anfragen, 0, "Vorschauseite hat den zentralen Speicher angesprochen");
+  assert.equal(document.getElementById("galerie-sortierung-speichern").disabled, true);
+  assert.match(document.getElementById("galerie-sortierung-status").textContent, /Vorschauseite/i);
   dom.window.close();
 });
