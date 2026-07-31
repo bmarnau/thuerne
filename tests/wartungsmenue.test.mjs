@@ -22,7 +22,7 @@ test("Wartungsmenü enthält drei zugängliche Bereiche", async () => {
     document.getElementById("wartung-panel-verlauf").textContent,
     /Vorgeschichte[\s\S]*Git-dokumentierter Verlauf seit 02\.07\.2026/
   );
-  assert.equal(document.querySelectorAll(".wartungsstatus-liste > li").length, 5);
+  assert.equal(document.querySelectorAll(".wartungsstatus-liste > li").length, 6);
   const infoLinks = [...document.querySelectorAll(".wartungsmenue-links a")];
   assert.equal(infoLinks.length, 3);
   assert.ok(infoLinks.every((link) => link.target === "_blank"));
@@ -46,6 +46,26 @@ test("Systemansicht prüft Worker und D1 einmalig und rein lesend", async () => 
 
   dom.window.fetch = async (url, optionen) => {
     anfragen.push({ url, optionen });
+    if (url.includes("api.github.com/repos/bmarnau/thuerne/pulls?")) {
+      return {
+        ok: true,
+        json: async () => ([{
+          number: 6,
+          url: "https://api.github.com/repos/bmarnau/thuerne/pulls/6"
+        }])
+      };
+    }
+    if (url.endsWith("/pulls/6")) {
+      return {
+        ok: true,
+        json: async () => ({
+          number: 6,
+          draft: true,
+          mergeable: true,
+          html_url: "https://github.com/bmarnau/thuerne/pull/6"
+        })
+      };
+    }
     return {
       ok: true,
       json: async () => ({ reihenfolge: ["galerie-aktionen"] })
@@ -59,9 +79,10 @@ test("Systemansicht prüft Worker und D1 einmalig und rein lesend", async () => 
   await ereignisseVerarbeiten();
   await ereignisseVerarbeiten();
 
-  assert.equal(anfragen.length, 1);
-  assert.equal(anfragen[0].optionen.method, "GET");
-  assert.equal(anfragen[0].optionen.cache, "no-store");
+  const workerAnfragen = anfragen.filter(({ url }) => url.includes("galerie-reihenfolge"));
+  assert.equal(workerAnfragen.length, 1);
+  assert.equal(workerAnfragen[0].optionen.method, "GET");
+  assert.equal(workerAnfragen[0].optionen.cache, "no-store");
   assert.match(document.getElementById("wartungsstatus-worker-text").textContent, /D1-Antwort gültig/);
   assert.ok(
     document.querySelector("#wartungsstatus-worker .wartungsstatus-punkt")
@@ -71,7 +92,19 @@ test("Systemansicht prüft Worker und D1 einmalig und rein lesend", async () => 
   document.getElementById("wartung-tab-orientierung").click();
   document.getElementById("wartung-tab-system").click();
   await ereignisseVerarbeiten();
-  assert.equal(anfragen.length, 1, "Worker wurde mehrfach geprüft");
+  assert.equal(
+    anfragen.filter(({ url }) => url.includes("galerie-reihenfolge")).length,
+    1,
+    "Worker wurde mehrfach geprüft"
+  );
+  assert.match(
+    document.getElementById("wartungsstatus-github-text").textContent,
+    /1 offen, davon 1 Entwurf/
+  );
+  assert.ok(
+    document.querySelector("#wartungsstatus-github .wartungsstatus-punkt")
+      .classList.contains("wartungsstatus-gelb")
+  );
   dom.window.close();
 });
 

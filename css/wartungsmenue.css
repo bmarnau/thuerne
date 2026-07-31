@@ -348,6 +348,11 @@
   line-height: 1.35;
 }
 
+.wartungsstatus-liste a {
+  justify-self: start;
+  font-size: 0.75rem;
+}
+
 .wartungsstatus-punkt,
 .wartungsstatus-legende i {
   display: inline-block;
