@@ -28,6 +28,22 @@ test("Wartungsmenü enthält drei zugängliche Bereiche", async () => {
   assert.ok(infoLinks.every((link) => link.target === "_blank"));
   assert.ok(infoLinks.every((link) => link.rel.includes("noopener")));
   assert.ok(infoLinks.every((link) => link.rel.includes("noreferrer")));
+  assert.match(
+    document.getElementById("wartung-panel-orientierung").textContent,
+    /Roboto[\s\S]*Font Awesome Free 6\.5\.1[\s\S]*Originallizenzen/
+  );
+  assert.match(
+    document.getElementById("wartung-panel-orientierung").textContent,
+    /H\.264\/AVC[\s\S]*AAC[\s\S]*yuv420p[\s\S]*faststart/
+  );
+  assert.match(
+    document.getElementById("wartung-panel-verlauf").textContent,
+    /03\.08\.2026[\s\S]*75743e4/
+  );
+  assert.match(
+    document.getElementById("wartung-panel-system").textContent,
+    /30 bestanden[\s\S]*H\.264\/AVC/
+  );
   assert.deepEqual(
     tabs.map((tab) => tab.textContent.trim()),
     ["Orientierung", "Verlauf", "System"]
