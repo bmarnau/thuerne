@@ -13,12 +13,12 @@ und dieses Projekt folgt der [Semantischen Versionierung](https://semver.org/lan
 - `bilder/dachs.mp4` ersetzt den Platzhalter als Film des Monats
 - Film des Monats für eine breite Browserunterstützung von HEVC/MP2 auf
   H.264/AAC mit Weboptimierung umgewandelt
-- Drei beitragsbezogene Aufnahmen ergänzen den Gesundheitsartikel zur digitalen
-  Arztpraxis als eigenständige Mini-Galerie mit Großansicht
 - Roboto und die verwendeten Font-Awesome-Markensymbole werden einschließlich
   ihrer Originallizenzen lokal bereitgestellt; externe Font-CDNs entfallen
 - Wartungsmenü nennt Ablageorte und Originallizenzen der lokalen Schrift- und
   Symboldateien sowie das verbindliche H.264/AAC-Webformat für Filme
+- Nicht für die Öffentlichkeit freigegebene Aufnahmen zur digitalen Arztpraxis
+  und ihre Mini-Galerie vollständig entfernt
 
 ## [1.1.0] - 2026-07-27
 

@@ -24,9 +24,9 @@ Nach dem Hochladen:
 
 ## Den gesamten aktuellen Website-Stand veröffentlichen
 
-Wenn neben der Filmkorrektur auch die neue Mini-Galerie zur digitalen
-Arztpraxis und alle aktuellen Seitenänderungen veröffentlicht werden sollen,
-folgende Dateien mit gleicher Ordnerstruktur kopieren:
+Wenn neben der Filmkorrektur auch alle aktuellen Seitenänderungen
+veröffentlicht werden sollen, folgende Dateien mit gleicher Ordnerstruktur
+kopieren:
 
 ```text
 index.html
@@ -40,12 +40,8 @@ docs/impressum.html
 docs/kalender.html
 docs/kontakt.html
 docs/service.html
-js/gesundheit.js
 fonts/roboto-regular-latin.woff2
 bilder/dachs.mp4
-bilder/digitalepraxis1.jpg
-bilder/digitalepraxis2.jpg
-bilder/digitalepraxis3.png
 bilder/huhn.jpg
 ```
 

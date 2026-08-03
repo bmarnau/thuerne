@@ -42,7 +42,7 @@ test("Wartungsmenü enthält drei zugängliche Bereiche", async () => {
   );
   assert.match(
     document.getElementById("wartung-panel-system").textContent,
-    /30 bestanden[\s\S]*H\.264\/AVC/
+    /29 bestanden[\s\S]*H\.264\/AVC/
   );
   assert.deepEqual(
     tabs.map((tab) => tab.textContent.trim()),
