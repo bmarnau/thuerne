@@ -430,6 +430,9 @@
           <div><dt>Gestaltung</dt><dd><code>css/</code></dd></div>
           <div><dt>Funktionen</dt><dd><code>js/</code></dd></div>
           <div><dt>Bilder</dt><dd><code>bilder/</code></dd></div>
+          <div><dt>Schrift</dt><dd><code>fonts/</code></dd></div>
+          <div><dt>Symbole</dt><dd><code>assets/icons/</code></dd></div>
+          <div><dt>Lizenzen</dt><dd><code>licenses/</code></dd></div>
           <div><dt>Prüfungen</dt><dd><code>tests/</code></dd></div>
         </dl>
 
@@ -451,6 +454,26 @@
             <li>Bestehende Bedienung und Mobilansicht mitprüfen.</li>
             <li>Neue Bilder mit sinnvollem Alternativtext einbinden.</li>
             <li>Galerie-, Startfenster- und Cloudflare-Hinweise beachten.</li>
+          </ul>
+        </details>
+
+        <details>
+          <summary>Schriften, Symbole und Lizenzen</summary>
+          <ul>
+            <li>Roboto wird lokal aus <code>fonts/roboto-regular-latin.woff2</code> geladen.</li>
+            <li>Facebook- und Instagram-Symbol stammen aus Font Awesome Free 6.5.1 und liegen unter <code>assets/icons/</code>.</li>
+            <li>Die unveränderten Originallizenzen liegen unter <code>licenses/Roboto-OFL.txt</code> und <code>licenses/Font-Awesome-Free-LICENSE.txt</code>.</li>
+            <li>Keine Font-Datei und kein Symbol von Google Fonts oder cdnjs laden.</li>
+          </ul>
+        </details>
+
+        <details>
+          <summary>Filmformat für Webbrowser</summary>
+          <ul>
+            <li>MP4-Container mit Video-Codec <strong>H.264/AVC</strong> verwenden.</li>
+            <li>Audio als <strong>AAC</strong> und Bildformat als <code>yuv420p</code> ausgeben.</li>
+            <li>Für den Webstart die MP4-Option <code>faststart</code> aktivieren.</li>
+            <li>Der aktuelle Film liegt unter <code>bilder/dachs.mp4</code> in diesem Format vor.</li>
           </ul>
         </details>
 
@@ -477,6 +500,12 @@
         <h4 class="wartungsmenue-zwischenkopf">Git-dokumentierter Verlauf seit 02.07.2026</h4>
 
         <ol class="wartungsmenue-verlauf">
+          <li>
+            <time datetime="2026-08-03">03.08.2026</time>
+            <strong>Medien und lokale Schriftressourcen</strong>
+            <span>Film kompatibel umgewandelt, Mini-Galerie ergänzt und externe Font-CDNs durch lokale Originaldateien ersetzt.</span>
+            <small>GitHub-Commit <a href="https://github.com/bmarnau/thuerne/commit/75743e4"><code>75743e4</code></a></small>
+          </li>
           <li>
             <time datetime="2026-07-31">31.07.2026</time>
             <strong>Wartungshilfe ergänzt</strong>
@@ -534,7 +563,7 @@
         <ul class="wartungsstatus-liste" aria-label="Aktuelle Systemzustände">
           <li>
             <span class="wartungsstatus-punkt wartungsstatus-gruen" aria-label="Erfolgreich"></span>
-            <div><strong>Lokale Tests</strong><small>28 bestanden, 0 fehlgeschlagen · 31.07.2026</small></div>
+            <div><strong>Lokale Tests</strong><small>30 bestanden, 0 fehlgeschlagen · 03.08.2026</small></div>
           </li>
           <li>
             <span class="wartungsstatus-punkt wartungsstatus-gruen" aria-label="Erfolgreich"></span>
@@ -591,6 +620,8 @@
           <div><dt>Tests</dt><dd>Node-Testlauf mit jsdom</dd></div>
           <div><dt>Automatik</dt><dd><a href="https://github.com/bmarnau/thuerne/actions">GitHub Actions</a></dd></div>
           <div><dt>Galerie-Daten</dt><dd>Cloudflare Worker und D1</dd></div>
+          <div><dt>Schriften/Symbole</dt><dd>Lokal mit Originallizenzen</dd></div>
+          <div><dt>Filmformat</dt><dd>MP4 · H.264/AVC · AAC · yuv420p</dd></div>
         </dl>
 
         <details open>

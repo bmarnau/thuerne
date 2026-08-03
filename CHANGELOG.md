@@ -17,6 +17,8 @@ und dieses Projekt folgt der [Semantischen Versionierung](https://semver.org/lan
   Arztpraxis als eigenständige Mini-Galerie mit Großansicht
 - Roboto und die verwendeten Font-Awesome-Markensymbole werden einschließlich
   ihrer Originallizenzen lokal bereitgestellt; externe Font-CDNs entfallen
+- Wartungsmenü nennt Ablageorte und Originallizenzen der lokalen Schrift- und
+  Symboldateien sowie das verbindliche H.264/AAC-Webformat für Filme
 
 ## [1.1.0] - 2026-07-27
 
