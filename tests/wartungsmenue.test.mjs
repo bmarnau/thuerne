@@ -38,7 +38,7 @@ test("Wartungsmenü enthält drei zugängliche Bereiche", async () => {
   );
   assert.match(
     document.getElementById("wartung-panel-verlauf").textContent,
-    /03\.08\.2026[\s\S]*75743e4/
+    /03\.08\.2026[\s\S]*935a5f4[\s\S]*75743e4/
   );
   assert.match(
     document.getElementById("wartung-panel-system").textContent,
