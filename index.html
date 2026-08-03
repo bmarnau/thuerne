@@ -10,24 +10,18 @@
     Änderung anpassen. So lädt der Browser die neue Fassung statt einer alten
     Datei aus seinem Zwischenspeicher.
   -->
-  <link rel="stylesheet" href="css/style.css?v=20260731">
-  <link rel="stylesheet" href="css/cookie.css?v=20260731">
-  <link rel="stylesheet" href="css/wartungsmenue.css?v=20260731">
-  <script defer src="js/script.js?v=20260731"></script>
-  <script defer src="js/wartungsmenue.js?v=20260731"></script>
+  <link rel="stylesheet" href="css/style.css?v=20260803">
+  <link rel="stylesheet" href="css/cookie.css?v=20260803">
+  <link rel="stylesheet" href="css/wartungsmenue.css?v=20260803">
+  <script defer src="js/script.js?v=20260803"></script>
+  <script defer src="js/wartungsmenue.js?v=20260803"></script>
   <!-- Veranstaltungen und Ersatzbilder werden redaktionell in dieser Datei gepflegt. -->
   <!--
     REDAKTIONSHINWEIS:
     Nach einer Änderung an js/start-hinweis.js den Wert hinter ?v= erhöhen.
     Dadurch laden Browser den neuen Startbild-Pool und Schalter zuverlässig.
   -->
-  <script defer src="js/start-hinweis.js?v=20260731"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-  <link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-  />
-	
+  <script defer src="js/start-hinweis.js?v=20260803"></script>
 </head>
 <body>
   <header>
@@ -243,27 +237,18 @@
           </div>
           <h3>Film des Monats</h3>
 
-          <!--
-            REDAKTIONSHINWEIS ZUM MINIFILM:
-            1. Filmdatei zum Beispiel als bilder/film-des-monats.mp4 ablegen.
-            2. Den Platzhalter unten entfernen.
-            3. Anschließend diese Video-Vorlage aus dem Kommentar kopieren:
-
-            <video class="monatsmedium" controls preload="metadata">
-              Hier ein source-Element mit dem Pfad zur MP4-Datei einsetzen.
-              Dein Browser kann dieses Video nicht wiedergeben.
-            </video>
-
-            Beispiel für den einzusetzenden Dateipfad: bilder/film-des-monats.mp4
-            4. Monat im time-Element, Titel und Beschreibung redaktionell anpassen.
-          -->
-          <div class="monatsfilm-platzhalter" role="img" aria-label="Platzhalter für den Film des Monats">
-            <span aria-hidden="true">▶</span>
-            <strong>Minifilm wird vorbereitet</strong>
-          </div>
+          <video
+            class="monatsmedium"
+            controls
+            preload="metadata"
+            playsinline
+            aria-label="Film des Monats: Dachs">
+            <source src="bilder/dachs.mp4" type="video/mp4">
+            Dein Browser kann dieses Video nicht wiedergeben.
+          </video>
 
           <p>
-            Hier kann künftig ein kurzer Film aus der Dörfergemeinschaft vorgestellt werden.
+            Film: Heiner · Aufnahme Juli 2026
           </p>
         </article>
 
@@ -279,13 +264,13 @@
           <figure class="monatsmedium-figure">
             <img
               class="monatsmedium"
-              src="bilder/eule.jpg"
-              alt="Uhu"
+              src="bilder/huhn.jpg"
+              alt="Huhn"
               width="2048"
               height="2048"
               loading="lazy"
               decoding="async">
-            <figcaption>Foto: Yvonne · Aufnahme Juni 2026</figcaption>
+            <figcaption>Foto: Rainer · Aufnahme Juli 2026</figcaption>
           </figure>
         </article>
       </div>
@@ -323,14 +308,14 @@
    	rel="noopener noreferrer"
     class="social-link facebook"
     aria-label="Facebook-Auftritt der Dörfergemeinschaft">
-   <i class="fa-brands fa-facebook"></i>
+   <img src="assets/icons/facebook.svg" alt="" width="26" height="26" aria-hidden="true">
    </a>|
   <a href="https://www.instagram.com/thuerne/"
    target="_blank"
    rel="noopener noreferrer"
    class="social-link instagram"
    aria-label="Instagram-Auftritt der Dörfergemeinschaft">
-  <i class="fa-brands fa-instagram"></i>
+  <img src="assets/icons/instagram.svg" alt="" width="26" height="26" aria-hidden="true">
   </a> |
     
     <a href="docs/impressum.html">Impressum</a> |

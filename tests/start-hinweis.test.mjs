@@ -163,5 +163,8 @@ test("responsive CSS begrenzt Startfenster und Bild in Breite und Höhe", async 
   // Diese Regeln sichern insbesondere kleine Geräte und das Querformat ab.
   assert.match(css, /\.start-hinweis\s*\{[^}]*max-height:\s*calc\(100dvh - 2rem\)/s);
   assert.match(css, /\.start-hinweis-bild\s*\{[^}]*object-fit:\s*contain/s);
+  assert.match(css, /\.start-hinweis-bild\s*\{[^}]*object-position:\s*center top/s);
+  assert.match(css, /\.start-hinweis-bild\s*\{[^}]*border:\s*2px solid/s);
   assert.match(css, /@media \(orientation:\s*landscape\) and \(max-height:\s*600px\)/);
+  assert.doesNotMatch(css, /\.start-hinweis-bild\s*\{[^}]*height:\s*calc\(100dvh - 2rem\)/s);
 });

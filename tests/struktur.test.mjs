@@ -75,6 +75,24 @@ test("alle klassischen JavaScript-Dateien sind syntaktisch gültig", async () =>
   }
 });
 
+test("Schrift und Social-Media-Symbole werden ohne externe Font-CDNs geladen", async () => {
+  const css = await dateiLesen("css/style.css");
+  const html = (await Promise.all(htmlDateien.map((datei) => dateiLesen(datei)))).join("\n");
+
+  assert.match(css, /url\(['"]?\.\.\/fonts\/roboto-regular-latin\.woff2['"]?\)/);
+  assert.doesNotMatch(`${html}\n${css}`, /fonts\.(?:googleapis|gstatic)\.com|cdnjs\.cloudflare\.com/i);
+  assert.match(html, /assets\/icons\/facebook\.svg/);
+  assert.match(html, /assets\/icons\/instagram\.svg/);
+
+  await Promise.all([
+    access(new URL("fonts/roboto-regular-latin.woff2", projektWurzel)),
+    access(new URL("assets/icons/facebook.svg", projektWurzel)),
+    access(new URL("assets/icons/instagram.svg", projektWurzel)),
+    access(new URL("licenses/Roboto-OFL.txt", projektWurzel)),
+    access(new URL("licenses/Font-Awesome-Free-LICENSE.txt", projektWurzel))
+  ]);
+});
+
 test("Galerie-Konfiguration passt zum vorhandenen Bildbestand", async () => {
   const dom = new JSDOM(await dateiLesen("docs/galerie.html"));
   const bilder = await readdir(new URL("bilder/", projektWurzel));

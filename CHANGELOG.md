@@ -7,6 +7,17 @@ und dieses Projekt folgt der [Semantischen Versionierung](https://semver.org/lan
 
 ## [Unreleased]
 
+### Changed
+- Wechselndes Startbild wird auch auf flachen Bildschirmen vollständig und mit
+  einem dezenten Rahmen dargestellt
+- `bilder/dachs.mp4` ersetzt den Platzhalter als Film des Monats
+- Film des Monats für eine breite Browserunterstützung von HEVC/MP2 auf
+  H.264/AAC mit Weboptimierung umgewandelt
+- Drei beitragsbezogene Aufnahmen ergänzen den Gesundheitsartikel zur digitalen
+  Arztpraxis als eigenständige Mini-Galerie mit Großansicht
+- Roboto und die verwendeten Font-Awesome-Markensymbole werden einschließlich
+  ihrer Originallizenzen lokal bereitgestellt; externe Font-CDNs entfallen
+
 ## [1.1.0] - 2026-07-27
 
 ### Added
