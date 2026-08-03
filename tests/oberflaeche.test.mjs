@@ -18,6 +18,11 @@ test("Navigation, Cookie-Hinweis und Nach-oben-Schaltfläche funktionieren", asy
   assert.equal(dom.window.localStorage.getItem("cookieAccepted"), "true");
   assert.ok(document.getElementById("cookie-banner").classList.contains("hidden"));
 
+  const filmDesMonats = document.querySelector("video.monatsmedium");
+  assert.equal(filmDesMonats.querySelector("source").getAttribute("src"), "bilder/dachs.mp4");
+  assert.equal(filmDesMonats.querySelector("source").getAttribute("type"), "video/mp4");
+  assert.equal(document.querySelector(".monatsfilm-platzhalter"), null);
+
   Object.defineProperty(dom.window, "scrollY", { configurable: true, value: 400 });
   dom.window.dispatchEvent(new Event("scroll"));
   assert.equal(document.getElementById("back-to-top").style.display, "block");
@@ -58,6 +63,50 @@ test("Service-Padlets und Flyer lassen sich öffnen und schließen", async () =>
   assert.equal(document.getElementById("flyerPopup").style.display, "flex");
   document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape" }));
   assert.equal(document.getElementById("flyerPopup").style.display, "none");
+  dom.window.close();
+});
+
+test("Mini-Galerie der digitalen Praxis öffnet und wechselt nur ihre drei Bilder", async () => {
+  const dom = new JSDOM(await dateiLesen("docs/gesundheit.html"), {
+    runScripts: "outside-only",
+    url: "https://www.thuerne.de/docs/gesundheit.html"
+  });
+  const { document, KeyboardEvent } = dom.window;
+  const dialog = document.getElementById("praxis-bilddialog");
+
+  dialog.showModal = function showModal() {
+    this.open = true;
+  };
+  dialog.close = function close() {
+    this.open = false;
+    this.dispatchEvent(new dom.window.Event("close"));
+  };
+
+  dom.window.eval(await dateiLesen("js/gesundheit.js"));
+
+  const vorschaubilder = [...document.querySelectorAll(".praxis-minigalerie-bild")];
+  assert.equal(vorschaubilder.length, 3);
+  assert.deepEqual(
+    vorschaubilder.map(({ dataset }) => dataset.bild),
+    [
+      "../bilder/digitalepraxis1.jpg",
+      "../bilder/digitalepraxis2.jpg",
+      "../bilder/digitalepraxis3.png"
+    ]
+  );
+
+  vorschaubilder[0].click();
+  assert.equal(dialog.open, true);
+  assert.match(document.getElementById("praxis-bilddialog-bild").getAttribute("src"), /digitalepraxis1\.jpg$/);
+  assert.equal(document.getElementById("praxis-bilddialog-zaehler").textContent, "1 von 3");
+
+  dialog.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowRight" }));
+  assert.match(document.getElementById("praxis-bilddialog-bild").getAttribute("src"), /digitalepraxis2\.jpg$/);
+  assert.equal(document.getElementById("praxis-bilddialog-zaehler").textContent, "2 von 3");
+
+  document.querySelector(".praxis-bilddialog-schliessen").click();
+  assert.equal(dialog.open, false);
+  assert.equal(document.getElementById("praxis-bilddialog-bild").hasAttribute("src"), false);
   dom.window.close();
 });
 
