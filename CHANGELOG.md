@@ -7,6 +7,55 @@ und dieses Projekt folgt der [Semantischen Versionierung](https://semver.org/lan
 
 ## [Unreleased]
 
+- Die Beschriftung des Brotback-Padlets wird automatisch aus dem nächsten
+  Backtermin der Serviceseite gebildet, bleibt bis zum Ende der Kalenderwoche
+  beim gerade vergangenen Backtermin und ist beim Ein- und Ausblenden konsistent.
+- Die zentrale Cache-Kennung wurde aktualisiert, damit Browser das geänderte
+  Service-Skript zuverlässig neu laden.
+
+### Changed
+- Wechselndes Startbild wird auch auf flachen Bildschirmen vollständig und mit
+  einem dezenten Rahmen dargestellt
+- `bilder/dachs.mp4` ersetzt den Platzhalter als Film des Monats
+- Film des Monats für eine breite Browserunterstützung von HEVC/MP2 auf
+  H.264/AAC mit Weboptimierung umgewandelt
+- Roboto und die verwendeten Font-Awesome-Markensymbole werden einschließlich
+  ihrer Originallizenzen lokal bereitgestellt; externe Font-CDNs entfallen
+- Wartungsmenü nennt Ablageorte und Originallizenzen der lokalen Schrift- und
+  Symboldateien sowie das verbindliche H.264/AAC-Webformat für Filme
+- Nicht für die Öffentlichkeit freigegebene Aufnahmen zur digitalen Arztpraxis
+  und ihre Mini-Galerie vollständig entfernt
+
+## [1.1.0] - 2026-07-27
+
+### Added
+- Kompakte Wartungshilfe auf der Startseite mit Architekturübersicht,
+  Entwicklungstagebuch und aktuellem Systemstand
+- Tastaturbedienbare Reiter, Fokusführung und automatisierte Tests für das
+  Wartungsmenü
+- Einheitliche Cache-Versionierung für lokale CSS- und JavaScript-Dateien mit
+  automatischer Konsistenzprüfung
+
+### Changed
+- Projektversion, Arbeitsstand, Dokumentationsstand und Cache-Kennung klar
+  voneinander getrennt und zentral in `package.json` beschrieben
+- Veraltete Versionsangaben im Entwicklerleitfaden synchronisiert
+- Galerie-Konfiguration und Startbild-Pool mit dem vorhandenen Bildbestand
+  abgeglichen
+- Wartungszugang dezent in den Footer verschoben, Tagebuch um die belegbare
+  Vorgeschichte ergänzt und Systemübersicht um Zustände sowie eine lesende
+  Worker-/D1-Live-Prüfung erweitert
+- Weiterführende Wartungsdokumente öffnen aus dem Panel in einem neuen Tab
+- Tagebucheinträge verlinken vorhandene GitHub-Tags und Commit-Kennungen
+- Systemstatus meldet offene, konfliktbehaftete oder noch unklare
+  GitHub-Synchronisationsvorgänge
+- Offene Wartungsaufgaben aus GitHub Issues werden nach Dringlichkeit geordnet
+  im Systemstatus angezeigt
+- Galeriereihenfolge kann nur auf erlaubten Live-Domains und erst nach
+  erfolgreichem Laden einer aktiven D1-Reihenfolge gespeichert werden
+- Systemstatus zeigt Anzahl und letzten Änderungszeitpunkt der aktiven
+  D1-Galeriereihenfolge
+
 ## [1.1.0] - 2026-07-27
 
 ### Added

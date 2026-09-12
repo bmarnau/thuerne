@@ -10,22 +10,18 @@
     Änderung anpassen. So lädt der Browser die neue Fassung statt einer alten
     Datei aus seinem Zwischenspeicher.
   -->
-  <link rel="stylesheet" href="css/style.css?v=20260726">
-  <link rel="stylesheet" href="css/cookie.css" />	
-  <script defer src="js/script.js"></script>
+  <link rel="stylesheet" href="css/style.css?v=20260912">
+  <link rel="stylesheet" href="css/cookie.css?v=20260912">
+  <link rel="stylesheet" href="css/wartungsmenue.css?v=20260912">
+  <script defer src="js/script.js?v=20260912"></script>
+  <script defer src="js/wartungsmenue.js?v=20260912"></script>
   <!-- Veranstaltungen und Ersatzbilder werden redaktionell in dieser Datei gepflegt. -->
   <!--
     REDAKTIONSHINWEIS:
     Nach einer Änderung an js/start-hinweis.js den Wert hinter ?v= erhöhen.
     Dadurch laden Browser den neuen Startbild-Pool und Schalter zuverlässig.
   -->
-  <script defer src="js/start-hinweis.js?v=20260727"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-  <link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-  />
-	
+  <script defer src="js/start-hinweis.js?v=20260912"></script>
 </head>
 <body>
   <header>
@@ -237,31 +233,22 @@
         <article class="aktuelles-karte monatsmedium-karte">
           <div class="aktuelles-meta">
             <p class="aktuelles-typ">Film</p>
-            <time datetime="2026-07">Juli 2026</time>
+            <time datetime="2026-09">September 2026</time>
           </div>
           <h3>Film des Monats</h3>
 
-          <!--
-            REDAKTIONSHINWEIS ZUM MINIFILM:
-            1. Filmdatei zum Beispiel als bilder/film-des-monats.mp4 ablegen.
-            2. Den Platzhalter unten entfernen.
-            3. Anschließend diese Video-Vorlage aus dem Kommentar kopieren:
-
-            <video class="monatsmedium" controls preload="metadata">
-              Hier ein source-Element mit dem Pfad zur MP4-Datei einsetzen.
-              Dein Browser kann dieses Video nicht wiedergeben.
-            </video>
-
-            Beispiel für den einzusetzenden Dateipfad: bilder/film-des-monats.mp4
-            4. Monat im time-Element, Titel und Beschreibung redaktionell anpassen.
-          -->
-          <div class="monatsfilm-platzhalter" role="img" aria-label="Platzhalter für den Film des Monats">
-            <span aria-hidden="true">▶</span>
-            <strong>Minifilm wird vorbereitet</strong>
-          </div>
+          <video
+            class="monatsmedium"
+            controls
+            preload="metadata"
+            playsinline
+            aria-label="Film des Monats: Blinder Passagier">
+            <source src="medien/Blinder Passagier.mp4" type="video/mp4">
+            Dein Browser kann dieses Video nicht wiedergeben.
+          </video>
 
           <p>
-            Hier kann künftig ein kurzer Film aus der Dörfergemeinschaft vorgestellt werden.
+            Blinder Passagier · Film: Bernd · Aufnahme September 2026
           </p>
         </article>
 
@@ -269,7 +256,7 @@
         <article class="aktuelles-karte monatsmedium-karte">
           <div class="aktuelles-meta">
             <p class="aktuelles-typ">Fotografie</p>
-            <time datetime="2026-07">Juli 2026</time>
+            <time datetime="2026-09">September 2026</time>
           </div>
           <h3>Bild des Monats</h3>
 
@@ -277,13 +264,13 @@
           <figure class="monatsmedium-figure">
             <img
               class="monatsmedium"
-              src="bilder/eule.jpg"
-              alt="Uhu"
-              width="2048"
+              src="medien/blaeuling.jpg"
+              alt="Bläuling"
+              width="1449"
               height="2048"
               loading="lazy"
               decoding="async">
-            <figcaption>Foto: Yvonne · Aufnahme Juni 2026</figcaption>
+            <figcaption>Bläuling · Foto: Rainer · Aufnahme September 2026</figcaption>
           </figure>
         </article>
       </div>
@@ -321,18 +308,28 @@
    	rel="noopener noreferrer"
     class="social-link facebook"
     aria-label="Facebook-Auftritt der Dörfergemeinschaft">
-   <i class="fa-brands fa-facebook"></i>
+   <img src="assets/icons/facebook.svg" alt="" width="26" height="26" aria-hidden="true">
    </a>|
   <a href="https://www.instagram.com/thuerne/"
    target="_blank"
    rel="noopener noreferrer"
    class="social-link instagram"
    aria-label="Instagram-Auftritt der Dörfergemeinschaft">
-  <i class="fa-brands fa-instagram"></i>
+  <img src="assets/icons/instagram.svg" alt="" width="26" height="26" aria-hidden="true">
   </a> |
     
     <a href="docs/impressum.html">Impressum</a> |
     <a href="docs/datenschutz.html">Datenschutz</a>
+    <span class="wartungsmenue-trenner" aria-hidden="true">|</span>
+    <button
+      id="wartungsmenue-oeffnen"
+      class="wartungsmenue-ausloeser"
+      type="button"
+      aria-label="Wartungshinweise öffnen"
+      aria-controls="wartungsmenue"
+      aria-expanded="false">
+      <span aria-hidden="true">···</span>
+    </button>
   </footer>
 	<div class="cookie-banner hidden" id="cookie-banner">
    <p>
@@ -372,6 +369,285 @@
       </div>
     </article>
   </dialog>
+
+  <!--
+    Kompakte Wartungshilfe für Entwickler. Die Inhalte sind nicht vertraulich;
+    der unauffällige Auslöser hält lediglich die öffentliche Oberfläche ruhig.
+  -->
+  <div id="wartungsmenue-hintergrund" class="wartungsmenue-hintergrund" hidden></div>
+
+  <aside
+    id="wartungsmenue"
+    class="wartungsmenue"
+    aria-labelledby="wartungsmenue-titel"
+    aria-hidden="true"
+    hidden>
+    <header class="wartungsmenue-kopf">
+      <div>
+        <p class="wartungsmenue-kicker">Wartungshilfe</p>
+        <h2 id="wartungsmenue-titel">Website kompakt erklärt</h2>
+      </div>
+      <button
+        id="wartungsmenue-schliessen"
+        class="wartungsmenue-schliessen"
+        type="button"
+        aria-label="Wartungshinweise schließen">×</button>
+    </header>
+
+    <div class="wartungsmenue-tabs" role="tablist" aria-label="Wartungsbereiche">
+      <button
+        id="wartung-tab-orientierung"
+        type="button"
+        role="tab"
+        aria-selected="true"
+        aria-controls="wartung-panel-orientierung"
+        tabindex="0">Orientierung</button>
+      <button
+        id="wartung-tab-verlauf"
+        type="button"
+        role="tab"
+        aria-selected="false"
+        aria-controls="wartung-panel-verlauf"
+        tabindex="-1">Verlauf</button>
+      <button
+        id="wartung-tab-system"
+        type="button"
+        role="tab"
+        aria-selected="false"
+        aria-controls="wartung-panel-system"
+        tabindex="-1">System</button>
+    </div>
+
+    <div class="wartungsmenue-inhalt">
+      <section
+        id="wartung-panel-orientierung"
+        role="tabpanel"
+        aria-labelledby="wartung-tab-orientierung">
+        <h3>Schnell zurechtfinden</h3>
+        <dl class="wartungsmenue-uebersicht">
+          <div><dt>Startseite</dt><dd><code>index.html</code></dd></div>
+          <div><dt>Unterseiten</dt><dd><code>docs/</code></dd></div>
+          <div><dt>Gestaltung</dt><dd><code>css/</code></dd></div>
+          <div><dt>Funktionen</dt><dd><code>js/</code></dd></div>
+          <div><dt>Bilder</dt><dd><code>bilder/</code></dd></div>
+          <div><dt>Schrift</dt><dd><code>fonts/</code></dd></div>
+          <div><dt>Symbole</dt><dd><code>assets/icons/</code></dd></div>
+          <div><dt>Lizenzen</dt><dd><code>licenses/</code></dd></div>
+          <div><dt>Prüfungen</dt><dd><code>tests/</code></dd></div>
+        </dl>
+
+        <details>
+          <summary>Änderung in fünf Schritten</summary>
+          <ol>
+            <li>Aktuellen Git-Stand und betroffene Dateien prüfen.</li>
+            <li>Nur die benötigten Inhalte oder Funktionen ändern.</li>
+            <li><code>npm test</code> ausführen und die Darstellung prüfen.</li>
+            <li>Wesentliche Änderung unter „Unreleased“ dokumentieren.</li>
+            <li>Aussagekräftig committen; Versionen nur bei einem Release erhöhen.</li>
+          </ol>
+        </details>
+
+        <details>
+          <summary>Wichtige Regeln</summary>
+          <ul>
+            <li>Keine Kennwörter, PINs oder Tokens in Git speichern.</li>
+            <li>Bestehende Bedienung und Mobilansicht mitprüfen.</li>
+            <li>Neue Bilder mit sinnvollem Alternativtext einbinden.</li>
+            <li>Galerie-, Startfenster- und Cloudflare-Hinweise beachten.</li>
+          </ul>
+        </details>
+
+        <details>
+          <summary>Schriften, Symbole und Lizenzen</summary>
+          <ul>
+            <li>Roboto wird lokal aus <code>fonts/roboto-regular-latin.woff2</code> geladen.</li>
+            <li>Facebook- und Instagram-Symbol stammen aus Font Awesome Free 6.5.1 und liegen unter <code>assets/icons/</code>.</li>
+            <li>Die unveränderten Originallizenzen liegen unter <code>licenses/Roboto-OFL.txt</code> und <code>licenses/Font-Awesome-Free-LICENSE.txt</code>.</li>
+            <li>Keine Font-Datei und kein Symbol von Google Fonts oder cdnjs laden.</li>
+          </ul>
+        </details>
+
+        <details>
+          <summary>Filmformat für Webbrowser</summary>
+          <ul>
+            <li>MP4-Container mit Video-Codec <strong>H.264/AVC</strong> verwenden.</li>
+            <li>Audio als <strong>AAC</strong> und Bildformat als <code>yuv420p</code> ausgeben.</li>
+            <li>Für den Webstart die MP4-Option <code>faststart</code> aktivieren.</li>
+            <li>Der aktuelle Film liegt unter <code>bilder/dachs.mp4</code> in diesem Format vor.</li>
+          </ul>
+        </details>
+
+        <p class="wartungsmenue-links">
+          <a href="docs/entwicklung.html" target="_blank" rel="noopener noreferrer">Ausführlicher Leitfaden</a>
+          <a href="galeriepflege.md" target="_blank" rel="noopener noreferrer">Galeriepflege</a>
+          <a href="cloudflare/README.md" target="_blank" rel="noopener noreferrer">Cloudflare-Betrieb</a>
+        </p>
+      </section>
+
+      <section
+        id="wartung-panel-verlauf"
+        role="tabpanel"
+        aria-labelledby="wartung-tab-verlauf"
+        hidden>
+        <h3>Entwicklungstagebuch</h3>
+        <p class="wartungsmenue-hinweis">Belegter Verlauf und bekannte Grenzen. Ausführliche Liste: <a href="CHANGELOG.md">CHANGELOG.md</a>.</p>
+
+        <div class="wartungsmenue-vorgeschichte">
+          <strong>Vorgeschichte · vor Juli 2026</strong>
+          <p>Die Website bestand bereits vor ihrer Aufnahme in Git. Dreamweaver-Struktur, ältere Inhalte und der erste Commit „GitHub-Vorbereitung“ belegen eine Vorgeschichte; einzelne Änderungen lassen sich ohne Versionsdaten jedoch nicht zuverlässig rekonstruieren.</p>
+        </div>
+
+        <h4 class="wartungsmenue-zwischenkopf">Git-dokumentierter Verlauf seit 02.07.2026</h4>
+
+        <ol class="wartungsmenue-verlauf">
+          <li>
+            <time datetime="2026-08-03">03.08.2026</time>
+            <strong>Wartungshinweise erweitert</strong>
+            <span>Hinweise zu Originallizenzen und zum kompatiblen Filmformat im versteckten Menü ergänzt.</span>
+            <small>GitHub-Commit <a href="https://github.com/bmarnau/thuerne/commit/935a5f4"><code>935a5f4</code></a></small>
+          </li>
+          <li>
+            <time datetime="2026-08-03">03.08.2026</time>
+            <strong>Medien und lokale Schriftressourcen</strong>
+            <span>Film kompatibel umgewandelt und externe Font-CDNs durch lokale Originaldateien ersetzt.</span>
+            <small>GitHub-Commit <a href="https://github.com/bmarnau/thuerne/commit/75743e4"><code>75743e4</code></a></small>
+          </li>
+          <li>
+            <time datetime="2026-07-31">31.07.2026</time>
+            <strong>Wartungshilfe ergänzt</strong>
+            <span>Orientierung, Verlauf und Systemstand kompakt zusammengeführt.</span>
+            <small>Unreleased · noch keine GitHub-Kennung</small>
+          </li>
+          <li>
+            <time datetime="2026-07-27">27.07.2026</time>
+            <strong>Version 1.1.0 dokumentiert</strong>
+            <span>Tests, Cloudflare-Dokumentation und Startfenster zusammengefasst.</span>
+            <small>GitHub-Tag <a href="https://github.com/bmarnau/thuerne/releases/tag/v1.1.0">v1.1.0</a></small>
+          </li>
+          <li>
+            <time datetime="2026-07-26">26.07.2026</time>
+            <strong>Galerie und zentrale Reihenfolge</strong>
+            <span>Galerie repariert und zentrale Sortierung vorbereitet.</span>
+            <small>GitHub-Commit <a href="https://github.com/bmarnau/thuerne/commit/9ef0aaa"><code>9ef0aaa</code></a></small>
+          </li>
+          <li>
+            <time datetime="2026-07-25">25.07.2026</time>
+            <strong>Cloudflare-Speicherung</strong>
+            <span>Galeriesortierung zentral über Worker und D1 speicherbar gemacht.</span>
+            <small>GitHub-Commit <a href="https://github.com/bmarnau/thuerne/commit/39f8043"><code>39f8043</code></a></small>
+          </li>
+          <li>
+            <time datetime="2026-07-08">08.07.2026</time>
+            <strong>Erstes Release</strong>
+            <span>Grundstruktur, Versionierung und Entwicklerleitfaden eingeführt.</span>
+            <small>GitHub-Tag <a href="https://github.com/bmarnau/thuerne/releases/tag/v1.0.0"><code>v1.0.0</code></a></small>
+          </li>
+          <li>
+            <time datetime="2026-07-02">02.07.2026</time>
+            <strong>Projektstart</strong>
+            <span>Repository für GitHub vorbereitet.</span>
+            <small>GitHub-Commit <a href="https://github.com/bmarnau/thuerne/commit/4bbcd95"><code>4bbcd95</code></a></small>
+          </li>
+        </ol>
+      </section>
+
+      <section
+        id="wartung-panel-system"
+        role="tabpanel"
+        aria-labelledby="wartung-tab-system"
+        data-worker-url="https://thuerne-galerie.broad-butterfly-074a.workers.dev/api/galerie-reihenfolge"
+        data-github-pulls-url="https://api.github.com/repos/bmarnau/thuerne/pulls?state=open&amp;per_page=5"
+        data-github-issues-url="https://api.github.com/repos/bmarnau/thuerne/issues?state=open&amp;per_page=10"
+        hidden>
+        <h3>Systemstatus</h3>
+
+        <div id="wartungsstatus-zusammenfassung" class="wartungsstatus-zusammenfassung wartungsstatus-gelb">
+          <strong>Teilweise aktuell</strong>
+          <span>Lokale Prüfungen sind aktuell; Live-Dienste werden getrennt bewertet.</span>
+        </div>
+
+        <ul class="wartungsstatus-liste" aria-label="Aktuelle Systemzustände">
+          <li>
+            <span class="wartungsstatus-punkt wartungsstatus-gruen" aria-label="Erfolgreich"></span>
+            <div><strong>Lokale Tests</strong><small>29 bestanden, 0 fehlgeschlagen · 03.08.2026</small></div>
+          </li>
+          <li>
+            <span class="wartungsstatus-punkt wartungsstatus-gruen" aria-label="Erfolgreich"></span>
+            <div><strong>Versionierung</strong><small>Projektversion und Cache-Kennung synchron · 31.07.2026</small></div>
+          </li>
+          <li id="wartungsstatus-worker">
+            <span class="wartungsstatus-punkt wartungsstatus-grau" aria-label="Noch nicht geprüft"></span>
+            <div>
+              <strong>Galerie-Worker und D1</strong>
+              <small id="wartungsstatus-worker-text" aria-live="polite">Wird beim Öffnen einmal lesend geprüft.</small>
+            </div>
+          </li>
+          <li id="wartungsstatus-github">
+            <span class="wartungsstatus-punkt wartungsstatus-grau" aria-label="Noch nicht geprüft"></span>
+            <div>
+              <strong>GitHub-Synchronisation</strong>
+              <small id="wartungsstatus-github-text" aria-live="polite">Offene Pull Requests werden beim Öffnen geprüft.</small>
+              <a id="wartungsstatus-github-link" href="https://github.com/bmarnau/thuerne/pulls" target="_blank" rel="noopener noreferrer">Synchronisationsvorgänge ansehen</a>
+            </div>
+          </li>
+          <li>
+            <span class="wartungsstatus-punkt wartungsstatus-gelb" aria-label="Prüfung nicht aktuell"></span>
+            <div><strong>Öffentliche Website und API</strong><small>Letzter dokumentierter Live-Test: 27.07.2026</small></div>
+          </li>
+          <li>
+            <span class="wartungsstatus-punkt wartungsstatus-grau" aria-label="Nur manuell prüfbar"></span>
+            <div><strong>Kalender, Padlet und fremde Inhalte</strong><small>Nur eingeschränkt oder manuell prüfbar</small></div>
+          </li>
+        </ul>
+
+        <p class="wartungsstatus-legende">
+          <span><i class="wartungsstatus-gruen"></i>OK</span>
+          <span><i class="wartungsstatus-gelb"></i>beachten</span>
+          <span><i class="wartungsstatus-rot"></i>Fehler</span>
+          <span><i class="wartungsstatus-grau"></i>unbekannt</span>
+        </p>
+
+        <section class="wartungsaufgaben" aria-labelledby="wartungsaufgaben-titel">
+          <div class="wartungsaufgaben-kopf">
+            <h4 id="wartungsaufgaben-titel">Offene Wartungsaufgaben</h4>
+            <a href="https://github.com/bmarnau/thuerne/issues" target="_blank" rel="noopener noreferrer">Alle Issues</a>
+          </div>
+          <p id="wartungsaufgaben-status" class="wartungsmenue-hinweis" aria-live="polite">
+            Aufgaben werden beim Öffnen aus GitHub Issues geladen.
+          </p>
+          <ol id="wartungsaufgaben-liste" class="wartungsaufgaben-liste" hidden></ol>
+        </section>
+
+        <dl class="wartungsmenue-system">
+          <div><dt>Version</dt><dd>1.1.0</dd></div>
+          <div><dt>Arbeitsstand</dt><dd>Unreleased</dd></div>
+          <div><dt>Stand</dt><dd>31.07.2026</dd></div>
+          <div><dt>Frontend</dt><dd>HTML, CSS, JavaScript</dd></div>
+          <div><dt>Tests</dt><dd>Node-Testlauf mit jsdom</dd></div>
+          <div><dt>Automatik</dt><dd><a href="https://github.com/bmarnau/thuerne/actions">GitHub Actions</a></dd></div>
+          <div><dt>Galerie-Daten</dt><dd>Cloudflare Worker und D1</dd></div>
+          <div><dt>Schriften/Symbole</dt><dd>Lokal mit Originallizenzen</dd></div>
+          <div><dt>Filmformat</dt><dd>MP4 · H.264/AVC · AAC · yuv420p</dd></div>
+        </dl>
+
+        <details open>
+          <summary>Aktuelle Funktionen</summary>
+          <ul>
+            <li>Responsive Navigation und Seitendarstellung</li>
+            <li>Galerie mit zentral gespeicherter Reihenfolge</li>
+            <li>Kalender und externe Inhalte erst nach Zustimmung</li>
+            <li>Datumsabhängiges Startfenster mit Galerie-Ersatzbild</li>
+            <li>Cookie-Hinweis und Nach-oben-Schaltfläche</li>
+          </ul>
+        </details>
+
+        <details>
+          <summary>Veröffentlichung und Pflege</summary>
+          <p>GitHub ist der verbindliche Projektstand. Lokale Tests laufen mit <code>npm test</code>; der lesende Live-Test mit <code>npm run test:live</code>.</p>
+        </details>
+      </section>
+    </div>
+  </aside>
 
  <button id="back-to-top" type="button" title="Zurück nach oben" aria-label="Zurück nach oben">↑</button>
 </body>

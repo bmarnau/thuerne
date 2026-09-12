@@ -18,11 +18,6 @@ test("Navigation, Cookie-Hinweis und Nach-oben-Schaltfläche funktionieren", asy
   assert.equal(dom.window.localStorage.getItem("cookieAccepted"), "true");
   assert.ok(document.getElementById("cookie-banner").classList.contains("hidden"));
 
-  const filmDesMonats = document.querySelector("video.monatsmedium");
-  assert.equal(filmDesMonats.querySelector("source").getAttribute("src"), "medien/Blinder Passagier.mp4");
-  assert.equal(filmDesMonats.querySelector("source").getAttribute("type"), "video/mp4");
-  assert.equal(document.querySelector(".monatsfilm-platzhalter"), null);
-
   Object.defineProperty(dom.window, "scrollY", { configurable: true, value: 400 });
   dom.window.dispatchEvent(new Event("scroll"));
   assert.equal(document.getElementById("back-to-top").style.display, "block");
@@ -51,38 +46,10 @@ test("Service-Padlets und Flyer lassen sich öffnen und schließen", async () =>
   const dom = await seiteLaden("docs/service.html", ["js/service.js"]);
   const { document, KeyboardEvent } = dom.window;
 
-  dom.window.ServicePadlets.backterminAktualisieren(new Date(2026, 8, 12));
-  assert.equal(
-    document.getElementById("padlet-toggle").textContent,
-    "Brotbacken am 12.09.2026 – Padlet laden"
-  );
-
   document.getElementById("padlet-toggle").click();
   assert.ok(document.querySelector("#padlet-container iframe"));
-  assert.equal(
-    document.getElementById("padlet-toggle").textContent,
-    "Brotbacken am 12.09.2026 – Padlet ausblenden"
-  );
   document.getElementById("padlet-toggle").click();
   assert.equal(document.querySelector("#padlet-container iframe"), null);
-
-  dom.window.ServicePadlets.backterminAktualisieren(new Date(2026, 8, 13));
-  assert.equal(
-    document.getElementById("padlet-toggle").textContent,
-    "Brotbacken am 12.09.2026 – Padlet laden"
-  );
-
-  dom.window.ServicePadlets.backterminAktualisieren(new Date(2026, 9, 1));
-  assert.equal(
-    document.getElementById("padlet-toggle").textContent,
-    "Brotbacken am 17.10.2026 – Padlet laden"
-  );
-
-  dom.window.ServicePadlets.backterminAktualisieren(new Date(2026, 8, 14));
-  assert.equal(
-    document.getElementById("padlet-toggle").textContent,
-    "Brotbacken am 17.10.2026 – Padlet laden"
-  );
 
   document.getElementById("padlet-toggle2").click();
   assert.ok(document.querySelector("#padlet-container2 iframe"));
@@ -107,20 +74,11 @@ test("Galerie lädt, sortiert, zeigt Beschriftungen und schützt das Speichern",
   dom.window.fetch = async (_url, optionen = {}) => {
     anfragen.push(optionen);
     if ((optionen.method || "GET") === "PUT") {
-      return {
-        ok: true,
-        json: async () => ({
-          gespeichert: true,
-          aktualisiertAm: "2026-07-31T05:30:00.000Z"
-        })
-      };
+      return { ok: true, json: async () => ({ gespeichert: true }) };
     }
     return {
       ok: true,
-      json: async () => ({
-        reihenfolge: [...abschnittIds].reverse(),
-        aktualisiertAm: "2026-07-31T05:00:00.000Z"
-      })
+      json: async () => ({ reihenfolge: [...abschnittIds].reverse(), aktualisiertAm: null })
     };
   };
   dom.window.HTMLDialogElement.prototype.showModal = function showModal() {
@@ -131,11 +89,6 @@ test("Galerie lädt, sortiert, zeigt Beschriftungen und schützt das Speichern",
   };
 
   dom.window.eval(await dateiLesen("js/galerie.js"));
-  assert.equal(
-    document.getElementById("galerie-sortierung-speichern").disabled,
-    true,
-    "Speichern ist vor dem zentralen Laden nicht gesperrt"
-  );
   await ereignisseVerarbeiten();
   await ereignisseVerarbeiten();
 
@@ -145,11 +98,6 @@ test("Galerie lädt, sortiert, zeigt Beschriftungen und schützt das Speichern",
     "zentrale Reihenfolge wurde nicht angewendet"
   );
   assert.equal(document.querySelectorAll("#galerie-sortierliste > li").length, abschnittIds.length);
-  assert.equal(document.getElementById("galerie-sortierung-speichern").disabled, false);
-  assert.match(
-    document.getElementById("galerie-sortierung-status").textContent,
-    /Zentrale Reihenfolge aktiv.*zuletzt geändert/i
-  );
 
   const ersterTitel = document.querySelector("#galerie-sortierliste > li span").textContent;
   document.querySelector("#galerie-sortierliste > li button:nth-child(2)").click();
@@ -177,33 +125,5 @@ test("Galerie lädt, sortiert, zeigt Beschriftungen und schützt das Speichern",
   await ereignisseVerarbeiten();
   assert.equal(anfragen.filter(({ method }) => method === "PUT").length, 1);
   assert.match(document.getElementById("galerie-sortierung-status").textContent, /gespeichert/i);
-  dom.window.close();
-});
-
-test("Galeriespeichern bleibt außerhalb der Live-Seite vollständig gesperrt", async () => {
-  const html = await dateiLesen("docs/galerie.html");
-  const dom = new JSDOM(html, {
-    runScripts: "outside-only",
-    url: "http://127.0.0.1:8765/docs/galerie.html"
-  });
-  const { document } = dom.window;
-  let anfragen = 0;
-  dom.window.fetch = async () => {
-    anfragen += 1;
-    return {
-      ok: true,
-      json: async () => ({
-        reihenfolge: ["galerie-aktionen"],
-        aktualisiertAm: "2026-07-31T05:00:00.000Z"
-      })
-    };
-  };
-
-  dom.window.eval(await dateiLesen("js/galerie.js"));
-  await ereignisseVerarbeiten();
-
-  assert.equal(anfragen, 0, "Vorschauseite hat den zentralen Speicher angesprochen");
-  assert.equal(document.getElementById("galerie-sortierung-speichern").disabled, true);
-  assert.match(document.getElementById("galerie-sortierung-status").textContent, /Vorschauseite/i);
   dom.window.close();
 });

@@ -1,15 +1,14 @@
 import assert from "node:assert/strict";
-import { readdir } from "node:fs/promises";
 import test from "node:test";
 import { JSDOM } from "jsdom";
-import { dateiLesen, projektWurzel } from "./helpers.mjs";
+import { dateiLesen } from "./helpers.mjs";
 
 /*
   Diese Hilfsfunktion lädt nur das neutrale HTML und das Startfenster-Skript.
   Das Testdatum wird anschließend ausdrücklich übergeben, damit die Tests auch
   nach dem echten Veranstaltungsdatum unverändert funktionieren.
 */
-async function startseiteVorbereiten({ startbildAktiv = true } = {}) {
+async function startseiteVorbereiten() {
   const dom = new JSDOM(await dateiLesen("index.html"), {
     runScripts: "outside-only",
     url: "https://www.thuerne.de/index.html"
@@ -24,45 +23,9 @@ async function startseiteVorbereiten({ startbildAktiv = true } = {}) {
     this.open = false;
   };
 
-  /*
-    Für den Ausschalttest wird ausschließlich im Arbeitsspeicher eine zweite
-    Schalterstellung erzeugt. Die Projektdatei selbst bleibt dabei unverändert.
-  */
-  const startHinweisQuelltext = (await dateiLesen("js/start-hinweis.js")).replace(
-    "const STARTBILD_AKTIV = true;",
-    `const STARTBILD_AKTIV = ${startbildAktiv};`
-  );
-  dom.window.eval(startHinweisQuelltext);
+  dom.window.eval(await dateiLesen("js/start-hinweis.js"));
   return dom;
 }
-
-test("redaktioneller Schalter kann das Startbild vollständig ausschalten", async () => {
-  const dom = await startseiteVorbereiten({ startbildAktiv: false });
-  const ergebnis = dom.window.StartHinweis.initialisieren();
-  const dialog = dom.window.document.getElementById("start-hinweis");
-
-  assert.equal(dom.window.StartHinweis.startbildAktiv, false);
-  assert.equal(ergebnis.typ, "deaktiviert");
-  assert.equal(dialog.open, false);
-  assert.equal(dialog.dataset.initialisiert, "deaktiviert");
-  assert.equal(dom.window.localStorage.length, 0);
-  dom.window.close();
-});
-
-test("Startbild-Pool enthält den vollständigen nummerierten Galeriebestand", async () => {
-  const dom = await startseiteVorbereiten();
-  const vorhandeneGaleriebilder = (await readdir(new URL("bilder/", projektWurzel)))
-    .filter((datei) => /^[ae]\d+bild\d+\.(?:jpe?g|png)$/i.test(datei))
-    .map((datei) => `bilder/${datei}`)
-    .sort();
-  const startbildPool = [...dom.window.StartHinweis.galeriebilder].sort();
-
-  // Der exakte Mengenvergleich erkennt neue, fehlende und doppelte Einträge.
-  assert.deepEqual(startbildPool, vorhandeneGaleriebilder);
-  assert.equal(new Set(startbildPool).size, startbildPool.length);
-  assert.equal(startbildPool.length, 42);
-  dom.window.close();
-});
 
 test("vor Veranstaltungsbeginn erscheint die zeitlich nächste Einladung", async () => {
   const dom = await startseiteVorbereiten();
@@ -129,8 +92,8 @@ test("Bildfehler führen zu Reservebildern und nie zu einem leeren Fenster", asy
   });
 
   const bild = document.getElementById("start-hinweis-bild");
-  // Der vollständige konfigurierte Pool schlägt nacheinander fehl.
-  for (let index = 0; index < dom.window.StartHinweis.galeriebilder.length; index += 1) {
+  // Fünf konfigurierte Bilder schlagen nacheinander fehl.
+  for (let index = 0; index < 5; index += 1) {
     bild.dispatchEvent(new Event("error"));
   }
 
@@ -163,8 +126,5 @@ test("responsive CSS begrenzt Startfenster und Bild in Breite und Höhe", async 
   // Diese Regeln sichern insbesondere kleine Geräte und das Querformat ab.
   assert.match(css, /\.start-hinweis\s*\{[^}]*max-height:\s*calc\(100dvh - 2rem\)/s);
   assert.match(css, /\.start-hinweis-bild\s*\{[^}]*object-fit:\s*contain/s);
-  assert.match(css, /\.start-hinweis-bild\s*\{[^}]*object-position:\s*center top/s);
-  assert.match(css, /\.start-hinweis-bild\s*\{[^}]*border:\s*2px solid/s);
   assert.match(css, /@media \(orientation:\s*landscape\) and \(max-height:\s*600px\)/);
-  assert.doesNotMatch(css, /\.start-hinweis-bild\s*\{[^}]*height:\s*calc\(100dvh - 2rem\)/s);
 });

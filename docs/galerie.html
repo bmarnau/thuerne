@@ -5,12 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="galerie-reihenfolge-api" content="https://thuerne-galerie.broad-butterfly-074a.workers.dev/api/galerie-reihenfolge" />
   <title>Fotogalerie – Dörfergemeinschaft am Thürne e. V.</title>
- <link rel="stylesheet" href="../css/style.css" />
-  <link rel="stylesheet" href="../css/cookie.css" />
-  <script defer src="../js/script.js"></script>
+ <link rel="stylesheet" href="../css/style.css?v=20260912">
+  <link rel="stylesheet" href="../css/cookie.css?v=20260912">
+  <script defer src="../js/script.js?v=20260912"></script>
   <!-- galerie.js liest die vollständige Cloudflare-Adresse aus dem Meta-Eintrag oben. -->
-  <script defer src="../js/galerie.js?v=20260726-2"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <script defer src="../js/galerie.js?v=20260912"></script>
 </head>
 <body>
   <header>
@@ -50,8 +49,8 @@
           <li><span>Wanderwege</span><code>a6bild01, a6bild02 …</code></li>
           <li><span>Noch nicht zugeordnet</span><code>a5bild01, a5bild02 …</code></li>
           <li><span>Wietzen</span><code>e1bild01 bis e1bild06</code></li>
-          <li><span>Sommerfest</span><code>e2bild01 bis e2bild05</code></li>
-          <li><span>Pflanzenbörse</span><code>e3bild01 bis e3bild09</code></li>
+          <li><span>Sommerfest</span><code>e2bild01, e2bild03, e2bild04</code></li>
+          <li><span>Pflanzenbörse</span><code>e3bild01–03, e3bild05–09</code></li>
           <li><span>Dorffest</span><code>e4bild01 bis e4bild07</code></li>
         </ul>
         <button class="galerie-zuordnung-kopieren" id="galerie-zuordnung-kopieren" type="button">
@@ -62,10 +61,15 @@
         <div class="galerie-sortierung">
           <strong>Reihenfolge der Abschnitte</strong>
 
-          <p>Mit den Pfeilen kannst du die Galerieabschnitte verschieben. Mit der Redaktions-PIN wird die Reihenfolge anschließend für alle Endgeräte gespeichert.</p>
+          <p>Mit den Pfeilen kannst du die Galerieabschnitte verschieben. Speichern wird nur auf der Live-Seite freigegeben, nachdem die aktive zentrale Reihenfolge erfolgreich geladen wurde.</p>
 
           <ol id="galerie-sortierliste" aria-label="Reihenfolge der Galerieabschnitte"></ol>
-          <button class="galerie-sortierung-speichern" id="galerie-sortierung-speichern" type="button">
+          <button
+            class="galerie-sortierung-speichern"
+            id="galerie-sortierung-speichern"
+            type="button"
+            disabled
+            aria-describedby="galerie-sortierung-status">
             Reihenfolge speichern
           </button>
           <p class="galerie-sortierung-status" id="galerie-sortierung-status" role="status" aria-live="polite"></p>
@@ -122,8 +126,8 @@
 
       Auch die Ereignisgalerien besitzen eigene Nummernkreise:
       - Wietzen:       e1bild01 bis e1bild06
-      - Sommerfest:    e2bild01 bis e2bild05
-      - Pflanzenbörse: e3bild01 bis e3bild09
+      - Sommerfest:    e2bild01, e2bild03, e2bild04
+      - Pflanzenbörse: e3bild01 bis e3bild03 sowie e3bild05 bis e3bild09
       - Dorffest:      e4bild01 bis e4bild07
       Neue fortlaufend nummerierte Ereignisbilder werden ebenfalls automatisch erkannt.
     -->
@@ -165,7 +169,7 @@
 
     <section class="galerie-ereignis galerie-thema" id="galerie-natur">
       <p class="seiten-kategorie">Themengalerie</p>
-      <h2>Natur</h2>
+      <h2>Biologische Vielfalt rund um den Thürne</h2>
       <div
         class="galerie-grid automatische-galerie"
         data-praefix="a4bild"
@@ -184,8 +188,8 @@
 
     <section class="galerie-ereignis" id="galerie-sommerfest-2026">
       <p class="seiten-kategorie">Rückblick</p>
-      <h2>Sommerfest 2026</h2>
-      <div class="galerie-grid automatische-galerie" data-praefix="e2bild" data-von="5" data-bis="1" data-stellen="2"></div>
+      <h2>Italienischer Abend</h2>
+      <div class="galerie-grid automatische-galerie" data-praefix="e2bild" data-von="4" data-bis="1" data-stellen="2"></div>
     </section>
 
     <section class="galerie-ereignis" id="galerie-pflanzenboerse-2026">
@@ -196,7 +200,7 @@
 
     <section class="galerie-ereignis" id="galerie-dorffest-2025">
       <p class="seiten-kategorie">Rückblick</p>
-      <h2>Dorffest 2025</h2>
+      <h2>Aktivitäten</h2>
       <div class="galerie-grid automatische-galerie" data-praefix="e4bild" data-von="7" data-bis="1" data-stellen="2"></div>
     </section>
 
@@ -206,7 +210,7 @@
       <div
         class="galerie-grid automatische-galerie"
         data-praefix="a6bild"
-        data-von="4"
+        data-von="5"
         data-bis="1"
         data-stellen="2"></div>
       <p class="galerie-leer">Noch keine Fotos vorhanden.</p>

@@ -1,6 +1,6 @@
 # Testbericht der Thürne-Webseite
 
-Stand: 31. Juli 2026
+Stand: 26. Juli 2026
 
 ## Status
 
@@ -12,9 +12,8 @@ im Test gespeichert oder übertragen.
 
 | Teststufe | Ergebnis |
 | --- | --- |
-| Lokale Struktur-, UI-, Startfenster-, Galerie-, Versionierungs- und Worker-Tests | 28 bestanden, 0 fehlgeschlagen |
-| Live-Test der öffentlichen Seiten und API | nicht erneut ausgeführt; letzter dokumentierter Stand vom 27.07.2026: 2 bestanden, 0 fehlgeschlagen |
-| Sichtprüfung Wartungsmenü | Desktop 1280 × 720 und Mobil 390 × 844 bestanden |
+| Lokale Struktur-, UI-, Startfenster-, Galerie- und Worker-Tests | 18 bestanden, 0 fehlgeschlagen |
+| Live-Test der öffentlichen Seiten und API | 2 bestanden, 0 fehlgeschlagen |
 
 ## Geprüfte Bereiche
 
@@ -26,11 +25,7 @@ im Test gespeichert oder übertragen.
 | Navigation | mobiles Menü und `aria-expanded` |
 | Datenschutz | Cookie-Einwilligung und lokale Speicherung |
 | Bedienung | Nach-oben-Schaltfläche |
-| Wartungshilfe | Öffnen, Schließen, Reiter, Escape-Taste, Fokusführung und Mobilansicht |
-| Versionierung | Projektversion, Dokumentationsstand und Cache-Kennung konsistent |
 | Startfenster | nächste Veranstaltung vor Beginn; Galeriebild ab Beginn |
-| Startfenster-Schalter | vollständiges Ausschalten ohne Bildabruf oder Speicherung |
-| Startfenster-Bildpool | alle 42 nummerierten Galeriebilder enthalten; keine Doppelungen |
 | Startfenster-Zufall | aufeinanderfolgende Starts zeigen unterschiedliche Bilder |
 | Startfenster-Fehlerfall | Reservebilder und sichtbarer Text bei Bildfehlern |
 | Startfenster-Bedienung | Schließen über Schaltfläche und Hintergrund |
@@ -38,7 +33,6 @@ im Test gespeichert oder übertragen.
 | Kalender | externe Einbettung erst nach Klick; Ein-/Ausblenden |
 | Service | beide Padlets; Flyer öffnen und schließen |
 | Galerie | zentrale Reihenfolge laden, Abschnitte verschieben, Beschriftungen, PIN-Prüfung und Speichern |
-| Galerie-Speicherschutz | nur auf Live-Domains und nach erfolgreichem Laden einer aktiven D1-Reihenfolge |
 | Galeriebilder | bekannter Bestand stimmt mit den vorhandenen nummerierten Dateien überein |
 | Cloudflare Worker | Lesen, Schreiben, Authentifizierung, Datenprüfung, CORS, Pfade und Methoden |
 | Live-System | öffentliche Seiten, Galerie-API und CORS über separaten Live-Test |
@@ -73,14 +67,3 @@ meldet das Ergebnis als grünen oder roten Check.
 - Externe Dienste wie Google Kalender und Padlet werden nur bis zur korrekt
   erzeugten Einbettung geprüft; deren fremde Inhalte liegen außerhalb dieses
   Projekts.
-
-## Sichtprüfung vom 31. Juli 2026
-
-- Desktop: Seitenpanel 430 Pixel breit bei 1280 × 720 Pixel Viewport
-- Mobil: vollbreites Panel bei 390 × 844 Pixel Viewport
-- kein horizontaler Überlauf
-- Orientierung, Verlauf und System umschaltbar
-- Escape-Taste schließt das Panel und setzt den Fokus auf den Auslöser zurück
-- keine Warnungen oder Fehler in der Browserkonsole
-- lokale Vorschau kennzeichnet die produktionsgebundene Worker-Prüfung
-  verständlich als nur auf der veröffentlichten Website ausführbar
