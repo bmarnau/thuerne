@@ -7,7 +7,63 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (!toggleButton || !padletContainer) return;
 
+  const datumAlsIso = (datum) => {
+    const jahr = datum.getFullYear();
+    const monat = String(datum.getMonth() + 1).padStart(2, '0');
+    const tag = String(datum.getDate()).padStart(2, '0');
+    return `${jahr}-${monat}-${tag}`;
+  };
+
+  const naechsterBacktermin = (heute = new Date()) => {
+    const heuteIso = datumAlsIso(heute);
+    const termine = [...document.querySelectorAll('[data-backtermin]')]
+      .map((element) => element.dataset.backtermin)
+      .filter((datum) => /^\d{4}-\d{2}-\d{2}$/.test(datum))
+      .sort();
+
+    const letzterVergangenerTermin = [...termine].reverse().find((datum) => datum < heuteIso);
+    if (letzterVergangenerTermin) {
+      const [jahr, monat, tag] = letzterVergangenerTermin.split('-').map(Number);
+      const wochenende = new Date(jahr, monat - 1, tag, 12);
+      const tageBisSonntag = (7 - wochenende.getDay()) % 7;
+      wochenende.setDate(wochenende.getDate() + tageBisSonntag);
+
+      if (heuteIso <= datumAlsIso(wochenende)) {
+        return letzterVergangenerTermin;
+      }
+    }
+
+    return termine.find((datum) => datum >= heuteIso) || null;
+  };
+
+  const datumDeutsch = (isoDatum) => {
+    const [jahr, monat, tag] = isoDatum.split('-');
+    return `${tag}.${monat}.${jahr}`;
+  };
+
+  let aktuellerBacktermin = null;
   let padletLoaded = false;
+
+  const beschriftungAktualisieren = () => {
+    if (!aktuellerBacktermin) {
+      toggleButton.textContent = 'Brotbacken – derzeit kein neuer Backtermin';
+      toggleButton.disabled = true;
+      return;
+    }
+
+    const aktion = padletLoaded ? 'Padlet ausblenden' : 'Padlet laden';
+    toggleButton.textContent = `Brotbacken am ${datumDeutsch(aktuellerBacktermin)} – ${aktion}`;
+    toggleButton.disabled = false;
+  };
+
+  const backterminAktualisieren = (heute = new Date()) => {
+    aktuellerBacktermin = naechsterBacktermin(heute);
+    beschriftungAktualisieren();
+    return aktuellerBacktermin;
+  };
+
+  window.ServicePadlets = { backterminAktualisieren, naechsterBacktermin };
+  backterminAktualisieren();
 
   toggleButton.addEventListener('click', () => {
 
@@ -25,16 +81,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
       padletContainer.classList.remove("hidden");
 
-      toggleButton.textContent = "Brotbacken im Juli - Padlet ausblenden";
       padletLoaded = true;
+      beschriftungAktualisieren();
 
     } else {
 
       padletContainer.innerHTML = "";
       padletContainer.classList.add("hidden");
 
-      toggleButton.textContent = "Brotbacken im Juli - Padlet laden";
       padletLoaded = false;
+      beschriftungAktualisieren();
 
     }
 

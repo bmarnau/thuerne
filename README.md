@@ -6,7 +6,7 @@ Eine professionelle HTML-Website erstellt mit Dreamweaver.
 
 **Aktuelle Version:** 1.1.0
 
-**Aktueller Arbeitsstand:** Unreleased · Dokumentationsstand 31.07.2026
+**Aktueller Arbeitsstand:** Unreleased · Dokumentationsstand 12.09.2026
 
 ## 📁 Projektstruktur
 

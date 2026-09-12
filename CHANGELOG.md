@@ -7,6 +7,12 @@ und dieses Projekt folgt der [Semantischen Versionierung](https://semver.org/lan
 
 ## [Unreleased]
 
+- Die Beschriftung des Brotback-Padlets wird automatisch aus dem nächsten
+  Backtermin der Serviceseite gebildet, bleibt bis zum Ende der Kalenderwoche
+  beim gerade vergangenen Backtermin und ist beim Ein- und Ausblenden konsistent.
+- Die zentrale Cache-Kennung wurde aktualisiert, damit Browser das geänderte
+  Service-Skript zuverlässig neu laden.
+
 ### Changed
 - Wechselndes Startbild wird auch auf flachen Bildschirmen vollständig und mit
   einem dezenten Rahmen dargestellt

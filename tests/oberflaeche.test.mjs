@@ -19,7 +19,7 @@ test("Navigation, Cookie-Hinweis und Nach-oben-Schaltfläche funktionieren", asy
   assert.ok(document.getElementById("cookie-banner").classList.contains("hidden"));
 
   const filmDesMonats = document.querySelector("video.monatsmedium");
-  assert.equal(filmDesMonats.querySelector("source").getAttribute("src"), "bilder/dachs.mp4");
+  assert.equal(filmDesMonats.querySelector("source").getAttribute("src"), "medien/Blinder Passagier.mp4");
   assert.equal(filmDesMonats.querySelector("source").getAttribute("type"), "video/mp4");
   assert.equal(document.querySelector(".monatsfilm-platzhalter"), null);
 
@@ -51,10 +51,38 @@ test("Service-Padlets und Flyer lassen sich öffnen und schließen", async () =>
   const dom = await seiteLaden("docs/service.html", ["js/service.js"]);
   const { document, KeyboardEvent } = dom.window;
 
+  dom.window.ServicePadlets.backterminAktualisieren(new Date(2026, 8, 12));
+  assert.equal(
+    document.getElementById("padlet-toggle").textContent,
+    "Brotbacken am 12.09.2026 – Padlet laden"
+  );
+
   document.getElementById("padlet-toggle").click();
   assert.ok(document.querySelector("#padlet-container iframe"));
+  assert.equal(
+    document.getElementById("padlet-toggle").textContent,
+    "Brotbacken am 12.09.2026 – Padlet ausblenden"
+  );
   document.getElementById("padlet-toggle").click();
   assert.equal(document.querySelector("#padlet-container iframe"), null);
+
+  dom.window.ServicePadlets.backterminAktualisieren(new Date(2026, 8, 13));
+  assert.equal(
+    document.getElementById("padlet-toggle").textContent,
+    "Brotbacken am 12.09.2026 – Padlet laden"
+  );
+
+  dom.window.ServicePadlets.backterminAktualisieren(new Date(2026, 9, 1));
+  assert.equal(
+    document.getElementById("padlet-toggle").textContent,
+    "Brotbacken am 17.10.2026 – Padlet laden"
+  );
+
+  dom.window.ServicePadlets.backterminAktualisieren(new Date(2026, 8, 14));
+  assert.equal(
+    document.getElementById("padlet-toggle").textContent,
+    "Brotbacken am 17.10.2026 – Padlet laden"
+  );
 
   document.getElementById("padlet-toggle2").click();
   assert.ok(document.querySelector("#padlet-container2 iframe"));
