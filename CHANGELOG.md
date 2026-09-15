@@ -7,6 +7,9 @@ und dieses Projekt folgt der [Semantischen Versionierung](https://semver.org/lan
 
 ## [Unreleased]
 
+- Die Herbstwanderung am 27. September ersetzt den Italienischen Abend auf der
+  Startseite und ist dort sowie auf der Serviceseite direkt mit dem Flyer verlinkt.
+- Der vergangene September-Backtermin wurde von der Serviceseite entfernt.
 - Die Beschriftung des Brotback-Padlets wird automatisch aus dem nächsten
   Backtermin der Serviceseite gebildet, bleibt bis zum Ende der Kalenderwoche
   beim gerade vergangenen Backtermin und ist beim Ein- und Ausblenden konsistent.

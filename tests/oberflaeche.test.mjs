@@ -47,24 +47,28 @@ test("Kalender wird erst nach Zustimmung eingebettet und wieder ausgeblendet", a
   dom.window.close();
 });
 
-test("Service-Padlets und Flyer lassen sich öffnen und schließen", async () => {
+test("Service-Padlets lassen sich öffnen und schließen", async () => {
   const dom = await seiteLaden("docs/service.html", ["js/service.js"]);
-  const { document, KeyboardEvent } = dom.window;
+  const { document } = dom.window;
 
   dom.window.ServicePadlets.backterminAktualisieren(new Date(2026, 8, 12));
   assert.equal(
     document.getElementById("padlet-toggle").textContent,
-    "Brotbacken am 12.09.2026 – Padlet laden"
+    "Brotbacken am 17.10.2026 – Padlet laden"
   );
 
   document.getElementById("padlet-toggle").click();
   assert.ok(document.querySelector("#padlet-container iframe"));
   assert.equal(
     document.getElementById("padlet-toggle").textContent,
-    "Brotbacken am 12.09.2026 – Padlet ausblenden"
+    "Brotbacken am 17.10.2026 – Padlet ausblenden"
   );
   document.getElementById("padlet-toggle").click();
   assert.equal(document.querySelector("#padlet-container iframe"), null);
+
+  const vergangenerTesttermin = document.createElement("li");
+  vergangenerTesttermin.dataset.backtermin = "2026-09-12";
+  document.querySelector(".news-list").appendChild(vergangenerTesttermin);
 
   dom.window.ServicePadlets.backterminAktualisieren(new Date(2026, 8, 13));
   assert.equal(
@@ -86,12 +90,31 @@ test("Service-Padlets und Flyer lassen sich öffnen und schließen", async () =>
 
   document.getElementById("padlet-toggle2").click();
   assert.ok(document.querySelector("#padlet-container2 iframe"));
-
-  document.getElementById("flyer").click();
-  assert.equal(document.getElementById("flyerPopup").style.display, "flex");
-  document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape" }));
-  assert.equal(document.getElementById("flyerPopup").style.display, "none");
   dom.window.close();
+});
+
+test("Herbstwanderung ist auf Start- und Serviceseite mit dem Flyer verlinkt", async () => {
+  const startseite = new JSDOM(await dateiLesen("index.html"));
+  const serviceseite = new JSDOM(await dateiLesen("docs/service.html"));
+  const startLink = startseite.window.document.querySelector(
+    'a[href="docs/herbstwanderung-september-2026.pdf"]'
+  );
+  const serviceLink = serviceseite.window.document.querySelector(
+    'a[href="herbstwanderung-september-2026.pdf"]'
+  );
+
+  assert.ok(startLink);
+  assert.equal(startLink.getAttribute("target"), "_blank");
+  assert.match(startLink.getAttribute("rel"), /noopener/);
+  assert.ok(serviceLink);
+  assert.equal(serviceLink.getAttribute("target"), "_blank");
+  assert.equal(
+    serviceseite.window.document.querySelector('[data-backtermin="2026-09-12"]'),
+    null
+  );
+
+  startseite.window.close();
+  serviceseite.window.close();
 });
 
 test("Galerie lädt, sortiert, zeigt Beschriftungen und schützt das Speichern", async () => {
