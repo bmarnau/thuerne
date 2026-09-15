@@ -5,10 +5,10 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Service – Dörfergemeinschaft am Thürne e. V.</title>
-  <link rel="stylesheet" href="../css/style.css" />
-  <link rel="stylesheet" href="../css/cookie.css" />
-  <script defer src="../js/script.js"></script>	
-  <script defer src="../js/service.js"></script>
+  <link rel="stylesheet" href="../css/style.css?v=20260915">
+  <link rel="stylesheet" href="../css/cookie.css?v=20260915">
+  <script defer src="../js/script.js?v=20260915"></script>
+  <script defer src="../js/service.js?v=20260915"></script>
 	
 </head>
 <body>
@@ -30,37 +30,48 @@
 	</header>
   <main class="wrap">
     
- <section class="section termine-bereich" id="italienischer-abend">
+ <section class="section termine-bereich" id="backtermine">
   <div class="termine-container">
 
     <!-- Linke Seite: Termine -->
     <div class="termine-liste">
-      <h2 class="section-title">Unsere Backes Termine</h2>
+      <h2 class="section-title">Unsere Backes-Termine</h2>
       <ul class="news-list">
-		<li class="news-item"><strong>01.08.2026, Samstag:</strong> Ital. Abend</li>
-		<li class="news-item"><strong>12.09.2026, Samstag:</strong> Backtag</li>
-		<li class="news-item"><strong>17.10.2026, Samstag:</strong> Backtag</li>
-		<li class="news-item"><strong>28.11.2026, Samstag:</strong> Adventsmarkt</li>
+		<li class="news-item" data-backtermin="2026-10-17"><strong><time datetime="2026-10-17">17.10.2026, Samstag</time>:</strong> Backtag</li>
+		<li class="news-item"><strong><time datetime="2026-11-28">28.11.2026, Samstag</time>:</strong> Adventsmarkt</li>
       </ul>
     </div>
-
-    <div class="termine-bild">
-
-  <figure class="bild-box">
-	  
-	<img id="flyer"
-     src="../bilder/italienischer-abend-flyer.jpg"
-     alt="Italienischer Abend"
-     class="bild-rechts">  
-   
-    <figcaption class="bild-text">
-      Quelle: Thuerne
-    </figcaption>
-  </figure>
-
-</div>
-
   </div>
+</section>
+
+<section class="section aktuelles" id="herbstwanderung" aria-labelledby="herbstwanderung-ueberschrift">
+  <div class="aktuelles-kopf">
+    <div>
+      <p class="aktuelles-kategorie">Neue Veranstaltung</p>
+      <h2 id="herbstwanderung-ueberschrift">Herbstwanderung 2026</h2>
+    </div>
+  </div>
+
+  <article class="aktuelles-karte aktuell-wichtig">
+    <div class="aktuelles-meta">
+      <p class="aktuelles-typ">Wanderung</p>
+      <time datetime="2026-09-27">Sonntag, 27. September 2026</time>
+    </div>
+
+    <h3>Gemeinsam unterwegs mit der DJK Houverath</h3>
+    <p>
+      Treffpunkt ist um 13 Uhr in der Wendelinusstraße 15 in Scheuren.
+      Die maximal 6 km lange Strecke führt über überwiegend gut ausgebaute,
+      flache Waldwege. Anschließend klingt die Wanderung bei Kaffee und Kuchen aus.
+    </p>
+    <p>
+      Zur Organisation der Pause wird möglichst um Anmeldung unter Telefon
+      958 2443 oder per E-Mail an <a href="mailto:info@thuerne.de">info@thuerne.de</a> gebeten.
+    </p>
+    <a href="herbstwanderung-september-2026.pdf" target="_blank" rel="noopener noreferrer">
+      Flyer in einem neuen Tab ansehen →
+    </a>
+  </article>
 </section>
 <section class="section padlet-board" id="padlet">
   <h2 class="section-title">Padlet-Board</h2>
@@ -79,7 +90,7 @@
 
       <div class="padlet-aktionen">
         <button class="padlet-button" id="padlet-toggle" type="button">
-          Brotbacken im Juli – Padlet laden
+          Brotbacken – Padlet laden
         </button>
 
         <div class="padlet-container hidden" id="padlet-container"></div>
@@ -164,15 +175,6 @@
 
     <p class="service-zurueck"><a href="../index.html">← Zur Startseite</a></p>
   </main>	  
-  
-	<div id="flyerPopup" class="flyer-popup">
-    <button id="closeFlyer" type="button" aria-label="Flyer schließen">&times;</button>
-
-    <img id="flyerLarge"
-         src="../bilder/italienischer-abend-flyer.jpg"
-         alt="Flyer">
-	</div>
-	  
   <footer>
     &copy; Dörfergemeinschaft am Thürne e. V. |
     <a href="../docs/impressum.html">Impressum</a> |

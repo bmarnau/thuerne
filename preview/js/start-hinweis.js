@@ -1,17 +1,5 @@
 /*
   ================================================================
-  REDAKTION: STARTBILD EIN- ODER AUSSCHALTEN
-  ================================================================
-
-  true  = Das Startfenster wird beim Öffnen der Startseite angezeigt.
-  false = Das Startfenster bleibt vollständig ausgeschaltet.
-
-  Nur das Wort true oder false ändern. Anführungszeichen sind nicht nötig.
-*/
-const STARTBILD_AKTIV = true;
-
-/*
-  ================================================================
   REDAKTION: AKTUELLE VERANSTALTUNGEN
   ================================================================
 
@@ -29,7 +17,6 @@ const STARTBILD_AKTIV = true;
   - Zwischen zwei Veranstaltungsblöcken steht ein Komma.
   - Keine abgelaufene Veranstaltung muss von Hand gelöscht werden.
 */
-
 const START_VERANSTALTUNGEN = [
   {
     titel: "Italienischer Abend 2026",
@@ -43,109 +30,37 @@ const START_VERANSTALTUNGEN = [
 ];
 
 /*
-const START_VERANSTALTUNGEN = [];
-
-
   ================================================================
   REDAKTION: ERSATZBILDER OHNE AKTUELLE VERANSTALTUNG
   ================================================================
 
-  Wenn keine Veranstaltung mehr aktuell ist, wird eines der unten aufgeführten
-  Galeriebilder gezeigt. Der Pool enthält den vollständigen nummerierten
-  Bildbestand aus docs/galerie.html.
+  Wenn keine Veranstaltung mehr aktuell ist, wird eines dieser Bilder gezeigt.
+  Für ein weiteres Bild einen vorhandenen Block kopieren und Pfad sowie
+  Bildbeschreibung anpassen. Nur tatsächlich vorhandene Webbilder verwenden.
 
   Der Browser merkt sich das zuletzt gezeigte Bild. Beim nächsten Öffnen der
   Startseite wird nach Möglichkeit ein anderes Bild ausgewählt.
-
-  Für neue Galeriebilder:
-  1. Das Bild wie gewohnt im Ordner bilder/ und in der Galerie ergänzen.
-  2. Den exakten Dateinamen zusätzlich in der passenden Gruppe unten eintragen.
-  3. Mit npm test prüfen. Der Test meldet fehlende oder überzählige Einträge.
-
-  Nicht in diesen Pool gehören Flyer, PDF-Dateien, Logos oder Servicebilder.
 */
-const START_GALERIEGRUPPEN = [
+const START_GALERIEBILDER = [
   {
-    bildAlt: "Galeriebild aus dem Bereich Astronomie am Thürne",
-    dateien: [
-      "a2bild01.jpg",
-      "a2bild02.jpg",
-      "a2bild03.jpg",
-      "a2bild04.jpg",
-      "a2bild05.jpg",
-      "a2bild06.jpg"
-    ]
+    bild: "bilder/a4bild01.jpg",
+    bildAlt: "Naturaufnahme aus der Dörfergemeinschaft am Thürne"
   },
   {
-    bildAlt: "Galeriebild aus dem Bereich Wettbewerbe am Thürne",
-    dateien: [
-      "a3bild01.jpeg"
-    ]
+    bild: "bilder/e1bild01.jpg",
+    bildAlt: "Gemeinschaftliches Erlebnis am Thürne"
   },
   {
-    bildAlt: "Naturaufnahme aus der Dörfergemeinschaft am Thürne",
-    dateien: [
-      "a4bild01.jpg",
-      "a4bild02.jpg",
-      "a4bild03.jpg",
-      "a4bild04.jpg",
-      "a4bild08.jpg",
-      "a4bild09.jpg"
-    ]
+    bild: "bilder/e2bild03.jpeg",
+    bildAlt: "Eindruck von einer Veranstaltung der Dörfergemeinschaft"
   },
   {
-    bildAlt: "Galeriebild von den Wanderwegen rund um den Thürne",
-    dateien: [
-      "a6bild01.jpg",
-      "a6bild02.jpg",
-      "a6bild03.jpg",
-      "a6bild04.jpg",
-      "a6bild05.jpg"
-    ]
+    bild: "bilder/e3bild08.jpg",
+    bildAlt: "Impression aus den Dörfern rund um den Thürne"
   },
   {
-    bildAlt: "Galeriebild vom Besuch der Backes-Freunde aus Wietzen",
-    dateien: [
-      "e1bild01.jpg",
-      "e1bild02.png",
-      "e1bild03.png",
-      "e1bild04.png",
-      "e1bild05.png",
-      "e1bild06.jpg"
-    ]
-  },
-  {
-    bildAlt: "Galeriebild vom Sommerfest 2026",
-    dateien: [
-      "e2bild01.jpeg",
-      "e2bild03.jpeg",
-      "e2bild04.jpeg"
-    ]
-  },
-  {
-    bildAlt: "Galeriebild von der Pflanzenbörse 2026",
-    dateien: [
-      "e3bild01.jpg",
-      "e3bild02.jpeg",
-      "e3bild03.jpeg",
-      "e3bild05.jpeg",
-      "e3bild06.jpeg",
-      "e3bild07.jpeg",
-      "e3bild08.jpg",
-      "e3bild09.jpg"
-    ]
-  },
-  {
-    bildAlt: "Galeriebild vom Dorffest 2025",
-    dateien: [
-      "e4bild01.jpeg",
-      "e4bild02.jpeg",
-      "e4bild03.jpeg",
-      "e4bild04.jpeg",
-      "e4bild05.jpeg",
-      "e4bild06.jpeg",
-      "e4bild07.jpeg"
-    ]
+    bild: "bilder/e4bild07.jpeg",
+    bildAlt: "Dorfleben in der Dörfergemeinschaft am Thürne"
   }
 ];
 
@@ -156,12 +71,6 @@ const START_GALERIEGRUPPEN = [
 */
 (() => {
   const SPEICHER_SCHLUESSEL = "startHinweisLetztesGaleriebild";
-  const START_GALERIEBILDER = START_GALERIEGRUPPEN.flatMap(({ bildAlt, dateien }) =>
-    dateien.map((datei) => ({
-      bild: `bilder/${datei}`,
-      bildAlt
-    }))
-  );
 
   function naechsteVeranstaltung(zeitpunkt) {
     return START_VERANSTALTUNGEN
@@ -238,17 +147,6 @@ const START_GALERIEGRUPPEN = [
     const dialog = document.getElementById("start-hinweis");
     if (!dialog || dialog.dataset.initialisiert === "true") return null;
 
-    /*
-      Der Redaktionsschalter wird vor allen weiteren Arbeiten geprüft.
-      So werden bei ausgeschaltetem Startbild weder Ereignisse registriert
-      noch Bilder geladen oder Browserdaten gespeichert.
-    */
-    if (!STARTBILD_AKTIV) {
-      dialog.removeAttribute("open");
-      dialog.dataset.initialisiert = "deaktiviert";
-      return { typ: "deaktiviert", dialog };
-    }
-
     const elemente = {
       bild: document.getElementById("start-hinweis-bild"),
       kategorie: document.getElementById("start-hinweis-kategorie"),
@@ -305,12 +203,6 @@ const START_GALERIEGRUPPEN = [
   }
 
   // Die öffentliche Test-Schnittstelle hält Datum und Zufall reproduzierbar.
-  window.StartHinweis = {
-    initialisieren,
-    naechsteVeranstaltung,
-    // Diese Angaben werden vom automatischen Bestandsabgleich verwendet.
-    startbildAktiv: STARTBILD_AKTIV,
-    galeriebilder: START_GALERIEBILDER.map(({ bild }) => bild)
-  };
+  window.StartHinweis = { initialisieren, naechsteVeranstaltung };
   document.addEventListener("DOMContentLoaded", () => initialisieren());
 })();
