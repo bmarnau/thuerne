@@ -62,6 +62,35 @@ test("alle lokalen Links, Bilder, Stylesheets und Skripte verweisen auf vorhande
   assert.deepEqual(fehlend, []);
 });
 
+// GitHub Pages veröffentlicht das ganze Repository; Pflege- und Entwicklungsdateien
+// werden über _config.yml ausgeschlossen, die veraltete Vorschau gibt es nicht mehr.
+const nichtVeroeffentlicht = [
+  "AGENTS.md", "CHANGELOG.md", "MONATSCHECK.md", "README.md", "TESTBERICHT.md",
+  "UPLOAD-WEBSERVER.md", "codex-vorschrift-neuer-abschnitt.md", "galeriepflege.md",
+  "cloudflare", "scripts", "tests", "package.json", "package-lock.json"
+];
+
+test("Pflegedateien werden nicht auf der Website veröffentlicht", async () => {
+  const konfiguration = await dateiLesen("_config.yml");
+  const ausgeschlossen = [...konfiguration.matchAll(/^\s+-\s+"?([^"\n]+?)"?\s*$/gm)].map((t) => t[1]);
+
+  assert.deepEqual(nichtVeroeffentlicht.filter((name) => !ausgeschlossen.includes(name)), []);
+  await assert.rejects(access(new URL("preview/", projektWurzel)));
+  await assert.rejects(access(new URL("preview.zip", projektWurzel)));
+});
+
+test("Wartungshilfe verlinkt nicht veröffentlichte Pflegedokumente auf GitHub", async () => {
+  const dom = new JSDOM(await dateiLesen("index.html"));
+  const links = [...dom.window.document.querySelectorAll("#wartungsmenue a[href]")].map((a) => a.getAttribute("href"));
+  const lokal = links.filter((href) => nichtVeroeffentlicht.some((name) => href === name || href.startsWith(`${name}/`)));
+
+  assert.deepEqual(lokal, []);
+  for (const datei of ["galeriepflege.md", "cloudflare/README.md", "CHANGELOG.md"]) {
+    assert.ok(links.includes(`https://github.com/bmarnau/thuerne/blob/main/${datei}`), datei);
+  }
+  dom.window.close();
+});
+
 test("alle klassischen JavaScript-Dateien sind syntaktisch gültig", async () => {
   const dateien = (await readdir(new URL("js/", projektWurzel)))
     .filter((datei) => extname(datei) === ".js");

@@ -7,6 +7,11 @@ und dieses Projekt folgt der [Semantischen Versionierung](https://semver.org/lan
 
 ## [Unreleased]
 
+- Die vergangene Herbstwanderung (27. September) wurde von Start- und Serviceseite
+  entfernt; der Flyer bleibt unter seiner bisherigen Adresse erreichbar.
+- Die veraltete Vorschau (`preview/`, `preview.zip`) wurde entfernt.
+- `_config.yml` schließt Pflege- und Entwicklungsdateien von GitHub Pages aus; die
+  Wartungshilfe verlinkt Galeriepflege, Cloudflare-Betrieb und Changelog auf GitHub.
 - Die Herbstwanderung am 27. September ersetzt den Italienischen Abend auf der
   Startseite und ist dort sowie auf der Serviceseite direkt mit dem Flyer verlinkt.
 - Der vergangene September-Backtermin wurde von der Serviceseite entfernt.

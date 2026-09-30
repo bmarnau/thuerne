@@ -46,4 +46,4 @@ bilder/huhn.jpg
 ```
 
 Nicht für den Webserver benötigt werden `tests/`, `package.json`,
-`CHANGELOG.md`, `UPLOAD-WEBSERVER.md`, `licenses/` und der Ordner `preview/`.
+`CHANGELOG.md`, `UPLOAD-WEBSERVER.md` und `licenses/`.

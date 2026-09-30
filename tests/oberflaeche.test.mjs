@@ -93,21 +93,13 @@ test("Service-Padlets lassen sich öffnen und schließen", async () => {
   dom.window.close();
 });
 
-test("Herbstwanderung ist auf Start- und Serviceseite mit dem Flyer verlinkt", async () => {
+test("vergangene Herbstwanderung ist von Start- und Serviceseite entfernt", async () => {
   const startseite = new JSDOM(await dateiLesen("index.html"));
   const serviceseite = new JSDOM(await dateiLesen("docs/service.html"));
-  const startLink = startseite.window.document.querySelector(
-    'a[href="docs/herbstwanderung-september-2026.pdf"]'
-  );
-  const serviceLink = serviceseite.window.document.querySelector(
-    'a[href="herbstwanderung-september-2026.pdf"]'
-  );
 
-  assert.ok(startLink);
-  assert.equal(startLink.getAttribute("target"), "_blank");
-  assert.match(startLink.getAttribute("rel"), /noopener/);
-  assert.ok(serviceLink);
-  assert.equal(serviceLink.getAttribute("target"), "_blank");
+  assert.equal(startseite.window.document.querySelector('a[href$="herbstwanderung-september-2026.pdf"]'), null);
+  assert.equal(serviceseite.window.document.getElementById("herbstwanderung"), null);
+  assert.equal(serviceseite.window.document.querySelector('a[href$="herbstwanderung-september-2026.pdf"]'), null);
   assert.equal(
     serviceseite.window.document.querySelector('[data-backtermin="2026-09-12"]'),
     null

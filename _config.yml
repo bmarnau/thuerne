@@ -1,0 +1,17 @@
+# GitHub Pages (Jekyll) veröffentlicht sonst das ganze Repository.
+# Pflege- und Entwicklungsdateien bleiben im Repository, erscheinen aber nicht auf der Website.
+exclude:
+  - "AGENTS.md"
+  - "CHANGELOG.md"
+  - "MONATSCHECK.md"
+  - "README.md"
+  - "TESTBERICHT.md"
+  - "UPLOAD-WEBSERVER.md"
+  - "codex-vorschrift-neuer-abschnitt.md"
+  - "galeriepflege.md"
+  - "cloudflare"
+  - "scripts"
+  - "tests"
+  - "node_modules"
+  - "package.json"
+  - "package-lock.json"
