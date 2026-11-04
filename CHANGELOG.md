@@ -7,6 +7,10 @@ und dieses Projekt folgt der [Semantischen Versionierung](https://semver.org/lan
 
 ## [Unreleased]
 
+- Cache-Kennung auf `20261104` erhöht, damit Browser das geänderte
+  `js/start-hinweis.js` (Startbild-Gruppe Herbstwanderung) neu laden.
+- `UPLOAD-WEBSERVER.md` mit aktueller Dateiliste, vollständiger Ordnerübersicht
+  (einschließlich `js/` und `medien/`) und Liste nicht hochzuladender Dateien.
 - `npm run test:live` läuft über `scripts/live-test.mjs` jetzt auch unter Windows.
 - `CLAUDE.md` um Arbeitsweise (Feature-Branch, Pull Request), Veröffentlichung und
   Hilfsbefehle ergänzt und in `_config.yml` von GitHub Pages ausgeschlossen.

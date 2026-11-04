@@ -9,7 +9,7 @@ Ordnerstruktur hochladen; bereits vorhandene Dateien werden überschrieben.
 
 Geändert seit dem letzten Stand (`f7f930c`): Bild des Monats November,
 Herbstwanderung als Rückblick mit Galerieabschnitt und neue Cache-Kennung
-(`?v=20261006`) auf allen Unterseiten.
+(`?v=20261104`) auf allen Unterseiten.
 
 ```text
 index.html
