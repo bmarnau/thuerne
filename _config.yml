@@ -3,6 +3,7 @@
 exclude:
   - "AGENTS.md"
   - "CHANGELOG.md"
+  - "CLAUDE.md"
   - "MONATSCHECK.md"
   - "README.md"
   - "TESTBERICHT.md"

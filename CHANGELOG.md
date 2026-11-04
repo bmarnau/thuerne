@@ -7,8 +7,15 @@ und dieses Projekt folgt der [Semantischen Versionierung](https://semver.org/lan
 
 ## [Unreleased]
 
-- Die vergangene Herbstwanderung (27. September) wurde von Start- und Serviceseite
-  entfernt; der Flyer bleibt unter seiner bisherigen Adresse erreichbar.
+- `npm run test:live` läuft über `scripts/live-test.mjs` jetzt auch unter Windows.
+- `CLAUDE.md` um Arbeitsweise (Feature-Branch, Pull Request), Veröffentlichung und
+  Hilfsbefehle ergänzt und in `_config.yml` von GitHub Pages ausgeschlossen.
+- `README.md`: Git-Workflow auf Feature-Branch und Pull Request umgestellt, Abschnitt
+  zur Weiterentwicklung mit Claude Code ergänzt.
+- `.gitignore` schließt lokale Claude-Code-Einstellungen, `.wrangler/` und `.env.*` aus.
+- Die Herbstwanderung (27. September) erscheint auf Start- und Serviceseite als
+  Rückblick mit Foto und verlinkt den Galerieabschnitt „Herbstwanderung 2026“; die
+  Einladung wurde ersetzt.
 - Die veraltete Vorschau (`preview/`, `preview.zip`) wurde entfernt.
 - `_config.yml` schließt Pflege- und Entwicklungsdateien von GitHub Pages aus; die
   Wartungshilfe verlinkt Galeriepflege, Cloudflare-Betrieb und Changelog auf GitHub.

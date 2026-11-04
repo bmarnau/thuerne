@@ -93,14 +93,20 @@ git clone https://github.com/bmarnau/thuerne.git
 cd thuerne
 ```
 
-2. Local mit Dreamweaver öffnen und bearbeiten
-
-3. Änderungen commiten und pushen:
+2. Änderungen auf einem eigenen Branch vornehmen (mit einem Editor oder mit
+   Claude Code, siehe unten):
 ```bash
-git add .
-git commit -m "Beschreibung der Änderungen"
-git push origin main
+git checkout -b feature/beschreibung
 ```
+
+3. Vor dem Commit prüfen, dann committen und den Branch pushen:
+```bash
+npm test
+git add <geänderte Dateien>
+git commit -m "feat: kurze Beschreibung"
+git push -u origin feature/beschreibung
+```
+   Anschließend einen Pull Request gegen `main` anlegen.
 
 ## ✅ Funktionstest
 
@@ -143,6 +149,20 @@ Changelog und – falls sich Architektur, Funktionen oder Version ändern – di
 kompakte Wartungshilfe gemeinsam aktualisiert. Commit-Nummern werden erst
 eingetragen, wenn sie tatsächlich vorhanden sind.
 
+## 🤖 Weiterentwicklung mit Claude Code
+
+Die Website lässt sich gemeinsam mit Claude Code pflegen und weiterentwickeln.
+
+- Arbeitsordner: `C:\dev\thuerne` (außerhalb von OneDrive). Gestartet wird unter
+  Windows über das PowerShell-Skript `start-claude.ps1` (liegt außerhalb des
+  Repositorys).
+- `CLAUDE.md` enthält die Projektregeln für Claude, `AGENTS.md` die gemeinsamen
+  Anweisungen für ChatGPT/Codex.
+- Hilfsbefehle in `.claude/commands/`: `/pruefen`, `/veranstaltung`, `/galeriebild`,
+  `/monatscheck`, `/pr`.
+- Claude arbeitet auf Feature-Branches und pusht oder führt nichts ohne Freigabe
+  zusammen.
+
 ## 🔄 Einfacher Dateiaustausch mit GitHub Desktop
 
 GitHub ist der verbindliche Projektstand. Auf Windows:
@@ -157,19 +177,17 @@ Branch und die Commit-Nummer in GitHub Desktop.
 
 ## 📝 Git-Workflow
 
-### Neue Features / Bugfixes
-```bash
-# Neuen Branch erstellen
-git checkout -b feature/beschreibung
+`main` ist der veröffentlichte Stand. Änderungen laufen immer über einen Branch
+und einen Pull Request:
 
-# Änderungen commiten
-git add .
-git commit -m "Feature: kurze Beschreibung"
-
-# Zu main mergen
-git checkout main
-git merge feature/beschreibung
-```
+1. Branch anlegen: `git checkout -b feature/beschreibung` (bzw. `fix/beschreibung`).
+2. Änderungen in kleinen, thematisch getrennten Commits festhalten
+   (`feat:`, `fix:`, `docs:`, `chore:`).
+3. `npm test` und `npm run test:month` lokal ausführen.
+4. Branch pushen und einen Pull Request gegen `main` öffnen.
+5. Nach grünen GitHub-Prüfungen zusammenführen.
+6. Für Variomedia nur die im Commit genannten Dateien hochladen
+   (siehe `UPLOAD-WEBSERVER.md`).
 
 ## 📋 Wichtige Dateien
 
