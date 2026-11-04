@@ -146,6 +146,15 @@ const START_GALERIEGRUPPEN = [
       "e4bild06.jpeg",
       "e4bild07.jpeg"
     ]
+  },
+  {
+    bildAlt: "Galeriebild von der Herbstwanderung 2026",
+    dateien: [
+      "e5bild01.jpg",
+      "e5bild02.jpg",
+      "e5bild03.jpg",
+      "e5bild04.jpg"
+    ]
   }
 ];
 

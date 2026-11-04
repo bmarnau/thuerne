@@ -10,18 +10,18 @@
     Änderung anpassen. So lädt der Browser die neue Fassung statt einer alten
     Datei aus seinem Zwischenspeicher.
   -->
-  <link rel="stylesheet" href="css/style.css?v=20260915">
-  <link rel="stylesheet" href="css/cookie.css?v=20260915">
-  <link rel="stylesheet" href="css/wartungsmenue.css?v=20260915">
-  <script defer src="js/script.js?v=20260915"></script>
-  <script defer src="js/wartungsmenue.js?v=20260915"></script>
+  <link rel="stylesheet" href="css/style.css?v=20261006">
+  <link rel="stylesheet" href="css/cookie.css?v=20261006">
+  <link rel="stylesheet" href="css/wartungsmenue.css?v=20261006">
+  <script defer src="js/script.js?v=20261006"></script>
+  <script defer src="js/wartungsmenue.js?v=20261006"></script>
   <!-- Veranstaltungen und Ersatzbilder werden redaktionell in dieser Datei gepflegt. -->
   <!--
     REDAKTIONSHINWEIS:
     Nach einer Änderung an js/start-hinweis.js den Wert hinter ?v= erhöhen.
     Dadurch laden Browser den neuen Startbild-Pool und Schalter zuverlässig.
   -->
-  <script defer src="js/start-hinweis.js?v=20260915"></script>
+  <script defer src="js/start-hinweis.js?v=20261006"></script>
 </head>
 <body>
   <header>
@@ -175,6 +175,27 @@
         - Die Klasse „aktuell-wichtig“ hebt eine Veranstaltung dezent hervor.
       -->
       <div class="aktuelles-grid">
+
+        <!-- MELDUNG START: Herbstwanderung -->
+        <article class="aktuelles-karte aktuell-wichtig">
+          <div class="aktuelles-meta">
+            <p class="aktuelles-typ">Rückblick</p>
+            <time datetime="2026-09-27">27. September 2026</time>
+          </div>
+
+          <h3>Großartiges Wetter, beste Stimmung</h3>
+
+          <p>
+            Bei bestem Wanderwetter war unsere Gruppe gemeinsam auf den Waldwegen rund
+            um Scheuren unterwegs. Gute Gespräche und der gesellige Abschluss machten
+            die Herbstwanderung zu einem rundum gelungenen Tag.
+          </p>
+
+          <a href="docs/galerie.html#galerie-herbstwanderung-2026">
+            Fotos der Herbstwanderung ansehen →
+          </a>
+        </article>
+        <!-- MELDUNG ENDE: Herbstwanderung -->
 
         <!-- MELDUNG START: Besuch aus Wietzen -->
         <article class="aktuelles-karte">
@@ -553,7 +574,7 @@
           </li>
           <li>
             <span class="wartungsstatus-punkt wartungsstatus-gruen" aria-label="Erfolgreich"></span>
-            <div><strong>Versionierung</strong><small>Projektversion und Cache-Kennung synchron · 31.07.2026</small></div>
+            <div><strong>Versionierung</strong><small>Projektversion und Cache-Kennung synchron · 06.10.2026</small></div>
           </li>
           <li id="wartungsstatus-worker">
             <span class="wartungsstatus-punkt wartungsstatus-grau" aria-label="Noch nicht geprüft"></span>
@@ -601,7 +622,7 @@
         <dl class="wartungsmenue-system">
           <div><dt>Version</dt><dd>1.1.0</dd></div>
           <div><dt>Arbeitsstand</dt><dd>Unreleased</dd></div>
-          <div><dt>Stand</dt><dd>31.07.2026</dd></div>
+          <div><dt>Stand</dt><dd>06.10.2026</dd></div>
           <div><dt>Frontend</dt><dd>HTML, CSS, JavaScript</dd></div>
           <div><dt>Tests</dt><dd>Node-Testlauf mit jsdom</dd></div>
           <div><dt>Automatik</dt><dd><a href="https://github.com/bmarnau/thuerne/actions">GitHub Actions</a></dd></div>

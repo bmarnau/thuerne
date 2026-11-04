@@ -60,7 +60,7 @@ test("Startbild-Pool enthält den vollständigen nummerierten Galeriebestand", a
   // Der exakte Mengenvergleich erkennt neue, fehlende und doppelte Einträge.
   assert.deepEqual(startbildPool, vorhandeneGaleriebilder);
   assert.equal(new Set(startbildPool).size, startbildPool.length);
-  assert.equal(startbildPool.length, 42);
+  assert.equal(startbildPool.length, 46);
   dom.window.close();
 });
 

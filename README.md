@@ -6,7 +6,7 @@ Eine professionelle HTML-Website erstellt mit Dreamweaver.
 
 **Aktuelle Version:** 1.1.0
 
-**Aktueller Arbeitsstand:** Unreleased · Dokumentationsstand 15.09.2026
+**Aktueller Arbeitsstand:** Unreleased · Dokumentationsstand 06.10.2026
 
 ## 📁 Projektstruktur
 
@@ -72,7 +72,7 @@ durch ein Galeriebild ersetzt.
 ### Vollständigen Galeriebild-Pool pflegen
 
 Die Ersatzbilder stehen nach Bereichen geordnet in `START_GALERIEGRUPPEN`.
-Der Pool enthält alle aktuell 42 nummerierten Bilder der Galerie. Wird ein neues
+Der Pool enthält alle aktuell 46 nummerierten Bilder der Galerie. Wird ein neues
 Galeriebild ergänzt, muss sein exakter Dateiname zusätzlich in der passenden
 Gruppe eingetragen werden. `npm test` vergleicht beide Bestände und meldet jede
 Abweichung. Der Browser vermeidet beim nächsten Seitenstart das zuletzt gezeigte

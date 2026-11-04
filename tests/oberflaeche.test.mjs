@@ -93,13 +93,29 @@ test("Service-Padlets lassen sich öffnen und schließen", async () => {
   dom.window.close();
 });
 
-test("vergangene Herbstwanderung ist von Start- und Serviceseite entfernt", async () => {
+test("Herbstwanderung ist auf Start- und Serviceseite als Rückblick mit Fotos verlinkt", async () => {
   const startseite = new JSDOM(await dateiLesen("index.html"));
   const serviceseite = new JSDOM(await dateiLesen("docs/service.html"));
+  const startLink = startseite.window.document.querySelector(
+    'a[href="docs/galerie.html#galerie-herbstwanderung-2026"]'
+  );
+  const serviceLink = serviceseite.window.document.querySelector(
+    'a[href="galerie.html#galerie-herbstwanderung-2026"]'
+  );
 
-  assert.equal(startseite.window.document.querySelector('a[href$="herbstwanderung-september-2026.pdf"]'), null);
-  assert.equal(serviceseite.window.document.getElementById("herbstwanderung"), null);
-  assert.equal(serviceseite.window.document.querySelector('a[href$="herbstwanderung-september-2026.pdf"]'), null);
+  assert.ok(startLink);
+  assert.match(
+    startseite.window.document.querySelector('.aktuelles-karte.aktuell-wichtig').textContent,
+    /Großartiges Wetter, beste Stimmung/
+  );
+  assert.ok(serviceLink);
+  assert.ok(serviceseite.window.document.querySelector(
+    '.herbstwanderung-rueckblick img[src="../bilder/e5bild03.jpg"]'
+  ));
+  assert.match(
+    serviceseite.window.document.getElementById("herbstwanderung").textContent,
+    /Großartiges Wetter, beste Stimmung/
+  );
   assert.equal(
     serviceseite.window.document.querySelector('[data-backtermin="2026-09-12"]'),
     null

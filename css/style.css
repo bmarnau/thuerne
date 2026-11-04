@@ -1259,6 +1259,17 @@ footer {
   object-fit: cover;
 }
 
+.herbstwanderung-rueckblick {
+  display: grid;
+  grid-template-columns: minmax(180px, 280px) minmax(0, 1fr);
+  max-width: 900px;
+}
+
+.herbstwanderung-rueckblick > img {
+  height: 100%;
+  aspect-ratio: auto;
+}
+
 .besuchs-karte-inhalt {
   padding: 1.25rem;
 }
@@ -1282,6 +1293,17 @@ footer {
   margin-top: 0.5rem;
   color: #20653d;
   font-weight: bold;
+}
+
+@media (max-width: 680px) {
+  .herbstwanderung-rueckblick {
+    grid-template-columns: 1fr;
+  }
+
+  .herbstwanderung-rueckblick > img {
+    height: auto;
+    aspect-ratio: 16 / 9;
+  }
 }
 
 .service-links {
