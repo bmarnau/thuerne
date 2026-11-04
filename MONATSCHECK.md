@@ -2,7 +2,8 @@
 
 Der Monatscheck kontrolliert in einem Durchlauf:
 
-- identische und gültige Monatsangaben für Film und Bild,
+- gültige Monatsangaben für Film und Bild, jeweils einzeln geprüft (Film und Bild
+  dürfen unterschiedlichen Monaten zugeordnet sein),
 - vorhandene Mediendateien im Ordner `medien`,
 - Bezeichnungen, Urheber, Alternativtext und Bildabmessungen,
 - alle automatischen Website-, Struktur- und Funktionstests,
@@ -11,8 +12,10 @@ Der Monatscheck kontrolliert in einem Durchlauf:
 
 ## Monatliche Pflege
 
-1. Neues Bild und neuen Film in `medien` ablegen.
-2. In `index.html` Monat, Medienpfade, Bezeichnungen, Urheber und Aufnahmezeit ändern.
+1. Neues Bild und/oder neuen Film in `medien` ablegen. Film und Bild werden getrennt
+   gepflegt und können unabhängig voneinander wechseln.
+2. In `index.html` beim jeweiligen Medium Monat, Medienpfad, Bezeichnung, Urheber und
+   Aufnahmezeit ändern.
 3. Während der Bearbeitung prüfen:
 
    ```powershell
@@ -25,6 +28,9 @@ Der Monatscheck kontrolliert in einem Durchlauf:
    ```powershell
    .\scripts\monatscheck.ps1 -Monat 2026-09 -MitGitHub
    ```
+
+`-Monat` verlangt, dass mindestens eines der beiden Medien diesem Monat zugeordnet
+ist – in der Regel das gerade ausgetauschte.
 
 Ohne `-ArbeitsstandErlaubt` gilt der Check nur bei einem vollständig sauberen
 Git-Arbeitsstand als bestanden. So kann kein neues, aber noch nicht eingechecktes
