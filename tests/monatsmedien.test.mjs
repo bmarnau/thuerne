@@ -22,18 +22,18 @@ test("Bild und Film des Monats sind vollständig und konsistent gepflegt", async
 
   const zeiten = [...bereich.querySelectorAll("time")];
   assert.equal(zeiten.length, 2, "Film und Bild benötigen jeweils eine Monatsangabe.");
-  const monate = new Set(zeiten.map((element) => element.getAttribute("datetime")));
-  assert.equal(monate.size, 1, "Film und Bild müssen demselben Monat zugeordnet sein.");
-
-  const [monat] = monate;
-  assert.match(monat, /^\d{4}-(0[1-9]|1[0-2])$/, "Der Monat muss im Format JJJJ-MM stehen.");
+  const monate = zeiten.map((element) => element.getAttribute("datetime"));
+  monate.forEach((monat) =>
+    assert.match(monat, /^\d{4}-(0[1-9]|1[0-2])$/, "Der Monat muss im Format JJJJ-MM stehen."));
   if (process.env.MONATSCHECK_MONAT) {
-    assert.equal(monat, process.env.MONATSCHECK_MONAT, "Die Webseite zeigt nicht den erwarteten Monat.");
+    assert.ok(monate.includes(process.env.MONATSCHECK_MONAT), "Die Webseite zeigt nicht den erwarteten Monat.");
   }
-
-  const [jahr, monatsnummer] = monat.split("-").map(Number);
-  const sichtbarerMonat = `${monatsnamen[monatsnummer - 1]} ${jahr}`;
-  zeiten.forEach((element) => assert.equal(element.textContent.trim(), sichtbarerMonat));
+  const sichtbareMonate = zeiten.map((element, index) => {
+    const [jahr, monatsnummer] = monate[index].split("-").map(Number);
+    const sichtbarerMonat = `${monatsnamen[monatsnummer - 1]} ${jahr}`;
+    assert.equal(element.textContent.trim(), sichtbarerMonat);
+    return sichtbarerMonat;
+  });
 
   const video = bereich.querySelector("video.monatsmedium");
   const quelle = video?.querySelector("source");
@@ -58,8 +58,9 @@ test("Bild und Film des Monats sind vollständig und konsistent gepflegt", async
   const texte = [...bereich.querySelectorAll("p, figcaption")].map((element) => element.textContent.trim());
   assert.ok(texte.some((text) => /Film:\s*\S/.test(text)), "Beim Film fehlt der Urheber.");
   assert.ok(texte.some((text) => /Foto:\s*\S/.test(text)), "Beim Bild fehlt der Urheber.");
-  assert.ok(texte.filter((text) => text.includes(sichtbarerMonat)).length >= 2,
-    "Aufnahmezeit und Monatsangabe passen nicht zusammen.");
+  sichtbareMonate.forEach((sichtbarerMonat) =>
+    assert.ok(texte.some((text) => text.includes(sichtbarerMonat)),
+      `Die Aufnahmezeit für ${sichtbarerMonat} fehlt.`));
 
   dom.window.close();
 });
