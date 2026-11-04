@@ -70,7 +70,6 @@ const START_GALERIEGRUPPEN = [
     dateien: [
       "a2bild01.jpg",
       "a2bild02.jpg",
-      "a2bild03.jpg",
       "a2bild04.jpg",
       "a2bild05.jpg",
       "a2bild06.jpg"
@@ -94,13 +93,23 @@ const START_GALERIEGRUPPEN = [
     ]
   },
   {
-    bildAlt: "Galeriebild von den Wanderwegen rund um den Thürne",
+    bildAlt: "Galeriebild aus dem Bereich Wanderweg „Wääch jangs“ rund um den Thürne",
     dateien: [
       "a6bild01.jpg",
       "a6bild02.jpg",
       "a6bild03.jpg",
       "a6bild04.jpg",
-      "a6bild05.jpg"
+      "a6bild05.jpg",
+      "a6bild06.jpeg",
+      "a6bild07.jpeg",
+      "a6bild08.jpeg",
+      "a6bild09.jpeg"
+    ]
+  },
+  {
+    bildAlt: "Galeriebild aus der Dörfergemeinschaft am Thürne",
+    dateien: [
+      "a5bild01.jpg"
     ]
   },
   {
@@ -117,7 +126,6 @@ const START_GALERIEGRUPPEN = [
   {
     bildAlt: "Galeriebild vom Sommerfest 2026",
     dateien: [
-      "e2bild01.jpeg",
       "e2bild03.jpeg",
       "e2bild04.jpeg"
     ]
@@ -126,10 +134,6 @@ const START_GALERIEGRUPPEN = [
     bildAlt: "Galeriebild von der Pflanzenbörse 2026",
     dateien: [
       "e3bild01.jpg",
-      "e3bild02.jpeg",
-      "e3bild03.jpeg",
-      "e3bild05.jpeg",
-      "e3bild06.jpeg",
       "e3bild07.jpeg",
       "e3bild08.jpg",
       "e3bild09.jpg"
@@ -143,8 +147,14 @@ const START_GALERIEGRUPPEN = [
       "e4bild03.jpeg",
       "e4bild04.jpeg",
       "e4bild05.jpeg",
-      "e4bild06.jpeg",
-      "e4bild07.jpeg"
+      "e4bild07.jpeg",
+      "e4bild08.jpeg"
+    ]
+  },
+  {
+    bildAlt: "Galeriebild vom Adventsmarkt",
+    dateien: [
+      "e6bild01.jpeg"
     ]
   },
   {

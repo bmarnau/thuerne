@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="galerie-reihenfolge-api" content="https://thuerne-galerie.broad-butterfly-074a.workers.dev/api/galerie-reihenfolge" />
   <title>Fotogalerie – Dörfergemeinschaft am Thürne e. V.</title>
- <link rel="stylesheet" href="../css/style.css?v=20261104">
-  <link rel="stylesheet" href="../css/cookie.css?v=20261104">
-  <script defer src="../js/script.js?v=20261104"></script>
+ <link rel="stylesheet" href="../css/style.css?v=20261104-2">
+  <link rel="stylesheet" href="../css/cookie.css?v=20261104-2">
+  <script defer src="../js/script.js?v=20261104-2"></script>
   <!-- galerie.js liest die vollständige Cloudflare-Adresse aus dem Meta-Eintrag oben. -->
-  <script defer src="../js/galerie.js?v=20261104"></script>
+  <script defer src="../js/galerie.js?v=20261104-2"></script>
 </head>
 <body>
   <header>
@@ -46,13 +46,14 @@
           <li><span>Astronomie</span><code>a2bild01, a2bild02 …</code></li>
           <li><span>Wettbewerbe</span><code>a3bild01, a3bild02 …</code></li>
           <li><span>Natur</span><code>a4bild01, a4bild02 …</code></li>
-          <li><span>Wanderwege</span><code>a6bild01, a6bild02 …</code></li>
+          <li><span>Wanderweg - Wääch jangs</span><code>a6bild01, a6bild02 …</code></li>
           <li><span>Noch nicht zugeordnet</span><code>a5bild01, a5bild02 …</code></li>
           <li><span>Wietzen</span><code>e1bild01 bis e1bild06</code></li>
-          <li><span>Sommerfest</span><code>e2bild01, e2bild03, e2bild04</code></li>
-          <li><span>Pflanzenbörse</span><code>e3bild01–03, e3bild05–09</code></li>
-          <li><span>Dorffest</span><code>e4bild01 bis e4bild07</code></li>
+          <li><span>Italienischer Abend</span><code>e2bild03, e2bild04</code></li>
+          <li><span>Pflanzenbörse</span><code>e3bild01, e3bild07–09</code></li>
+          <li><span>Aktivitäten</span><code>e4bild01–05, e4bild07–08</code></li>
           <li><span>Herbstwanderung 2026</span><code>e5bild01 bis e5bild04</code></li>
+          <li><span>Adventsmarkt</span><code>e6bild01, e6bild02 …</code></li>
         </ul>
         <button class="galerie-zuordnung-kopieren" id="galerie-zuordnung-kopieren" type="button">
           Zuordnung kopieren
@@ -110,7 +111,7 @@
       - Astronomie:   a2bild01.jpg, a2bild02.png, a2bild03.jpeg usw.
       - Wettbewerbe:  a3bild01.jpg, a3bild02.png, a3bild03.jpeg usw.
       - Natur:        a4bild01.jpg, a4bild02.png, a4bild03.jpeg usw.
-      - Wanderwege:   a6bild01.jpg, a6bild02.png, a6bild03.jpeg usw.
+      - Wanderweg - Wääch jangs: a6bild01.jpg, a6bild02.png, a6bild03.jpeg usw.
       - Noch nicht zugeordnet: a5bild01.jpg, a5bild02.png, a5bild03.jpeg usw.
       - Erlaubte Dateiendungen sind .jpeg, .jpg und .png.
       - Neue Bilder mit der nächsten freien Nummer werden automatisch erkannt.
@@ -127,9 +128,9 @@
 
       Auch die Ereignisgalerien besitzen eigene Nummernkreise:
       - Wietzen:       e1bild01 bis e1bild06
-      - Sommerfest:    e2bild01, e2bild03, e2bild04
-      - Pflanzenbörse: e3bild01 bis e3bild03 sowie e3bild05 bis e3bild09
-      - Dorffest:      e4bild01 bis e4bild07
+      - Italienischer Abend: e2bild03, e2bild04
+      - Pflanzenbörse: e3bild01 sowie e3bild07 bis e3bild09
+      - Aktivitäten:   e4bild01 bis e4bild05 sowie e4bild07 bis e4bild08
       - Herbstwanderung 2026: e5bild01 bis e5bild04
       Neue fortlaufend nummerierte Ereignisbilder werden ebenfalls automatisch erkannt.
     -->
@@ -203,7 +204,7 @@
     <section class="galerie-ereignis" id="galerie-dorffest-2025">
       <p class="seiten-kategorie">Rückblick</p>
       <h2>Aktivitäten</h2>
-      <div class="galerie-grid automatische-galerie" data-praefix="e4bild" data-von="7" data-bis="1" data-stellen="2"></div>
+      <div class="galerie-grid automatische-galerie" data-praefix="e4bild" data-von="8" data-bis="1" data-stellen="2"></div>
     </section>
 
     <section class="galerie-ereignis" id="galerie-herbstwanderung-2026">
@@ -212,13 +213,25 @@
       <div class="galerie-grid automatische-galerie" data-praefix="e5bild" data-von="4" data-bis="1" data-stellen="2"></div>
     </section>
 
+    <section class="galerie-ereignis" id="galerie-adventsmarkt-2026">
+      <p class="seiten-kategorie">Rückblick</p>
+      <h2>Adventsmarkt</h2>
+      <div
+        class="galerie-grid automatische-galerie"
+        data-praefix="e6bild"
+        data-von="1"
+        data-bis="1"
+        data-stellen="2"></div>
+      <p class="galerie-leer">Noch keine Fotos vorhanden.</p>
+    </section>
+
     <section class="galerie-ereignis galerie-thema" id="galerie-wanderwege">
       <p class="seiten-kategorie">Themengalerie</p>
-      <h2>Wanderwege</h2>
+      <h2>Wanderweg - Wääch jangs</h2>
       <div
         class="galerie-grid automatische-galerie"
         data-praefix="a6bild"
-        data-von="5"
+        data-von="9"
         data-bis="1"
         data-stellen="2"></div>
       <p class="galerie-leer">Noch keine Fotos vorhanden.</p>

@@ -8,8 +8,10 @@ Ordnerstruktur hochladen; bereits vorhandene Dateien werden überschrieben.
 ## Aktuelle Änderung hochladen (November 2026)
 
 Geändert seit dem letzten Stand (`f7f930c`): Bild des Monats November,
-Herbstwanderung als Rückblick mit Galerieabschnitt und neue Cache-Kennung
-(`?v=20261104`) auf allen Unterseiten.
+Herbstwanderung als Rückblick mit Galerieabschnitt, neuer Galerieabschnitt
+„Adventsmarkt“, Abschnitt „Wanderweg - Wääch jangs“ umbenannt, sieben Galeriebilder
+in andere Abschnitte verschoben und neue
+Cache-Kennung (`?v=20261104-2`) auf allen Seiten.
 
 ```text
 index.html
@@ -27,7 +29,30 @@ bilder/e5bild01.jpg
 bilder/e5bild02.jpg
 bilder/e5bild03.jpg
 bilder/e5bild04.jpg
+bilder/a6bild06.jpeg
+bilder/a6bild07.jpeg
+bilder/a6bild08.jpeg
+bilder/a6bild09.jpeg
+bilder/e4bild08.jpeg
+bilder/a5bild01.jpg
+bilder/e6bild01.jpeg
 medien/maeusebussard.jpg
+```
+
+**Auf dem Server löschen** (die Bilder wurden verschoben: nach „Wanderweg - Wääch
+jangs“ als `a6bild06` bis `a6bild09`, `e3bild02` nach „Aktivitäten“ als `e4bild08`,
+`a2bild03` nach „Noch nicht zugeordnet“ als `a5bild01`,
+`e4bild06` nach „Adventsmarkt“ als `e6bild01`; bleiben die alten
+Dateien liegen, zeigt die Galerie sie weiterhin in ihren alten Abschnitten):
+
+```text
+bilder/e2bild01.jpeg
+bilder/e3bild03.jpeg
+bilder/e3bild05.jpeg
+bilder/e3bild06.jpeg
+bilder/e3bild02.jpeg
+bilder/a2bild03.jpg
+bilder/e4bild06.jpeg
 ```
 
 ## Gesamten Website-Stand veröffentlichen

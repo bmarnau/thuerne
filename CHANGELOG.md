@@ -7,6 +7,23 @@ und dieses Projekt folgt der [Semantischen Versionierung](https://semver.org/lan
 
 ## [Unreleased]
 
+- Galerie: neuer Abschnitt „Adventsmarkt“ (`galerie-adventsmarkt-2026`,
+  Nummernkreis `e6bild`); weitere Bilder `e6bild02` usw. werden automatisch gefunden.
+- Galerie: Abschnitt „Wanderwege“ heißt jetzt „Wanderweg - Wääch jangs“ (ID und
+  Nummernkreis `a6bild` unverändert, Alternativtext im Startbild-Pool angepasst).
+- Galerie: `e2bild01`, `e3bild03`, `e3bild05` und `e3bild06` in den Abschnitt
+  „Wanderweg - Wääch jangs“ verschoben (jetzt `a6bild06` bis `a6bild09`);
+  Zuordnungsliste und Startbild-Pool angepasst.
+- Galerie: `e3bild02` in den Abschnitt „Aktivitäten“ verschoben (jetzt `e4bild08`).
+- Galerie: `a2bild03` aus „Astronomie“ nach „Noch nicht zugeordnet“ verschoben
+  (jetzt `a5bild01`); eigene Gruppe im Startbild-Pool.
+- Galerie: `e4bild06` aus „Aktivitäten“ als erstes Bild in den Abschnitt „Adventsmarkt“
+  verschoben (jetzt `e6bild01`); eigene Gruppe im Startbild-Pool.
+- Galerie: Zuordnungsliste nennt die Abschnitte jetzt wie ihre Überschriften
+  („Italienischer Abend“ statt „Sommerfest“, „Aktivitäten“ statt „Dorffest“).
+- Strukturtest prüft zusätzlich, dass jeder Bildnummernkreis nur einmal vorkommt
+  und in der Zuordnungsliste der Galerie steht.
+- Cache-Kennung auf `20261104-2` erhöht (geändertes `js/start-hinweis.js`).
 - Cache-Kennung auf `20261104` erhöht, damit Browser das geänderte
   `js/start-hinweis.js` (Startbild-Gruppe Herbstwanderung) neu laden.
 - `UPLOAD-WEBSERVER.md` mit aktueller Dateiliste, vollständiger Ordnerübersicht

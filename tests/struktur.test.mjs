@@ -142,5 +142,15 @@ test("Galerie-Konfiguration passt zum vorhandenen Bildbestand", async () => {
   }
 
   assert.deepEqual(fehler, []);
+
+  // Jeder Nummernkreis gehört zu genau einem Abschnitt und steht in der Zuordnungsliste.
+  const praefixe = [...dom.window.document.querySelectorAll(".automatische-galerie")]
+    .map((galerie) => galerie.dataset.praefix);
+  assert.equal(new Set(praefixe).size, praefixe.length, "Ein Bildnummernkreis wird doppelt verwendet.");
+
+  const zuordnung = dom.window.document.querySelector("#galerie-nummernkreise ul").textContent;
+  const fehlend = praefixe.filter((praefix) => !zuordnung.includes(praefix));
+  assert.deepEqual(fehlend, [], "Nummernkreise fehlen in der Zuordnungsliste.");
+
   dom.window.close();
 });
