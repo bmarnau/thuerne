@@ -7,6 +7,91 @@ und dieses Projekt folgt der [Semantischen Versionierung](https://semver.org/lan
 
 ## [Unreleased]
 
+- Galerie: neuer Abschnitt „Adventsmarkt“ (`galerie-adventsmarkt-2026`,
+  Nummernkreis `e6bild`); weitere Bilder `e6bild02` usw. werden automatisch gefunden.
+- Galerie: Abschnitt „Wanderwege“ heißt jetzt „Wanderweg - Wääch jangs“ (ID und
+  Nummernkreis `a6bild` unverändert, Alternativtext im Startbild-Pool angepasst).
+- Galerie: `e2bild01`, `e3bild03`, `e3bild05` und `e3bild06` in den Abschnitt
+  „Wanderweg - Wääch jangs“ verschoben (jetzt `a6bild06` bis `a6bild09`);
+  Zuordnungsliste und Startbild-Pool angepasst.
+- Galerie: `e3bild02` in den Abschnitt „Aktivitäten“ verschoben (jetzt `e4bild08`).
+- Galerie: `a2bild03` aus „Astronomie“ nach „Noch nicht zugeordnet“ verschoben
+  (jetzt `a5bild01`); eigene Gruppe im Startbild-Pool.
+- Galerie: `e4bild06` aus „Aktivitäten“ als erstes Bild in den Abschnitt „Adventsmarkt“
+  verschoben (jetzt `e6bild01`); eigene Gruppe im Startbild-Pool.
+- Galerie: Zuordnungsliste nennt die Abschnitte jetzt wie ihre Überschriften
+  („Italienischer Abend“ statt „Sommerfest“, „Aktivitäten“ statt „Dorffest“).
+- Strukturtest prüft zusätzlich, dass jeder Bildnummernkreis nur einmal vorkommt
+  und in der Zuordnungsliste der Galerie steht.
+- Cache-Kennung auf `20261104-2` erhöht (geändertes `js/start-hinweis.js`).
+- Cache-Kennung auf `20261104` erhöht, damit Browser das geänderte
+  `js/start-hinweis.js` (Startbild-Gruppe Herbstwanderung) neu laden.
+- `UPLOAD-WEBSERVER.md` mit aktueller Dateiliste, vollständiger Ordnerübersicht
+  (einschließlich `js/` und `medien/`) und Liste nicht hochzuladender Dateien.
+- `npm run test:live` läuft über `scripts/live-test.mjs` jetzt auch unter Windows.
+- `CLAUDE.md` um Arbeitsweise (Feature-Branch, Pull Request), Veröffentlichung und
+  Hilfsbefehle ergänzt und in `_config.yml` von GitHub Pages ausgeschlossen.
+- `README.md`: Git-Workflow auf Feature-Branch und Pull Request umgestellt, Abschnitt
+  zur Weiterentwicklung mit Claude Code ergänzt.
+- `.gitignore` schließt lokale Claude-Code-Einstellungen, `.wrangler/` und `.env.*` aus.
+- Die Herbstwanderung (27. September) erscheint auf Start- und Serviceseite als
+  Rückblick mit Foto und verlinkt den Galerieabschnitt „Herbstwanderung 2026“; die
+  Einladung wurde ersetzt.
+- Die veraltete Vorschau (`preview/`, `preview.zip`) wurde entfernt.
+- `_config.yml` schließt Pflege- und Entwicklungsdateien von GitHub Pages aus; die
+  Wartungshilfe verlinkt Galeriepflege, Cloudflare-Betrieb und Changelog auf GitHub.
+- Die Herbstwanderung am 27. September ersetzt den Italienischen Abend auf der
+  Startseite und ist dort sowie auf der Serviceseite direkt mit dem Flyer verlinkt.
+- Der vergangene September-Backtermin wurde von der Serviceseite entfernt.
+- Die Beschriftung des Brotback-Padlets wird automatisch aus dem nächsten
+  Backtermin der Serviceseite gebildet, bleibt bis zum Ende der Kalenderwoche
+  beim gerade vergangenen Backtermin und ist beim Ein- und Ausblenden konsistent.
+- Die zentrale Cache-Kennung wurde aktualisiert, damit Browser das geänderte
+  Service-Skript zuverlässig neu laden.
+
+### Changed
+- Wechselndes Startbild wird auch auf flachen Bildschirmen vollständig und mit
+  einem dezenten Rahmen dargestellt
+- `bilder/dachs.mp4` ersetzt den Platzhalter als Film des Monats
+- Film des Monats für eine breite Browserunterstützung von HEVC/MP2 auf
+  H.264/AAC mit Weboptimierung umgewandelt
+- Roboto und die verwendeten Font-Awesome-Markensymbole werden einschließlich
+  ihrer Originallizenzen lokal bereitgestellt; externe Font-CDNs entfallen
+- Wartungsmenü nennt Ablageorte und Originallizenzen der lokalen Schrift- und
+  Symboldateien sowie das verbindliche H.264/AAC-Webformat für Filme
+- Nicht für die Öffentlichkeit freigegebene Aufnahmen zur digitalen Arztpraxis
+  und ihre Mini-Galerie vollständig entfernt
+
+## [1.1.0] - 2026-07-27
+
+### Added
+- Kompakte Wartungshilfe auf der Startseite mit Architekturübersicht,
+  Entwicklungstagebuch und aktuellem Systemstand
+- Tastaturbedienbare Reiter, Fokusführung und automatisierte Tests für das
+  Wartungsmenü
+- Einheitliche Cache-Versionierung für lokale CSS- und JavaScript-Dateien mit
+  automatischer Konsistenzprüfung
+
+### Changed
+- Projektversion, Arbeitsstand, Dokumentationsstand und Cache-Kennung klar
+  voneinander getrennt und zentral in `package.json` beschrieben
+- Veraltete Versionsangaben im Entwicklerleitfaden synchronisiert
+- Galerie-Konfiguration und Startbild-Pool mit dem vorhandenen Bildbestand
+  abgeglichen
+- Wartungszugang dezent in den Footer verschoben, Tagebuch um die belegbare
+  Vorgeschichte ergänzt und Systemübersicht um Zustände sowie eine lesende
+  Worker-/D1-Live-Prüfung erweitert
+- Weiterführende Wartungsdokumente öffnen aus dem Panel in einem neuen Tab
+- Tagebucheinträge verlinken vorhandene GitHub-Tags und Commit-Kennungen
+- Systemstatus meldet offene, konfliktbehaftete oder noch unklare
+  GitHub-Synchronisationsvorgänge
+- Offene Wartungsaufgaben aus GitHub Issues werden nach Dringlichkeit geordnet
+  im Systemstatus angezeigt
+- Galeriereihenfolge kann nur auf erlaubten Live-Domains und erst nach
+  erfolgreichem Laden einer aktiven D1-Reihenfolge gespeichert werden
+- Systemstatus zeigt Anzahl und letzten Änderungszeitpunkt der aktiven
+  D1-Galeriereihenfolge
+
 ## [1.1.0] - 2026-07-27
 
 ### Added

@@ -20,8 +20,28 @@
   // Konfigurationsdatei nötig und der Worker-Pfad wird nicht doppelt ergänzt.
   const galerieApiMeta = document.querySelector('meta[name="galerie-reihenfolge-api"]');
   const galerieApiUrl = String(galerieApiMeta?.content || "").replace(/\/+$/, "");
+  const erlaubteLiveHosts = new Set([
+    "thuerne.de",
+    "www.thuerne.de",
+    "bmarnau.github.io"
+  ]);
+  const istLiveSeite = erlaubteLiveHosts.has(window.location.hostname);
   let beschriftungenSichtbar = false;
   let aktuelleReihenfolge = [...htmlReihenfolge];
+  let zentraleReihenfolgeGeladen = false;
+
+  function speicherschutzSetzen(freigegeben, statusText = "") {
+    zentraleReihenfolgeGeladen = freigegeben;
+    if (sortierungSpeichern) sortierungSpeichern.disabled = !freigegeben;
+    if (sortierungStatus && statusText) sortierungStatus.textContent = statusText;
+  }
+
+  function datumUhrzeitFormatieren(isoWert) {
+    if (!isoWert) return "Zeitpunkt unbekannt";
+    const datum = new Date(isoWert);
+    if (Number.isNaN(datum.getTime())) return "Zeitpunkt unbekannt";
+    return datum.toLocaleString("de-DE");
+  }
 
   function nummernkreiseInAbschnittenErgaenzen() {
     galerieAbschnitte.forEach((abschnitt) => {
@@ -188,11 +208,21 @@
   sortierlisteAnzeigen();
 
   async function zentraleReihenfolgeLaden() {
+    speicherschutzSetzen(false, "Zentrale Reihenfolge wird geprüft – Speichern ist noch gesperrt.");
+
+    if (!istLiveSeite) {
+      speicherschutzSetzen(
+        false,
+        "Vorschauseite erkannt. Laden und Speichern der zentralen Reihenfolge sind nur auf der Live-Seite freigegeben."
+      );
+      return;
+    }
+
     if (!galerieApiUrl) {
-      if (sortierungStatus) {
-        sortierungStatus.textContent =
-          "Der zentrale Speicher wird noch eingerichtet. Zurzeit gilt die hinterlegte Reihenfolge.";
-      }
+      speicherschutzSetzen(
+        false,
+        "Der zentrale Speicher ist nicht eingerichtet. Speichern bleibt zum Schutz der Reihenfolge gesperrt."
+      );
       return;
     }
 
@@ -207,21 +237,38 @@
         throw new Error(daten.fehler || "Reihenfolge konnte nicht geladen werden.");
       }
 
+      const aktiveIds = daten.reihenfolge.filter((id) => htmlReihenfolge.includes(id));
+      if (aktiveIds.length === 0) {
+        speicherschutzSetzen(
+          false,
+          "Keine aktive zentrale Reihenfolge gefunden. Speichern bleibt gesperrt."
+        );
+        return;
+      }
+
       aktuelleReihenfolge = reihenfolgeVervollstaendigen(daten.reihenfolge);
       reihenfolgeAnwenden();
       sortierlisteAnzeigen();
-      if (sortierungStatus) sortierungStatus.textContent = "";
+      speicherschutzSetzen(
+        true,
+        `Zentrale Reihenfolge aktiv · zuletzt geändert: ${datumUhrzeitFormatieren(daten.aktualisiertAm)}`
+      );
     } catch {
-      if (sortierungStatus) {
-        sortierungStatus.textContent =
-          "Der zentrale Speicher ist momentan nicht erreichbar. Die hinterlegte Reihenfolge wird verwendet.";
-      }
+      speicherschutzSetzen(
+        false,
+        "Der zentrale Speicher ist momentan nicht erreichbar. Die hinterlegte Reihenfolge wird nur angezeigt; Speichern bleibt gesperrt."
+      );
     }
   }
 
   zentraleReihenfolgeLaden();
 
   async function reihenfolgeZentralSpeichern(pin) {
+    if (!istLiveSeite || !zentraleReihenfolgeGeladen) {
+      throw new Error(
+        "Speichern ist nur auf der Live-Seite und nach erfolgreichem Laden einer aktiven zentralen Reihenfolge möglich."
+      );
+    }
     if (!galerieApiUrl) {
       throw new Error("Der zentrale Speicher ist noch nicht eingerichtet.");
     }
@@ -258,10 +305,10 @@
     const pin = window.prompt("Redaktions-PIN eingeben:");
     if (pin) {
       reihenfolgeZentralSpeichern(pin)
-        .then(() => {
+        .then((daten) => {
           if (sortierungStatus) {
             sortierungStatus.textContent =
-              "Reihenfolge gespeichert. Sie gilt jetzt für alle Endgeräte.";
+              `Reihenfolge gespeichert · zuletzt geändert: ${datumUhrzeitFormatieren(daten.aktualisiertAm)}`;
           }
         })
         .catch((fehler) => {
@@ -280,12 +327,12 @@
     speichernBestaetigen.disabled = true;
 
     try {
-      await reihenfolgeZentralSpeichern(pin);
+      const daten = await reihenfolgeZentralSpeichern(pin);
       if (redaktionsPin) redaktionsPin.value = "";
       speicherdialog?.close();
       if (sortierungStatus) {
         sortierungStatus.textContent =
-          "Reihenfolge gespeichert. Sie gilt jetzt für alle Endgeräte.";
+          `Reihenfolge gespeichert · zuletzt geändert: ${datumUhrzeitFormatieren(daten.aktualisiertAm)}`;
       }
     } catch (fehler) {
       if (dialogStatus) dialogStatus.textContent = fehler.message;

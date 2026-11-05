@@ -5,10 +5,10 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Service – Dörfergemeinschaft am Thürne e. V.</title>
-  <link rel="stylesheet" href="../css/style.css" />
-  <link rel="stylesheet" href="../css/cookie.css" />
-  <script defer src="../js/script.js"></script>	
-  <script defer src="../js/service.js"></script>
+  <link rel="stylesheet" href="../css/style.css?v=20261104-2">
+  <link rel="stylesheet" href="../css/cookie.css?v=20261104-2">
+  <script defer src="../js/script.js?v=20261104-2"></script>
+  <script defer src="../js/service.js?v=20261104-2"></script>
 	
 </head>
 <body>
@@ -30,37 +30,50 @@
 	</header>
   <main class="wrap">
     
- <section class="section termine-bereich" id="italienischer-abend">
+ <section class="section termine-bereich" id="backtermine">
   <div class="termine-container">
 
     <!-- Linke Seite: Termine -->
     <div class="termine-liste">
-      <h2 class="section-title">Unsere Backes Termine</h2>
+      <h2 class="section-title">Unsere Backes-Termine</h2>
       <ul class="news-list">
-		<li class="news-item"><strong>01.08.2026, Samstag:</strong> Ital. Abend</li>
-		<li class="news-item"><strong>12.09.2026, Samstag:</strong> Backtag</li>
-		<li class="news-item"><strong>17.10.2026, Samstag:</strong> Backtag</li>
-		<li class="news-item"><strong>28.11.2026, Samstag:</strong> Adventsmarkt</li>
+		<li class="news-item" data-backtermin="2026-10-17"><strong><time datetime="2026-10-17">17.10.2026, Samstag</time>:</strong> Backtag</li>
+		<li class="news-item"><strong><time datetime="2026-11-28">28.11.2026, Samstag</time>:</strong> Adventsmarkt</li>
       </ul>
     </div>
-
-    <div class="termine-bild">
-
-  <figure class="bild-box">
-	  
-	<img id="flyer"
-     src="../bilder/italienischer-abend-flyer.jpg"
-     alt="Italienischer Abend"
-     class="bild-rechts">  
-   
-    <figcaption class="bild-text">
-      Quelle: Thuerne
-    </figcaption>
-  </figure>
-
-</div>
-
   </div>
+</section>
+
+<section class="section aktuelles" id="herbstwanderung" aria-labelledby="herbstwanderung-ueberschrift">
+  <div class="aktuelles-kopf">
+    <div>
+      <p class="aktuelles-kategorie">Rückblick</p>
+      <h2 id="herbstwanderung-ueberschrift">Unsere Herbstwanderung</h2>
+    </div>
+  </div>
+
+  <article class="besuchs-karte herbstwanderung-rueckblick">
+    <img
+      src="../bilder/e5bild03.jpg"
+      alt="Teilnehmende der Herbstwanderung 2026 beim gemeinsamen Gruppenfoto"
+      width="2048"
+      height="1542"
+      loading="lazy"
+      decoding="async">
+
+    <div class="besuchs-karte-inhalt">
+      <p class="besuchs-karte-kategorie">Herbstwanderung 2026</p>
+      <h3>Großartiges Wetter, beste Stimmung</h3>
+      <p>
+        Bei bestem Wanderwetter war unsere Gruppe gemeinsam auf den Waldwegen rund
+        um Scheuren unterwegs. Gute Gespräche, viel Freude und der gesellige Abschluss
+        machten die Herbstwanderung zu einem rundum gelungenen Tag.
+      </p>
+      <a class="besuchs-karte-link" href="galerie.html#galerie-herbstwanderung-2026">
+        Fotos der Herbstwanderung ansehen →
+      </a>
+    </div>
+  </article>
 </section>
 <section class="section padlet-board" id="padlet">
   <h2 class="section-title">Padlet-Board</h2>
@@ -79,7 +92,7 @@
 
       <div class="padlet-aktionen">
         <button class="padlet-button" id="padlet-toggle" type="button">
-          Brotbacken im Juli – Padlet laden
+          Brotbacken – Padlet laden
         </button>
 
         <div class="padlet-container hidden" id="padlet-container"></div>
@@ -164,15 +177,6 @@
 
     <p class="service-zurueck"><a href="../index.html">← Zur Startseite</a></p>
   </main>	  
-  
-	<div id="flyerPopup" class="flyer-popup">
-    <button id="closeFlyer" type="button" aria-label="Flyer schließen">&times;</button>
-
-    <img id="flyerLarge"
-         src="../bilder/italienischer-abend-flyer.jpg"
-         alt="Flyer">
-	</div>
-	  
   <footer>
     &copy; Dörfergemeinschaft am Thürne e. V. |
     <a href="../docs/impressum.html">Impressum</a> |

@@ -31,3 +31,12 @@ npm-debug.log*
 .env
 .env.local
 .dev.vars
+
+# Claude Code (lokale, persoenliche Einstellungen)
+.claude/settings.local.json
+
+# Cloudflare Wrangler
+.wrangler/
+
+# Weitere Umgebungsdateien
+.env.*

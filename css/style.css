@@ -1,3 +1,11 @@
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/roboto-regular-latin.woff2') format('woff2');
+}
+
 body {
   font-family: 'Roboto', sans-serif;
   margin: 0;
@@ -698,6 +706,15 @@ footer {
   object-fit: cover;
 }
 
+.galerie-grid > figure:only-child {
+  justify-self: start;
+}
+
+.galerie-grid > figure:only-child img {
+  width: auto;
+  max-width: 100%;
+}
+
 .galerie-grid figcaption {
   padding-top: 0.5rem;
   color: #444;
@@ -858,24 +875,23 @@ footer {
 }
 
 .social-link {
-  font-size: 26px;
+  display: inline-flex;
+  width: 26px;
+  height: 26px;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
   text-decoration: none;
 }
 
-.social-link.facebook {
-  color: #1877f2;
+.social-link img {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .social-link:hover {
-  color: #0f5ec7;
-}
-
-.social-link.instagram {
-  color: #E4405F;
-}
-
-.social-link.instagram:hover {
-  color: #C13584;
+  opacity: 0.78;
 }
 
 [hidden] {
@@ -1243,6 +1259,17 @@ footer {
   object-fit: cover;
 }
 
+.herbstwanderung-rueckblick {
+  display: grid;
+  grid-template-columns: minmax(180px, 280px) minmax(0, 1fr);
+  max-width: 900px;
+}
+
+.herbstwanderung-rueckblick > img {
+  height: 100%;
+  aspect-ratio: auto;
+}
+
 .besuchs-karte-inhalt {
   padding: 1.25rem;
 }
@@ -1266,6 +1293,17 @@ footer {
   margin-top: 0.5rem;
   color: #20653d;
   font-weight: bold;
+}
+
+@media (max-width: 680px) {
+  .herbstwanderung-rueckblick {
+    grid-template-columns: 1fr;
+  }
+
+  .herbstwanderung-rueckblick > img {
+    height: auto;
+    aspect-ratio: 16 / 9;
+  }
 }
 
 .service-links {
@@ -1549,10 +1587,14 @@ nav ul li a[aria-current="page"] {
 
 .start-hinweis-bild {
   display: block;
-  width: 100%;
+  width: calc(100% - 1rem);
   max-height: min(62dvh, 650px);
+  margin: 0.5rem;
+  border: 2px solid #c8d7cd;
+  border-radius: 8px;
   background: #e7eee9;
   object-fit: contain;
+  object-position: center top;
 }
 
 /* Wird nur gesetzt, wenn kein hinterlegtes Bild geladen werden konnte. */
@@ -1628,8 +1670,10 @@ nav ul li a[aria-current="page"] {
   }
 
   .start-hinweis-bild {
-    height: calc(100dvh - 2rem);
-    max-height: none;
+    width: calc(100% - 1rem);
+    height: auto;
+    max-height: calc(100dvh - 3rem);
+    align-self: start;
   }
 
   .start-hinweis-text {

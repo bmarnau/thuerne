@@ -1,0 +1,17 @@
+# Einheitliche Zeilenenden: Im Repository wird immer LF gespeichert.
+# Das verhindert, dass Windows-Zeilenenden (CRLF) ganze Dateien als geändert erscheinen lassen.
+* text=auto eol=lf
+
+# Binärdateien nie verändern
+*.jpg binary
+*.jpeg binary
+*.png binary
+*.gif binary
+*.webp binary
+*.avif binary
+*.ico binary
+*.mp4 binary
+*.woff binary
+*.woff2 binary
+*.pdf binary
+*.zip binary

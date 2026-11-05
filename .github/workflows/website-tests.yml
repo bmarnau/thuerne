@@ -29,5 +29,8 @@ jobs:
       - name: Lokale Funktions- und Strukturtests
         run: npm test
 
+      - name: Bild und Film des Monats prüfen
+        run: npm run test:month
+
       - name: Öffentliche Webseite und Cloudflare-API prüfen
         run: npm run test:live
