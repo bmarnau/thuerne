@@ -11,7 +11,7 @@ Geändert seit dem letzten Stand (`f7f930c`): Bild des Monats November,
 Herbstwanderung als Rückblick mit Galerieabschnitt, neuer Galerieabschnitt
 „Adventsmarkt“, Abschnitt „Wanderweg - Wääch jangs“ umbenannt, sieben Galeriebilder
 in andere Abschnitte verschoben und neue
-Cache-Kennung (`?v=20261104-2`) auf allen Seiten.
+Cache-Kennung (`?v=20261105`) auf allen Seiten.
 
 ```text
 index.html
