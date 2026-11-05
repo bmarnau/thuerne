@@ -32,13 +32,13 @@ const STARTBILD_AKTIV = true;
 
 const START_VERANSTALTUNGEN = [
   {
-    titel: "Italienischer Abend 2026",
-    beginn: "2026-08-01T18:00:00+02:00",
-    bild: "bilder/italienischer-abend-popup.png",
-    bildAlt: "Einladung zum Italienischen Abend am 1. August 2026 im Pfarrheim Houverath",
-    text: "Wir laden herzlich zum Italienischen Abend am Thürne ein.",
-    link: "docs/service.html#italienischer-abend",
-    linkText: "Informationen und Flyer ansehen"
+    titel: "4. Thürne-Adventsmarkt",
+    beginn: "2026-11-28T14:00:00+01:00",
+    bild: "bilder/adventsmarkt-2026-flyer.jpg",
+    bildAlt: "Flyer zum 4. Thürne-Adventsmarkt am 28. November 2026 im Pfarrheim Houverath",
+    text: "Am Samstag, 28. November, ab 14 Uhr laden wir herzlich zum Adventsmarkt ein.",
+    link: "docs/service.html#adventsmarkt",
+    linkText: "Programm und Flyer ansehen"
   }
 ];
 

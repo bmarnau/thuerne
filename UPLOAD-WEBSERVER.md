@@ -1,6 +1,6 @@
 # Dateien für den Webserver
 
-Stand: 4. November 2026 (Commit `657f7da`, Branch `galerie-oberflaeche-wiederherstellen`)
+Stand: 5. November 2026 (Commit `3c129af`, Branch `feature/adventsmarkt-2026`)
 
 Der Webserver (Variomedia) wird von Hand bespielt. Dateien immer mit gleicher
 Ordnerstruktur hochladen; bereits vorhandene Dateien werden überschrieben.
@@ -10,8 +10,9 @@ Ordnerstruktur hochladen; bereits vorhandene Dateien werden überschrieben.
 Geändert seit dem letzten Stand (`f7f930c`): Bild des Monats November,
 Herbstwanderung als Rückblick mit Galerieabschnitt, neuer Galerieabschnitt
 „Adventsmarkt“, Abschnitt „Wanderweg - Wääch jangs“ umbenannt, sieben Galeriebilder
-in andere Abschnitte verschoben und neue
-Cache-Kennung (`?v=20261104-2`) auf allen Seiten.
+in andere Abschnitte verschoben, Werbung für den 4. Thürne-Adventsmarkt
+(Startfenster, Startseite, Serviceseite mit Flyer und PDF) und neue
+Cache-Kennung (`?v=20261105`) auf allen Seiten.
 
 ```text
 index.html
@@ -25,6 +26,8 @@ docs/impressum.html
 docs/kalender.html
 docs/kontakt.html
 docs/service.html
+docs/adventsmarkt2026.pdf
+bilder/adventsmarkt-2026-flyer.jpg
 bilder/e5bild01.jpg
 bilder/e5bild02.jpg
 bilder/e5bild03.jpg

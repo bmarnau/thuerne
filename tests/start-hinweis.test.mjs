@@ -67,25 +67,25 @@ test("Startbild-Pool enthält den vollständigen nummerierten Galeriebestand", a
 test("vor Veranstaltungsbeginn erscheint die zeitlich nächste Einladung", async () => {
   const dom = await startseiteVorbereiten();
   const ergebnis = dom.window.StartHinweis.initialisieren({
-    jetzt: new Date("2026-08-01T17:59:59+02:00")
+    jetzt: new Date("2026-11-28T13:59:59+01:00")
   });
   const { document } = dom.window;
 
   assert.equal(ergebnis.typ, "veranstaltung");
   assert.equal(document.getElementById("start-hinweis").open, true);
-  assert.equal(document.getElementById("start-hinweis-titel").textContent, "Italienischer Abend 2026");
+  assert.equal(document.getElementById("start-hinweis-titel").textContent, "4. Thürne-Adventsmarkt");
   assert.equal(
     document.getElementById("start-hinweis-bild").getAttribute("src"),
-    "bilder/italienischer-abend-popup.png"
+    "bilder/adventsmarkt-2026-flyer.jpg"
   );
-  assert.match(document.getElementById("start-hinweis-link").href, /service\.html#italienischer-abend$/);
+  assert.match(document.getElementById("start-hinweis-link").href, /service\.html#adventsmarkt$/);
   dom.window.close();
 });
 
 test("ab Veranstaltungsbeginn erscheint ein Galeriebild statt der Einladung", async () => {
   const dom = await startseiteVorbereiten();
   const ergebnis = dom.window.StartHinweis.initialisieren({
-    jetzt: new Date("2026-08-01T18:00:00+02:00"),
+    jetzt: new Date("2026-11-28T14:00:00+01:00"),
     zufall: () => 0
   });
   const { document } = dom.window;
@@ -104,7 +104,7 @@ test("zwei aufeinanderfolgende Starts wählen unterschiedliche Galeriebilder", a
   const dom = await startseiteVorbereiten();
   const { document } = dom.window;
   const optionen = {
-    jetzt: new Date("2026-08-02T12:00:00+02:00"),
+    jetzt: new Date("2026-11-29T12:00:00+01:00"),
     zufall: () => 0
   };
 
@@ -124,7 +124,7 @@ test("Bildfehler führen zu Reservebildern und nie zu einem leeren Fenster", asy
   const dom = await startseiteVorbereiten();
   const { document, Event } = dom.window;
   dom.window.StartHinweis.initialisieren({
-    jetzt: new Date("2026-08-02T12:00:00+02:00"),
+    jetzt: new Date("2026-11-29T12:00:00+01:00"),
     zufall: () => 0
   });
 

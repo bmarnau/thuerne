@@ -7,6 +7,12 @@ und dieses Projekt folgt der [Semantischen Versionierung](https://semver.org/lan
 
 ## [Unreleased]
 
+- Werbung für den 4. Thürne-Adventsmarkt (28.11.2026, ab 14 Uhr): Einladung im
+  Startfenster (ersetzt den abgelaufenen Italienischen Abend), hervorgehobene Karte
+  unter „Aktuelles“ auf der Startseite, Flyer neben den Backes-Terminen auf der
+  Serviceseite (Sprungmarke `#adventsmarkt`) mit PDF zum Herunterladen
+  (`docs/adventsmarkt2026.pdf`, `bilder/adventsmarkt-2026-flyer.jpg`).
+- Cache-Kennung auf `20261105` erhöht (geändertes `js/start-hinweis.js`).
 - Galerie: neuer Abschnitt „Adventsmarkt“ (`galerie-adventsmarkt-2026`,
   Nummernkreis `e6bild`); weitere Bilder `e6bild02` usw. werden automatisch gefunden.
 - Galerie: Abschnitt „Wanderwege“ heißt jetzt „Wanderweg - Wääch jangs“ (ID und

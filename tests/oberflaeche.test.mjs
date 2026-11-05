@@ -105,7 +105,7 @@ test("Herbstwanderung ist auf Start- und Serviceseite als Rückblick mit Fotos v
 
   assert.ok(startLink);
   assert.match(
-    startseite.window.document.querySelector('.aktuelles-karte.aktuell-wichtig').textContent,
+    startLink.closest(".aktuelles-karte").textContent,
     /Großartiges Wetter, beste Stimmung/
   );
   assert.ok(serviceLink);
@@ -120,6 +120,21 @@ test("Herbstwanderung ist auf Start- und Serviceseite als Rückblick mit Fotos v
     serviceseite.window.document.querySelector('[data-backtermin="2026-09-12"]'),
     null
   );
+
+  startseite.window.close();
+  serviceseite.window.close();
+});
+
+test("Adventsmarkt 2026 wird auf Start- und Serviceseite mit Flyer beworben", async () => {
+  const startseite = new JSDOM(await dateiLesen("index.html"));
+  const serviceseite = new JSDOM(await dateiLesen("docs/service.html"));
+  const hervorgehoben = startseite.window.document.querySelector(".aktuelles-karte.aktuell-wichtig");
+  const service = serviceseite.window.document;
+
+  assert.match(hervorgehoben.textContent, /4\. Thürne-Adventsmarkt/);
+  assert.ok(hervorgehoben.querySelector('a[href="docs/service.html#adventsmarkt"]'));
+  assert.ok(service.getElementById("adventsmarkt"));
+  assert.ok(service.querySelector('a[href="./adventsmarkt2026.pdf"] img[src="../bilder/adventsmarkt-2026-flyer.jpg"]'));
 
   startseite.window.close();
   serviceseite.window.close();
