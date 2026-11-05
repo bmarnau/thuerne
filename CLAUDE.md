@@ -10,8 +10,8 @@ Pflege (Termine, Rückblicke, Galerie, Bild/Film des Monats).
 
 - Arbeitsordner: `C:\dev\thuerne`. Der frühere Ordner
   `C:\Users\bmarn\OneDrive\HTML\thuerne` ist die alte Arbeitskopie – dort nichts ändern.
-- Aktiver Arbeits-Branch ist `galerie-oberflaeche-wiederherstellen`; er ist deutlich
-  weiter als `main`. Vor Änderungen `git fetch` und mit dem Remote abgleichen.
+- Maßgeblicher Stand ist `main` (seit 5. November 2026 sind alle Arbeits-Branches
+  zusammengeführt). Vor Änderungen `git fetch` und mit dem Remote abgleichen.
 - Fremde, nicht zum Auftrag gehörende lokale Änderungen bewahren und nicht mitcommitten.
 
 ## Arbeitsweise
