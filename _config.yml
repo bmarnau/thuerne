@@ -10,6 +10,7 @@ exclude:
   - "UPLOAD-WEBSERVER.md"
   - "codex-vorschrift-neuer-abschnitt.md"
   - "galeriepflege.md"
+  - "docs/protokolle"
   - "cloudflare"
   - "scripts"
   - "tests"

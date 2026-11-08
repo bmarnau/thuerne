@@ -7,6 +7,10 @@ und dieses Projekt folgt der [Semantischen Versionierung](https://semver.org/lan
 
 ## [Unreleased]
 
+- Sitzungsroutine: Abschnitt „Tagesstart und Tagesabschluss“ mit Projektprofil in
+  `AGENTS.md` (werkzeugneutral, nach ADG `SITZUNGSROUTINE.md`), Ordner
+  `docs/protokolle/` für Tagesprotokolle; der Ordner ist in `_config.yml` von
+  GitHub Pages ausgeschlossen (Test in `tests/struktur.test.mjs`).
 - Werbung für den 4. Thürne-Adventsmarkt (28.11.2026, ab 14 Uhr): Einladung im
   Startfenster (ersetzt den abgelaufenen Italienischen Abend), hervorgehobene Karte
   unter „Aktuelles“ auf der Startseite, Flyer neben den Backes-Terminen auf der
