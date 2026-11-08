@@ -67,7 +67,7 @@ test("alle lokalen Links, Bilder, Stylesheets und Skripte verweisen auf vorhande
 const nichtVeroeffentlicht = [
   "AGENTS.md", "CHANGELOG.md", "MONATSCHECK.md", "README.md", "TESTBERICHT.md",
   "UPLOAD-WEBSERVER.md", "codex-vorschrift-neuer-abschnitt.md", "galeriepflege.md",
-  "cloudflare", "scripts", "tests", "package.json", "package-lock.json"
+  "docs/protokolle", "cloudflare", "scripts", "tests", "package.json", "package-lock.json"
 ];
 
 test("Pflegedateien werden nicht auf der Website veröffentlicht", async () => {
